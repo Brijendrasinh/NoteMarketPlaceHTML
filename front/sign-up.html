@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Importent Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Title -->
+    <title>Sign Up</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="css/custom.min.css">
+
+    <!-- Responsive layout -->
+    <link rel="stylesheet" href="css/responsive-layout.min.css">
+
+</head>
+
+<body>
+    <section id="sign-up-page">
+        <div class="bg">
+            <div class="row justify-content-center">
+                <div class="col-6 ml-auto mr-auto page-at-center">
+                    <div class="center-logo">
+                        <img class="logo-img" src="images/pre-login/top-logo.png" alt="logo">
+                    </div>
+                    <div class="form-container">
+                        <h3 class="text-center">Create an Account</h3>
+                        <p class="text-center top sign-up-top">Enter your details to signup</p>
+                        <p class="text-center text-success"><img src="images/pre-login/true-mark.png" alt="truemark"> Your accounthas been successfully created.</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputSignupFirstName">First Name *</label>
+                                <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupFirstName" aria-describedby="emailSignupHelp" placeholder="Enter your first name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSignupLastName">Last Name *</label>
+                                <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupLastName" aria-describedby="emailSignupHelp" placeholder="Enter your last name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSignupEmail">Email *</label>
+                                <input type="email" class="form-control form-control-sign-up" id="exampleInputSignupEmail" aria-describedby="emailSignupHelp" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSignupPassword">Password</label>
+                                <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupPassword" placeholder="Enter your Password">
+                                <span toggle="#exampleInputSignupPassword" class="field-icon toggle-password"><img src="images/pre-login/eye.png" alt="eye"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSignupConfirmPassword">Confirm Password</label>
+                                <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupConfirmPassword" placeholder="Re-enter your Password">
+                                <span toggle="#exampleInputSignupConfirmPassword" class="field-icon toggle-password"><img src="images/pre-login/eye.png" alt="eye"></span>
+                            </div>
+                            <button type="submit" class="btn btn-login btn-block">SIGN UP</button>
+                        </form>
+                        <p class="text-center bottom">Already have an account? <a href="login.html">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- JQuery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap JS-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/custom.min.js"></script>
+    
+</body>
+
+</html>

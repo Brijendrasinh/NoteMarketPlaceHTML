@@ -1,0 +1,1227 @@
+.menu-icon {
+    display: none;
+}
+.container {
+    max-width: 1470px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.note-title a.links {
+    color: #6255a5;
+}
+.no a.links {
+    color: #6255a5;
+}
+a.links:hover{
+    text-decoration: none;
+}
+
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+/* ===============================================
+                Login page
+=============================================== */
+.bg {
+    background: url('../images/banner-with-overlay.jpg') repeat;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+.page-at-center {
+    position: absolute;
+    top: 10vh;
+    max-width: 610px;
+}
+
+.center-logo {
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.form-container {
+    background: #fff;
+    padding: 50px;
+    border-radius: 3px;
+    max-width: 580px;
+}
+
+.form-container h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+    margin: 0;
+}
+
+.form-container p.top {
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+    padding: 20px 0 45px 0;
+    margin: 0;
+}
+
+.form-container p.bottom {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+    padding-top: 20px;
+    margin: 0;
+}
+
+.form-container p a {
+    color: #6255a5;
+}
+
+.form-container label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.form-container label a {
+    color: #6255a5;
+}
+
+.form-container small {
+    font-family: "Open sans", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #ff3636;
+}
+
+.form-control-login,
+.form-control-sign-up,
+.form-control-change-password,
+.form-control-forgot-password {
+    border: 1px solid #6255a5;
+    max-width: 480px;
+    height: 50px;
+    border-radius: 3px;
+}
+
+.form-container .email {
+    padding-bottom: 30px;
+    margin: 0;
+}
+
+.form-container .password {
+    margin: 0;
+}
+
+.form-container .email input,
+.form-container .password input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.form-container .email input {
+    color: #000;
+}
+
+.form-container .password input {
+    color: #8a8a8a;
+}
+
+.form-check {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin: 0;
+}
+
+.form-check-input {
+    border: 1px solid #d1d1d1;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+.form-check-label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    padding-left: 25px;
+    padding-top: 10px;
+}
+
+.form-text {
+    margin-top: 10ox;
+}
+
+.btn-login {
+    color: #fff;
+    max-width: 480px;
+    height: 50px;
+    border-radius: 3px;
+    background: #6255a5;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* password eye icon */
+.field-icon {
+    float: right;
+    margin-right: 15px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===============================================
+                Dashboard
+=============================================== */
+#dashboard-top {
+    margin-top: 70px;
+    padding-top: 45px;
+    padding-bottom: 15px;
+}
+
+#dashboard-top h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #6255a5;
+    margin-bottom: 0;
+}
+
+#dashboard-top .block h5 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 34px;
+    color: #6255a5;
+}
+
+#dashboard-top .block p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #333333;
+}
+
+#dashboard-top .block {
+    max-width: 460px;
+    height: 151px;
+    border: 1px solid #d1d1d1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+#dashboard-middle .left {
+    display: flex;
+    align-items: center;
+}
+
+#dashboard-middle .left h6 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5;
+}
+
+#dashboard-middle .right input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+    width: 322px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+    padding-left: 40px;
+}
+
+#dashboard-middle .right select {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+    width: 170px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+    margin-right: 15px;
+}
+
+#dashboard-middle .right span.magnifier {
+    position: relative;
+    left: 14%;
+    top: 10px;
+    z-index: 1;
+}
+
+.btn-search {
+    background-color: #6255a5;
+    width: 117px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button:focus {
+    outline: none;
+}
+
+.table {
+    border: 1px solid #d1d1d1;
+    margin-bottom: 0;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.table tr {
+    height: 70px;
+}
+
+.table td {
+    vertical-align: middle;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.table td img {
+    margin: 10px;
+}
+
+.table .srno {
+    text-align: center;
+}
+
+.table td.note-title {
+    color: #6255a5;
+}
+
+.table td.size {
+    text-align: center;
+}
+
+.table td.download-no {
+    text-align: center;
+}
+
+.table th {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #333333;
+    vertical-align: middle !important;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.table tr:hover,
+.table tr:focus {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Pagination */
+.pagination {
+    padding-top: 50px;
+    margin-bottom: 0;
+    padding-bottom: 50px;
+}
+
+.pagination .page-link {
+    border: none;
+}
+
+.pagination .page-link.number.active {
+    width: 34px;
+    height: 34px;
+    color: #fff;
+    border-color: transparent;
+    background-color: #6255a5;
+}
+
+.pagination .page-link.number {
+    color: #333333;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-right: 20px;
+}
+
+.pagination .page-item:nth-last-child(2) .page-link.number {
+    margin-right: 0;
+}
+
+.pagination .page-link span {
+    width: 8px;
+    height: 15px;
+    color: #333333;
+    background: none;
+    padding: 0 40px;
+}
+
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.pagination .page-link.number:focus {
+    background-color: #6255a5;
+    color: #fff;
+}
+
+/* dropdown */
+.dropdown button#dropdownMenu2,
+.dropdown button#dropdownMenu2:focus,
+.dropdown button#dropdownMenu3,
+.dropdown button#dropdownMenu3:focus,
+.dropdown button#dropdownMenu1,
+.dropdown button#dropdownMenu1:focus,
+.dropdown button#dropdown3dot,
+.dropdown button#dropdown3dot:focus {
+    border: none;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.dropdown button a {
+    color: #000;
+    font-weight: 600;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #6255a5;
+    color: #fff;
+}
+
+table td .dropdown button {
+    border: none;
+    background-color: #fff;
+}
+
+.footer {
+    border-top: 1px solid #d1d1d1;
+}
+
+.dropdown .dropdown-menu a {
+    font-size: 18px;
+    line-height: 22px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    color: #333333;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.dropdown .dropdown-menu a.logout {
+    font-weight: 600;
+    color: #6255a5;
+}
+
+.dropdown .dropdown-menu a.logout:hover {
+    color: #fff;
+}
+
+p.copyright-text,
+p.version-text {
+    margin-bottom: 0;
+}
+
+/* ===============================================
+                My Profile
+=============================================== */
+.my-profile {
+    margin-top: 70px;
+}
+
+.my-profile .main-block {
+    max-width: 735px;
+}
+
+.my-profile .block input {
+    max-width: 705px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+}
+
+.block select {
+    height: 50px;
+}
+
+.my-profile h3 {
+    padding-top: 45px;
+    padding-bottom: 25px;
+    margin-bottom: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+
+.my-profile button {
+    background-color: #6255a5;
+    width: 117px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 600;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    margin-bottom: 45px;
+}
+
+.my-profile .block label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.block.profile-pic span {
+    position: relative;
+    top: 50px;
+    left: 33%;
+}
+
+/* ===============================================
+                Manage Administator
+=============================================== */
+.manage-admin {
+    margin-top: 70px;
+}
+
+.manage-admin h3 {
+    padding-top: 45px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+
+.manage-admin span {
+    position: relative;
+    left: 15%;
+    top: 10px;
+    z-index: 1;
+}
+
+.manage-admin .text-left.type a {
+    width: 140px;
+}
+
+/*
+.manage-admin .text-left.category a {
+    width: 185px;
+}
+*/
+.manage-admin .text-left a {
+    background-color: #6255a5;
+    max-width: 250px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.m-left-auto {
+    margin-left: auto;
+}
+
+.manage-admin input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+    width: 322px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+    padding-left: 45px;
+    margin-right: 10px;
+}
+
+.manage-admin .table {
+    margin-top: 5px;
+}
+
+/* ===============================================
+                Manage Country
+=============================================== */
+.table .cc {
+    text-align: center;
+}
+
+/* ===============================================
+                Note Details
+=============================================== */
+#note-detail-top {
+    margin-top: 70px;
+    padding-top: 30px;
+    position: relative;
+}
+
+#note-detail-top-wrapper {
+    margin-bottom: 60px;
+}
+
+#note-detail-top h5.title-section {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5;
+}
+
+.padding-bottom-hide {
+    padding-bottom: 0;
+}
+
+#note-detail-top-wrapper .image img {
+    /*    height: 300px;
+    width: 240px;
+*/
+}
+
+#note-detail-top-wrapper h4.book-title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+    margin-bottom: 20px;
+}
+
+#note-detail-top-wrapper p.stream {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #333333;
+    margin-bottom: 30px;
+}
+
+#note-detail-top-wrapper p.dummy-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #333333;
+    margin-bottom: 30px;
+}
+
+#note-detail-top-wrapper .btn-download {
+    background-color: #6255a5;
+    width: 204px;
+    height: 50px;
+    padding: 12px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+#note-detail-top-wrapper .note-top-title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 36px;
+    color: #333333;
+}
+
+#note-detail-top-wrapper span.note-top-description {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #6255a5;
+}
+
+i.fa.fa-star.not-checked,
+span.fa.fa-star.not-checked {
+    color: #e8e8e8;
+}
+
+span.mark-report {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #df3434;
+}
+
+#customer-review-wrapper {
+    border: 1px solid #d1d1d1;
+    padding: 15px 30px;
+    /*    width: 811px;
+    height: 450px;  */
+    border-radius: 3px;
+}
+
+#customer-review-wrapper img {
+    width: 50px;
+    height: 50px;
+}
+
+#customer-review-wrapper .customer-name {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+#customer-review-wrapper .rating {
+    margin-bottom: 10px;
+}
+
+#customer-review-wrapper .customer-review {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 0;
+    color: #333333;
+}
+
+/*
+#customer-review-wrapper .row:nth-child(1),
+#customer-review-wrapper .row:nth-child(2) {
+    border-bottom: 1px solid #d1d1d1;
+/*    margin-bottom: 20px;  
+}
+*/
+#customer-review-wrapper .col-md-1 {
+    padding-right: 0;
+}
+
+#note-detail-bottom-wrapper {
+    padding-bottom: 60px;
+}
+
+/*  notes details pdf note preview */
+/*
+   general styles
+*/
+.center-block-horiz {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.set-margin-cicis-menu-to-go {
+    margin: 20px;
+}
+
+/*
+.set-padding-cicis-menu-to-go {
+  padding: 20px;
+}
+*/
+.set-border-cicis-menu-to-go {
+    border: 1px inset #d1d1d1;
+}
+
+set-box-shadow-cicis-menu-to-go {
+    -webkit-box-shadow: 4px 4px 14px #4f4f4f;
+    -moz-box-shadow: 4px 4px 14px #4f4f4f;
+    box-shadow: 4px 4px 14px #4f4f4f;
+}
+
+/*
+** Style the iframe
+** =========================
+*/
+/*
+    css commmon to all iframes
+*/
+.responsive-wrapper {
+    position: relative;
+    height: 0;
+    /* gets height from padding-bottom */
+    overflow: hidden;
+    /* put following styles (necessary for overflow and 
+     scrolling handling) inline in .embed-responsive-element-wrapper around iframe because not stable in CSS
+    -webkit-overflow-scrolling: touch; 
+                      overflow: auto; */
+}
+
+.responsive-wrapper img,
+.responsive-wrapper object,
+.responsive-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    border-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+    css particular to this iframe
+*/
+
+#Iframe-Cicis-Menu-To-Go {
+    max-width: 666.67px;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+/*
+   padding-bottom = h/w as %
+*/
+.responsive-wrapper-padding-bottom-90pct {
+    padding-bottom: 90%;
+}
+
+/* Note detail right side */
+.note-detail-right > .row [class*=col-] {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+/* Star Rating */
+.checked {
+    color: orange;
+}
+
+/* ===============================================
+                Footer Front
+=============================================== */
+ul.social-list li {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul {
+    margin: 0;
+}
+
+ul.social-list {
+    padding: 0;
+}
+
+ul.social-list li {
+    padding-left: 5px;
+}
+
+ul.social-list li a {
+    border: 1px solid #fff;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 35px;
+    color: #fff;
+    background: #6255a5;
+    border-radius: 50%;
+    vertical-align: middle;
+    -webkit-transition: all 400ms linear;
+    transition: all 400ms linear;
+}
+
+ul.social-list li a:hover,
+ul.social-list li a:hover,
+ul.social-list li a:hover {
+    border-color: transparent;
+    transform: rotate(360deg);
+    text-decoration: none;
+}
+
+.footer {
+    border-top: 1px solid #d1d1d1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.social-copyright {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.copyright-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 0;
+    color: #333333;
+}
+
+/* ===============================================
+                Members
+=============================================== */
+.members {
+    margin-top: 70px;
+}
+
+.members h3 {
+    padding-top: 45px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+
+.members-span {
+    position: relative;
+    left: 14%;
+    top: -12px;
+    z-index: 1;
+}
+
+.members input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+    width: 322px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+    padding-left: 45px;
+    margin-right: 10px;
+}
+
+.members .table {
+    margin-top: 5px;
+}
+
+.table .no,
+.table .no1 {
+    text-align: center;
+}
+
+.table td.no {
+    color: #6255a5;
+}
+
+/* ===============================================
+                Members Details
+=============================================== */
+.members-detail {
+    margin-top: 70px;
+}
+
+.members-detail h3 {
+    padding-top: 45px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+
+.note-title {
+    color: #6255a5;
+}
+
+.title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 36px;
+    color: #333333;
+}
+
+.detail {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #6255a5;
+}
+
+.right-border {
+    border-right: 1px solid #d1d1d1;
+}
+
+.member-detail-info > .row [class*=col-] {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.members-detail-bottom h6 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5;
+    margin-top: 35px;
+}
+
+/* ===============================================
+            Manage System Configuration
+=============================================== */
+.block.msc-profile-pic span {
+    position: relative;
+    top: -50px;
+    left: 44%;
+}
+
+/* ===============================================
+            Notes Under Review
+=============================================== */
+.NUR {
+    display: flex;
+    flex-direction: column;
+    /*margin-left: 15px;*/
+}
+
+.NUR select {
+    max-width: 130px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+}
+
+.note-U-R span {
+    position: relative;
+    left: 15%;
+    z-index: 1;
+    top: -15px;
+}
+
+.note-U-R .table-scroll {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.search-side-NUR {
+    /* margin-right: 15px;*/
+}
+
+.NUR label,
+.NUR select {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.btn-action {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-approve,
+.btn-reject,
+.btn-inreview {
+    width: 112px;
+    height: 40px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 5px;
+}
+
+th.action {
+    text-align: center;
+}
+
+.btn.btn-approve {
+    background-color: #28a745;
+}
+
+.btn.btn-reject {
+    background-color: #ff3636;
+}
+
+.btn.btn-inreview {
+    background-color: #cccccc;
+}
+
+#rejectPopupModal .reject-popup .remove-height {
+    height: 0;
+    padding: 0;
+}
+
+#rejectPopupModal .reject-popup .remove-height span {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    height: 18px;
+    width: 18px;
+}
+
+#rejectPopupModal .reject-popup h5 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5;
+}
+
+#rejectPopupModal .reject-popup label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+#rejectPopupModal .reject-popup textarea {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+}
+/* ===============================================
+                Download Notes
+=============================================== */
+.block.NUR {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.download .table-scroll {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.download-span {
+    position: relative;
+    left: 15%;
+    top: -15px !important;
+    z-index: 1;
+}

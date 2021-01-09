@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Importent Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Title -->
+    <title>Note Detail</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="css/custom.min.css">
+
+    <!-- Header -->
+    <link rel="stylesheet" href="css/header.min.css">
+
+    <!-- Responsive layout -->
+    <link rel="stylesheet" href="css/responsive-layout.min.css">
+
+    <!-- Responsive Header and Footer -->
+    <link rel="stylesheet" href="css/responsive-header-footer.min.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top white-nav-top">
+            <div class="container site-nav-wrapper">
+
+                <!-- Mobile Menu Open Button -->
+                <span class="ml-auto" id="mobile-nav-open-btn">&#9776;</span>
+
+                <div class="navbar-header">
+                    <!-- Logo -->
+                    <a href="#" class="navbar-brand">
+                        <img src="images/logo.png" alt="logo">
+                    </a>
+                </div>
+
+                <!-- Main Nav -->
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto" id="main-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link active" href="#">Notes</a>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a href="notes-under-review.html" class="dropdown-item" role="button">Notes Under Review</a>
+                                    <a href="published-notes.html" class="dropdown-item" role="button">Publishd Notes</a>
+                                    <a href="download-notes.html" class="dropdown-item" role="button">Downloaded Notes</a>
+                                    <a href="rejected-notes.html" class="dropdown-item" role="button">Rejected Notes</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="members.html">Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link" href="#">Reports</a>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                    <a href="spam-reports.html" class="dropdown-item" role="button">Spam Reports</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link" href="#">Settings</a>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a href="manage-system-configuration.html" class="dropdown-item" role="button">Manage System Configuration</a>
+                                    <a href="manage-administrator.html" class="dropdown-item" role="button">Manage Administrator</a>
+                                    <a href="manag-category.html" class="dropdown-item" role="button">Manage Category</a>
+                                    <a href="manage-type.html" class="dropdown-item" role="button">Manage Type</a>
+                                    <a href="manage-contry.html" class="dropdown-item" role="button">Manage Countries</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="images/user-img.png" alt="pp">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <a href="my-profile.html" class="dropdown-item" role="button">Update Profile</a>
+                                    <a href="../front/change-password.html" class="dropdown-item" role="button">Change Password</a>
+                                    <a href="login.html" class="dropdown-item logout" role="button">LOGOUT</a>
+
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="btn home-nav-btn" href="login.html" title="Login" role="button">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-nav">
+
+                    <!-- Mobile Menu Close Button -->
+                    <span id="mobile-nav-close-btn">&times;</span>
+
+                    <div id="mobile-nav-content">
+                        <ul class="nav flex-column">
+                            <li><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+                            <li>
+                                <div class="dropdown">
+                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link" href="#">Notes</a>
+                                    <span><i class="fa fa-caret-down"></i></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a href="notes-under-review.html" class="dropdown-item" role="button">Notes Under Review</a>
+                                    <a href="published-notes.html" class="dropdown-item" role="button">Publishd Notes</a>
+                                    <a href="download-notes.html" class="dropdown-item" role="button">Downloaded Notes</a>
+                                    <a href="rejected-notes.html" class="dropdown-item" role="button">Rejected Notes</a>
+                                </div>
+                            </div>
+                            </li>
+                            <li><a class="nav-link smooth-scroll" href="members.html">Members</a></li>
+                            <li>
+                                <div class="dropdown">
+                                <button type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link" href="#">Reports</a>
+                                    <span><i class="fa fa-caret-down"></i></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                    <a href="spam-reports.html" class="dropdown-item" role="button">Spam Reports</a>
+                                </div>
+                            </div>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link" href="#">Settings</a>
+                                    <span><i class="fa fa-caret-down"></i></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a href="manage-system-configuration.html" class="dropdown-item" role="button">Manage System Configuration</a>
+                                    <a href="manage-administrator.html" class="dropdown-item" role="button">Manage Administrator</a>
+                                    <a href="manag-category.html" class="dropdown-item" role="button">Manage Category</a>
+                                    <a href="manage-type.html" class="dropdown-item" role="button">Manage Type</a>
+                                    <a href="manage-contry.html" class="dropdown-item" role="button">Manage Countries</a>
+                                </div>
+                            </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="images/user-img.png" alt="pp">
+                                        <span><i class="fa fa-caret-down"></i></span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a href="my-profile.html" class="dropdown-item" role="button">Update Profile</a>
+                                        <a href="../front/change-password.html" class="dropdown-item" role="button">Change Password</a>
+                                        <a href="login.html" class="dropdown-item" role="button">LOGOUT</a>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn home-nav-btn" href="login.html" title="Logout" role="button">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <section id="note-detail-top">
+        <div class="container">
+            <div class="row row-01" id="note-detail-top-wrapper" style="border-bottom: 1px solid #d1d1d1">
+                <div class="padding-bottom-hide margin-bottom-hide-md col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h5 class="title-section">Notes Details</h5>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                    <div class="row">
+                        <div class="padding-top-hide padding-top-hide-md col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12 image"><img src="images/computer-science.png" class="img-fluid" alt="book image"></div>
+                        <div class="padding-top-hide-md col-xl-7 col-lg-7 col-md-12 col-sm-7 col-12">
+                            <h4 class="book-title">Computer Science</h4>
+                            <p class="stream">Sciences</p>
+                            <p class="dummy-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ab nesciunt inventore earum vel alias hic culpa saepe vitae qui voluptas similique.</p>
+                            <!--  <a class="btn btn-download" href="#" data-toggle="modal" data-target="#thanksPopupModal" title="Download" role="button">DOWNLOAD / $15</a>
+                            -->
+                            <a href="#" class="btn btn-download" title="Download" role="button">Download / $15</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="note-detail-right padding-top-hide padding-top-hide-md col-xl-5 col-lg-6 col-md-6 col-12 ml-auto">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Institution:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="detail-col note-top-description">University of California</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Country:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">United State</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Course Name:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">Computer Engineering</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Course Code:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">248705</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Professor:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">Mr. Richard Brown</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Number of Pages:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">277</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Approved Date:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">November 25 2020</span>
+                        </div>
+                        <div class="col-md-4 col-sm-5 col-5 text-left">
+                            <span class="note-top-title">Rating:</span>
+                        </div>
+                        <div class="col-md-8 col-sm-7 col-7 text-right">
+                            <span class="note-top-description">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span>100 Reviews</span>
+                            </span>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <p><span class="mark-report">5 Users marked this note as inappropriate</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-02" id="note-detail-bottom-wrapper">
+                <div class="col-lg-6 col-12">
+                    <h5 class="title-section">Notes Preview</h5>
+                    <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
+                        <div class="responsive-wrapper 
+     responsive-wrapper-padding-bottom-90pct" style="-webkit-overflow-scrolling: touch; overflow: auto;">
+                            <iframe src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">
+                                <p style="font-size: 110%;"><em><strong>ERROR: </strong>
+                                        An &#105;frame should be displayed here but your browser version does not support &#105;frames.</em> Please update your browser to its most recent version and try again, or access the file <a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">with this link.</a></p>
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-12">
+                    <h5 class="title-section">Customer Reviews</h5>
+                    <div id="customer-review-wrapper">
+                        <div class="row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
+                                <img src="images/reviewer-1.png" class="img-fluid rounded-circle" alt="prof.pict">
+                            </div>
+                            <div class="padding-top-hide col-xl-10 col-lg-10 col-md-9 col-sm-10 col-12">
+                                <p class="customer-name">Richard Brown</p>
+                                <p class="rating">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                </p>
+                                <p class="customer-review">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta quod eius est voluptas officiis, facilis, illo doloribus iure.</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
+                                <img src="images/reviewer-2.png" class="img-fluid rounded-circle" alt="prof.pict">
+                            </div>
+                            <div class="padding-top-hide col-xl-10 col-lg-10 col-md-9 col-sm-10 col-12">
+                                <p class="customer-name">Alice Ortiaz</p>
+                                <p class="rating">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                </p>
+                                <p class="customer-review">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta quod eius est voluptas officiis.</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
+                                <img src="images/reviewer-3.png" class="img-fluid rounded-circle" alt="prof.pict">
+                            </div>
+                            <div class="padding-top-hide col-xl-10 col-lg-10 col-md-9 col-sm-10 col-12">
+                                <p class="customer-name">Sara Passmore</p>
+                                <p class="rating">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                </p>
+                                <p class="customer-review">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta quod eius.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thanks Pop up -->
+    <!-- Modal 
+    <div class="modal fade" id="thanksPopupModal" tabindex="-1" role="dialog" aria-labelledby="thanksPopupModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container thanks-popup">
+                        <div class="row">
+                            <div class="col-md-12 col-12 remove-height">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="col-md-12 col-12 text-center">
+                                <img src="images/.png" class="img-fluid text-center" alt="">
+                            </div>
+                            <div class="col-md-12 col-12 text-center">
+                                <h4>Thank you for Purchasing!</h4>
+                            </div>
+                            <div class="col-md-12 col-12 popup-text">
+                                <h5>Dear Smith,</h5>
+                                <p>As this is paid notes - you need to pay to seller Rahil Shah Offline. We will send him an email that you want to download this note. He may contact you further for payment process completion.</p>
+                                <p>In case, you have urgency,<br>Please contact us on +9195377345959 .</p>
+                                <p>Once he receives the payment and acknowledge us - selected notes you can see over my downloads tab for download.</p>
+                                <p>Have a good day.</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <!-- Footer  version admin
+    <footer class="footer">
+        <div class=" container-fluid">
+            <div class="row copyright">
+                <div class="col-md-4 col-sm-5 col-6 text-center">
+                    <p class="version-text"> Version: 1.1.24</p>
+                </div>
+                <div class="col-md-8 col-sm-7 col-6 text-right">
+                    <p class="copyright-text">Copyright &copy; TatvaSoft All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    -->
+
+    <!-- Footer front social -->
+    <footer class="footer">
+        <div class=" container">
+            <div class="row social-copyright">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-7 col-12 text-left">
+                    <p class="copyright-text">Copyright &copy; TatvaSoft All rights reserved.</p>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-12 text-right">
+                    <ul class="social-list">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JQuery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap JS-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/custom.min.js"></script>
+
+
+</body></html>

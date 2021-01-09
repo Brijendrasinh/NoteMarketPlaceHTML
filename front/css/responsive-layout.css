@@ -1,0 +1,945 @@
+/* ===============================================
+                Mobile Menu
+=============================================== */
+
+.site-nav-wrapper {
+    position: relative;
+}
+
+#mobile-nav-open-btn {
+    font-size: 30px;
+    color: #6255a5;
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    right: 2%;
+    /* Hide mobile navigation open btn */
+    display: none;
+}
+
+#mobile-nav {
+    /* by default, mobile nav will be hidden with height 0% */
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, .9);
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+    overflow-y: hidden;
+}
+
+#mobile-nav-close-btn {
+    font-family: "Raleway", sans-serif;
+    font-size: 70px;
+    color: #212226;
+    font-weight: 400;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 13px;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+#mobile-nav-content {
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+    position: relative;
+    top: 10%;
+}
+
+#mobile-nav ul li {
+    margin-bottom: 20px;
+}
+
+#mobile-nav a {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    color: #212226;
+    font-weight: 400;
+    text-transform: uppercase;
+    display: inline;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+#mobile-nav a.home-nav-btn {
+    color: #6255a5;
+    width: 89px;
+    border-radius: 3px;
+    background-color: #fff;
+    font-size: 16px;
+    line-height: 22px;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear;
+}
+
+#mobile-nav a.home-nav-btn {
+    color: #fff;
+    background-color: #6255a5;
+}
+
+#mobile-nav a:hover,
+#mobile-nav a:focus,
+#mobile-nav-close-btn:hover,
+#mobile-nav-close-btn:focus {
+    color: #6255a5;
+    background: none;
+}
+
+@media (max-width: 767.9px) {
+
+    /* Mobile Navigation */
+    #mobile-nav-open-btn {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+
+/* ===============================================
+                    Responsive 
+=============================================== */
+
+@media (max-width: 390px) {
+
+    span.magnifier,
+    #dashboard-middle span,
+    #dashboard-bottom span {
+        top: -15px !important;
+    }
+
+    .btn-mydownload-search,
+    .btn-search {
+        font-size: 14px !important;
+    }
+
+    #selling-information button.btn-addnote-save,
+    #selling-information button.btn-addnote-publish {
+        width: 120px;
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 420px) {
+    .user-profile-image > img {
+        height: 166px;
+    }
+
+    .text-on-image-user-profile h3 {
+        font-size: 30px !important;
+        line-height: 36px;
+    }
+
+    .pagination .page-link.number {
+        color: #333333;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        margin-right: 10px;
+    }
+
+    .pagination .page-link span {
+        width: 8px;
+        height: 15px;
+        color: #333333;
+        background: none;
+        padding: 0;
+    }
+
+    #basic-note-details h3,
+    #institution-information h3,
+    #course-details h3,
+    #selling-information h3 {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        font-family: "Open Sans", sans-serif;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 38px;
+        color: #6255a5;
+    }
+
+    #basic-note-details h3,
+    #institution-information h3,
+    #course-details h3,
+    #selling-information h3 {
+        padding-top: 20px;
+    }
+
+    .custom-control-label::before {
+        position: absolute;
+        top: -5px;
+        left: -37px;
+        height: 30px;
+        width: 30px;
+    }
+
+    .custom-control-label::after {
+        position: absolute;
+        top: -5px;
+        left: -37px;
+        height: 30px;
+        width: 30px;
+    }
+
+    .buyer-request h3 {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        font-size: 26px;
+    }
+
+    .form-container {
+        padding: 20px !important;
+    }
+
+    .form-container h3 {
+        font-size: 27px;
+    }
+
+    .form-container p.top {
+        font-size: 14px;
+        padding: 15px 0;
+    }
+
+    #general-question h3,
+    #uploaders h3,
+    #downloaders h3 {
+        font-size: 24px !important;
+    }
+
+    .faq h3 {
+        font-size: 24px !important;
+        line-height: 30px !important;
+    }
+
+    /* Note Detail */
+    #note-detail-top {
+        padding-top: 10px;
+    }
+
+    #note-detail-top h5.title-section {
+        margin-bottom: 10px;
+    }
+
+    #note-detail-top-wrapper .note-top-title {
+        font-size: 12px;
+    }
+
+    #note-detail-top-wrapper p.dummy-text {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    #note-detail-top-wrapper h4.book-title {
+        font-size: 30px;
+    }
+
+    #note-detail-top-wrapper p.stream {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    #note-detail-top-wrapper span.note-top-description {
+        font-size: 12px;
+    }
+
+    #text-on-image-home {
+        top: 82% !important;
+    }
+
+    #text-on-image-home h3 {
+        font-size: 19px !important;
+        line-height: 24px !important;
+    }
+
+    #text-on-image-home p {
+        font-size: 10px !important;
+        line-height: 20px !important;
+    }
+
+    #text-on-image-home #home-02-btn a {
+        font-size: 14px !important;
+    }
+
+    #about-topic h3 {
+        font-size: 27px;
+    }
+
+    #about-topic p {
+        font-size: 14px;
+    }
+
+    #text-on-image-home #home-02-btn a {
+        width: 130px;
+    }
+
+    .customer-sub {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #home-bottom .customer-name {
+        font-size: 22px;
+    }
+
+    #home-bottom .customer-details {
+        font-size: 15px;
+    }
+
+    #home-top .container,
+    #home-middle .container,
+    #home-bottom .container {
+        padding: 20px 20px;
+    }
+
+    #book-lists .card .card-body {
+        height: 300px !important;
+    }
+
+    #dashboard-top h5 {
+        font-size: 17px !important;
+        line-height: 22px !important;
+    }
+
+    .left-box {
+        padding: 5px !important;
+        margin-left: 0;
+    }
+
+    #dashboard-top .btn-add-note {
+        width: 100px;
+        font-size: 13px;
+    }
+
+    #dashboard-top h4 {
+        font-size: 27px;
+    }
+
+    .right-box [class*=col-4] {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    #dashboard-top {
+        padding-top: 20px;
+        margin-bottom: 15px;
+    }
+    .customer-review-pic {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* ===============================================
+            xs (xtra small) Responsive 
+=============================================== */
+@media (max-width: 575.98px) {
+
+    span.magnifier,
+    #dashboard-middle span,
+    #dashboard-bottom span {
+        left: 7% !important;
+    }
+
+    .search-side,
+    .m-left-auto {
+        margin-left: 0 !important;
+    }
+
+    .navbar-brand img {
+        max-width: 220px;
+    }
+
+    .copyright-text,
+    .social-list {
+        text-align: left !important;
+    }
+
+    .text-on-image-user-profile h3 {
+        font-size: 40px;
+    }
+
+    .faq h3 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .form-container {
+        padding: 30px;
+    }
+
+    #general-question h3,
+    #uploaders h3,
+    #downloaders h3 {
+        font-size: 27px !important;
+    }
+
+    #general-question .card .card-header h6,
+    #uploaders .card .card-header h6,
+    #downloaders .card .card-header h6 {
+        font-size: 14px;
+    }
+
+    #general-question .card .card-body p,
+    #uploaders .card .card-body p,
+    #downloaders .card .card-body p {
+        font-size: 12px;
+    }
+
+    .page-at-center {
+        top: 2vh !important;
+    }
+
+    /*.bg {
+        height: 110vh;
+    }*/
+    .form-check-input {
+        height: 20px;
+        width: 20px;
+    }
+
+    .form-check-label {
+        padding-left: 10px;
+        padding-top: 5px;
+    }
+
+    #text-on-image-home {
+        top: 88%;
+    }
+
+    #text-on-image-home h3 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+
+    #text-on-image-home p {
+        font-size: 14px;
+    }
+
+    #text-on-image-home #home-02-btn a,
+    #about-topic p {
+        font-size: 16px;
+    }
+
+    #home-image {
+        height: 350px;
+    }
+
+    #about-topic h3 {
+        font-size: 28px;
+    }
+
+    #home-bottom h3 {
+        font-size: 27px;
+    }
+
+    #home-middle h3 {
+        font-size: 27px;
+    }
+
+    .remove-br {
+        display: none;
+    }
+
+    #book-lists .card .card-body {
+        height: 260px;
+    }
+
+    #book-lists .card-title {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    #book-lists .card-text span,
+    #book-lists span.star-review {
+        font-size: 13px;
+    }
+
+    #search-notes-filter-wrapper .row-02 {
+        padding: 10px;
+    }
+
+    #search-notes-filter-wrapper .row-01 {
+        margin-bottom: 0;
+        padding: 10px;
+    }
+
+    #search-filters .search {
+        position: absolute;
+        top: 10px;
+        left: 15px;
+    }
+
+    #search-notes-filter-wrapper {
+        padding: 10px 20px;
+    }
+
+    #dashboard-top h5 {
+        font-size: 22px;
+        line-height: 27px;
+    }
+
+    #dashboard-top .left-box p,
+    #dashboard-top .right-box p {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    #dashboard-top {
+        padding-top: 20px;
+        margin-bottom: 15px;
+    }
+    #home-top .container, #home-middle .container, #home-bottom .container {
+    padding: 20px 20px;
+}
+}
+
+/* ===============================================
+            sm (small) Responsive 
+=============================================== */
+@media (min-width: 576px) and (max-width:767.98px) {
+
+    .btn-mydownload-search,
+    .btn-search {
+        font-size: 14px !important;
+    }
+
+    .buyer-request h3 {
+        font-size: 21px;
+    }
+
+    .my-rejected h3 {
+        line-height: 23px;
+    }
+
+    .faq h3 {
+        font-size: 35px;
+    }
+
+    #dashboard-middle h6,
+    #dashboard-bottom h6 {
+        font-size: 20px;
+    }
+
+    #basic-profile-details label,
+    #university-college-information label,
+    #address-details label {
+        font-size: 15px;
+    }
+
+    #home-image {
+        height: 400px;
+    }
+
+    #text-on-image-home {
+        top: 85%;
+    }
+
+    #text-on-image-home h3 {
+        font-size: 35px;
+        line-height: 42px;
+    }
+
+    #text-on-image-home p {
+        font-size: 15px;
+    }
+
+    #text-on-image-home #home-02-btn a {
+        font-size: 16px;
+    }
+
+    #book-lists .card .card-body {
+        height: 300px;
+    }
+
+    #book-lists .card > img {
+        height: 180px;
+    }
+
+    #book-lists .card-title {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    #book-lists .card-text span,
+    #book-lists span.star-review {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 767.98px) {
+
+    /* Mobile Navigation */
+    #mobile-nav-open-btn {
+        display: block;
+    }
+
+    .navbar-expand-md > .container,
+    .navbar-expand-md > .container-fluid,
+    .navbar-expand-md > .container-lg,
+    .navbar-expand-md > .container-md,
+    .navbar-expand-md > .container-sm,
+    .navbar-expand-md > .container-xl {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .m-left-auto-sm {
+        margin-left: 0;
+    }
+
+    #contact-us h3 {
+        margin-top: 30px;
+    }
+
+    #contact-us p {
+        margin-bottom: 0;
+    }
+
+    .buyer-request {
+        padding-top: 20px;
+    }
+
+    .user-profile-image {
+        padding-top: 60px;
+    }
+
+    #general-question h3,
+    #uploaders h3,
+    #downloaders h3 {
+        font-size: 30px;
+    }
+
+    #general-question h3 {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    #uploaders h3,
+    #downloaders h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    #note-detail-top {
+        padding-top: 10px;
+    }
+
+    #basic-profile-details {
+        padding: 20px 0;
+    }
+
+    #university-college-information {
+        padding: 20px 0;
+    }
+
+    #basic-profile-details h3,
+    #university-college-information h3,
+    #address-details h3 {
+        font-size: 26px;
+    }
+
+    #note-detail-top-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .right-box {
+        margin-left: 0;
+        padding-top: 20px;
+    }
+
+    #dashboard-top {
+        padding-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    .padding-top-hide {
+        padding-top: 0;
+    }
+}
+
+/* ===============================================
+            md (medium) Responsive 
+=============================================== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    header #main-nav li {
+        padding: 0 10px;
+    }
+
+    .dropdown .dropdown-menu a {
+        font-size: 14px;
+        line-height: 22px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        color: #333333;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .navbar-brand img {
+        max-width: 170px;
+    }
+
+    ul.navbar-nav > li a {
+        font-family: "Open Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 20px;
+    }
+
+    .buyer-request {
+        padding-top: 20px;
+    }
+
+    .buyer-request h3 {
+        font-size: 29px;
+    }
+
+    .my-rejected h3 {
+        font-size: 24px;
+    }
+
+    .btn-mydownload-search,
+    .btn-search {
+        font-size: 14px !important;
+    }
+
+    #contact-us h3 {
+        margin-top: 30px;
+    }
+
+    #contact-us p {
+        margin-bottom: 0;
+    }
+
+    .user-profile-image {
+        padding-top: 60px;
+    }
+
+    #general-question h3 {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    #uploaders h3,
+    #downloaders h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    #note-detail-top {
+        padding-top: 15px;
+    }
+
+    #basic-profile-details label,
+    #university-college-information label,
+    #address-details label {
+        font-size: 13px;
+    }
+
+    #basic-profile-details h3,
+    #university-college-information h3,
+    #address-details h3 {
+        padding-bottom: 0;
+        font-size: 30px;
+    }
+
+    #basic-profile-details {
+        padding: 20px 0;
+    }
+
+    #university-college-information {
+        padding: 20px 0;
+    }
+
+    #note-detail-top-wrapper {
+        margin-bottom: 20px;
+    }
+
+    #text-on-image-home {
+        top: 72%;
+        left: 16%;
+    }
+
+    #text-on-image-home h3 {
+        font-size: 40px;
+        line-height: 45px;
+    }
+
+    #text-on-image-home p {
+        font-size: 15px;
+    }
+
+    #text-on-image-home #home-02-btn a {
+        font-size: 16px;
+    }
+
+    .home-middle-sub-heading {
+        font-size: 18px;
+        padding: 15px 0 10px 0;
+    }
+
+    #home-middle p {
+        font-size: 14px;
+    }
+
+    #home-bottom .customer-name {
+        font-size: 17px;
+    }
+
+    #home-bottom .customer-designation {
+        font-size: 12px;
+    }
+
+    #home-bottom .customer-detail {
+        font-size: 12px;
+    }
+
+    #book-lists .card-title {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    #book-lists .card .card-body {
+        height: 300px;
+    }
+
+    .right-box {
+        margin-left: 0;
+        padding-top: 20px;
+    }
+
+    #dashboard-top {
+        padding-top: 25px;
+        margin-bottom: 20px;
+    }
+}
+
+/* ===============================================
+            lg (large) Responsive 
+=============================================== */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    header #main-nav li {
+        padding: 0 12px;
+    }
+
+    ul.navbar-nav > li a {
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+    }
+
+    .my-rejected h3 {
+        font-size: 33px;
+    }
+
+    #note-detail-top {
+        padding-top: 20px;
+    }
+
+    #text-on-image-home {
+        left: 15%;
+        top: 75%;
+    }
+
+    #book-lists .card .card-body {
+        height: 305px;
+    }
+
+    #dashboard-top {
+        padding-top: 25px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1470px) {
+    #text-on-image-home {
+        top: 73%;
+        left: 12%;
+    }
+}
+
+@media (min-width: 1471px) and (max-width: 1550px) {
+    #text-on-image-home {
+        top: 73%;
+        left: 11%;
+    }
+}
+
+@media (min-width: 1551px) {
+    #text-on-image-home {
+        top: 70%;
+        left: 19%;
+    }
+}
+
+/*=========================================
+            Hight Media Queries
+=========================================*/
+
+@media (max-height: 600.98px) {
+    #login-page .bg {
+        height: 120vh;
+    }
+
+    #change-password-page .bg {
+        height: 110vh;
+    }
+
+    #sign-up-page .bg {
+        height: 152vh;
+    }
+}
+
+@media (min-height: 601px) and (max-height: 720px) {
+    #sign-up-page .bg {
+        height: 141vh;
+    }
+}
+
+@media (min-height: 721px) and (max-height: 820px) and (max-width: 576px) {
+    #sign-up-page .bg {
+        height: 118vh;
+    }
+}
+
+@media (min-height: 721px) and (max-height: 820px) and (min-width: 576px) {
+    #sign-up-page .bg {
+        height: 136vh;
+    }
+}
+
+@media (min-height: 821px) and (max-height: 920px) and (max-width: 576px) {
+    #sign-up-page .bg {
+        height: 110vh;
+    }
+}
+
+@media (min-height: 821px) and (max-height: 920px) and (min-width: 576px) {
+    #sign-up-page .bg {
+        height: 120vh;
+    }
+}

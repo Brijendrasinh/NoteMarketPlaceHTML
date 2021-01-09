@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Importent Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Title -->
+    <title>home page</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="css/custom.min.css">
+
+    <!-- Responsive layout -->
+    <link rel="stylesheet" href="css/responsive-layout.min.css">
+
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top white-nav-top">
+            <div class="container site-nav-wrapper">
+
+                <!-- Mobile Menu Open Button -->
+                <span class="ml-auto" id="mobile-nav-open-btn">&#9776;</span>
+
+                <div class="navbar-header">
+                    <!-- Logo -->
+                    <a href="index.html" class="navbar-brand">
+                        <img class="img-fluid" src="images/pre-login/logo.png" alt="logo">
+                    </a>
+                </div>
+
+                <!-- Main Nav -->
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto" id="main-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="search-notes.html">Search Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sell Your Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="FAQ.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact-us.html">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn home-nav-btn" href="login.html" title="Login" role="button">Login</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-nav">
+
+                    <!-- Mobile Menu Close Button -->
+                    <span id="mobile-nav-close-btn">&times;</span>
+
+                    <div id="mobile-nav-content">
+                        <ul class="nav flex-column">
+                            <li><a class="nav-link smooth-scroll" href="search-notes.html">Search Notes</a></li>
+                            <li><a class="nav-link smooth-scroll" href="#">Sell Your Notes</a></li>
+                            <li><a class="nav-link smooth-scroll" href="FAQ.html">FAQ</a></li>
+                            <li><a class="nav-link smooth-scroll" href="contact-us.html">Contact Us</a></li>
+                            <li class="nav-item">
+                                <a class="btn home-nav-btn" href="login.html" title="Logout" role="button">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <section class="user-profile-image">
+        <img class="img-fluid" src="images/User-Profile/banner-with-overlay.jpg" alt="User Profile banner">
+        <div class="text-on-image-user-profile faq">
+            <h3>Frequently Asked Question</h3>
+        </div>
+    </section>
+
+    <section id="general-question">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-12">
+                    <h3>General Questions</h3>
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h6 class="mb-0">
+                                    What is Notes Marketplace?
+                                </h6>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="#headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <!--  <div class="question">
+                                        <h6>What is Notes Marketplace?</h6>
+                                        
+                                            <span><img src="images/FAQ/minus.png" alt=""></span>
+                                        
+                                    </div> -->
+                                    <div class="answer">
+                                        <p>Notes Marketplace is an online marketplace for university students to buy and sell their course notes.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h6 class="mb-0">
+                                    Where did Notes Marketplace start?
+
+                                </h6>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="#headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                     <h6>Where did Notes Marketplace start?</h6>
+                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                             <span><img src="images/FAQ/minus.png" alt=""></span>
+                                         </button>   
+                                    </div>   -->
+                                    <div class="answer">
+                                        <p>What started out as four friends chucking around an idea in Ahmedabad ended up turning into an
+                                            earliest version of Notes Marketplace. So, with 2021 batch of tatvasoft – we has developed this product.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="uploaders">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <h3>Uploaders</h3>
+                    <div class="accordion" id="accordionExample2">
+                        <div class="card">
+                            <div class="card-header" id="heading1">
+                                <h6 class="mb-0">
+                                    Why should I upload now?
+
+                                </h6>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+
+                            <div id="collapse1" class="collapse" aria-labelledby="#heading1" data-parent="#accordionExample2">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                        <h6>Why should I upload now?</h6>
+                                        <span><img src="images/FAQ/minus.png" alt=""></span>
+                                    </div>
+                                    -->
+                                    <div class="answer">
+                                        <p>To maximize sales. We can't sell your notes if they are rotting on your hard drive. Your notes are
+                                            available for purchase the instant they are approved, which means that you could be missing potential
+                                            sales as we speak. Despite exam and holiday breaks, our users purchase notes all year round, so the best
+                                            time to upload notes is always today.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="heading2">
+                                <h6 class="mb-0">
+                                    What can't I sell?
+
+                                </h6>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+                            <div id="collapse2" class="collapse" aria-labelledby="#heading2" data-parent="#accordionExample2">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                        <h6>What can't I sell?</h6>
+                                        <span><img src="images/FAQ/minus.png" alt=""></span>
+                                    </div>
+                                    -->
+                                    <div class="answer">
+                                        <p>We won't approve materials that have been created by your university or another third party. We also
+                                            do not accept assignments, essays, practical’s or take-home exams. We love notes though.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="heading3">
+                                <h6 class="mb-0">
+                                    How long does it take to upload?
+
+                                </h6>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+                            <div id="collapse3" class="collapse" aria-labelledby="#heading3" data-parent="#accordionExample2">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                        <h6>How long does it take to upload?</h6>
+                                        <span><img src="images/FAQ/minus.png" alt=""></span>
+                                    </div>
+                                    -->
+                                    <div class="answer">
+                                        <p>Uploading notes is quick and easy. It can take as little as 90 seconds per set of notes. Put it this way, in
+                                            the time it took to read these FAQs, you could’ve uploaded several sets of notes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="downloaders">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-12">
+                    <h3>Downloaders</h3>
+                    <div class="accordion" id="accordionExample3">
+                        <div class="card">
+                            <div class="card-header" id="heading01">
+                                <h6 class="mb-0">
+                                    How do I buy notes?
+
+                                </h6>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse01" aria-expanded="false" aria-controls="collapse01">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+
+                            <div id="collapse01" class="collapse" aria-labelledby="#heading01" data-parent="#accordionExample3">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                        <h6>How do I buy notes?</h6>
+                                        <span><img src="images/FAQ/minus.png" alt=""></span>
+                                    </div>
+                                    -->
+                                    <div class="answer">
+                                        <p>Search for the notes you are after using the 'SEARCH NOTES' tab at the at the top right of every page.
+                                            You can then filter results by university, category, course information etc. To purchase, go to detail page
+                                            of note and click on download button. If notes are free to download – it will download over the browser
+                                            and if notes are paid, Once Seller will allow download you can have notes at my downloads grid for
+                                            actual download.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="heading02">
+                                <h6 class="mb-0">
+                                    Why should I buy notes?
+
+                                </h6>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse02" aria-expanded="false" aria-controls="collapse02">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+                            <div id="collapse02" class="collapse" aria-labelledby="#heading02" data-parent="#accordionExample3">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                        <h6>Why should I buy notes?</h6>
+                                        <span><img src="images/FAQ/minus.png" alt=""></span>
+                                    </div>
+                                    -->
+                                    <div class="answer">
+                                        <p>The notes on our site are incredibly useful as an educational tool when used correctly. They effectively
+                                            demonstrate the techniques that top students employ in order to receive top marks. They also
+                                            summaries the course in a concise format and show what that student believed were the most
+                                            important elements of the course. Learn from the best.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="heading03">
+                                <h6 class="mb-0">
+                                    Will downloading notes guarantee I improve my grades?
+
+                                </h6>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse03" aria-expanded="false" aria-controls="collapse03">
+                                    <span><img src="images/FAQ/add.png" alt=""></span>
+                                </button>
+                            </div>
+                            <div id="collapse03" class="collapse" aria-labelledby="#heading03" data-parent="#accordionExample3">
+                                <div class="card-body">
+                                    <!-- <div class="question">
+                                        <h6>Will downloading notes guarantee I improve my grades?</h6>
+                                        <span><img src="images/FAQ/minus.png" alt=""></span>
+                                    </div>
+                                    -->
+                                    <div class="answer">
+                                        <p>How long is a piece of string? However, 90% of students who purchased notes through our site said that
+                                            doing so improved their grades.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer  -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row copyright">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-7 col-12 text-left">
+                    <p class="copyright-text">Copyright &copy; TatvaSoft All rights reserved.</p>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-12 text-right">
+                    <ul class="social-list">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JQuery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/custom.min.js"></script>
+
+</body></html>
