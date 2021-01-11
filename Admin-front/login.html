@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
     <!-- Title -->
-    <title>Login</title>
+    <title>Login - Note Market Place</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -44,23 +44,23 @@
                     <div class="form-container">
                         <h3 class="text-center">Login</h3>
                         <p class="text-center top">Enter your email address and password to login</p>
-                        <form>
+                        <form id="login-form">
                             <div class="form-group email">
                                 <label for="exampleInputLoginEmail">Email</label>
-                                <input type="email" class="form-control form-control-login" id="exampleInputLoginEmail" aria-describedby="emailLoginHelp" placeholder="Enter your email address">
+                                <input type="email" class="form-control form-control-login" id="exampleInputLoginEmail" aria-describedby="emailLoginHelp" placeholder="Enter your email address" required>
                             </div>
                             <div class="form-group password">
                                 <label for="exampleInputLoginPassword">Password</label>
                                 <label class="float-right"><a href="forgot-password.html">Forgot Password?</a></label>
-                                <input type="password" class="form-control form-control-login" id="exampleInputLoginPassword" placeholder="Enter your Password">
+                                <input type="password" class="form-control form-control-login" id="exampleInputLoginPassword" placeholder="Enter your Password" required>
                                 <span toggle="#exampleInputLoginPassword" class="field-icon toggle-password"><img src="images/eye.png" alt="eye"></span>
-                                <small id="emailLoginHelp" class="form-text">The password that you've entered is incorrect <h6>Forget Password?</h6></small>
+                                <small id="wrongPasswordError" class="form-text">The password that you've entered is incorrect <h6>Forget Password?</h6></small>
                             </div>
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleLoginCheck">
                                 <label class="form-check-label " for="exampleLoginCheck">Remember Me</label>
                             </div>
-                            <button type="submit" class="btn btn-login btn-block">LOGIN</button>
+                            <button type="button" onclick="validate();" class="btn btn-login btn-block">LOGIN</button>
                         </form>
                         <p class="text-center bottom">Don't have an account? <a href="sign-up.html">Sign Up</a></p>
                     </div>
@@ -74,5 +74,14 @@
 
     <!-- Bootstrap JS-->
     <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/custom.min.js"></script>
+
+    <!-- Alert box for Dummy password -->
+    <script>
+        alert("dummy password for check is admin");
+    </script>
+
 
 </body></html>

@@ -9,12 +9,13 @@ button:focus {
 }
 
 .dropdown-menu {
-   /* text-align: center; */
+    /* text-align: center; */
     position: static;
     float: none;
     border: none;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
 }
+
 .dropdown-menu.show {
     display: inline-grid;
 }
@@ -26,6 +27,7 @@ button:focus {
 .note-title a.links {
     color: #6255a5;
 }
+
 a.links:hover {
     text-decoration: none;
 }
@@ -112,7 +114,7 @@ a.links:hover {
 /* ===============================================
                     Home Page
 =============================================== */
-home-image-about {
+#home-image-about {
     position: relative;
 }
 
@@ -122,8 +124,12 @@ home-image-about {
 
 #home-image,
 #home-image-about {
-    /*    height: 620px;  */
+
     position: relative;
+}
+
+#home-image {
+    height: 620px;
 }
 
 #text-on-image-home {
@@ -452,7 +458,7 @@ ul.navbar-nav > li > a.home-nav-btn {
 .page-at-center {
     max-width: 610px;
     position: absolute;
-    top: 10vh;
+    top: 8vh;
 }
 
 .center-logo {
@@ -606,6 +612,10 @@ ul.navbar-nav > li > a.home-nav-btn {
     z-index: 2;
 }
 
+#wrongPasswordError {
+    display: none;
+}
+
 /* ===============================================
                 Forgot Password
 =============================================== */
@@ -630,6 +640,9 @@ ul.navbar-nav > li > a.home-nav-btn {
     padding-bottom: 30px;
 }
 
+#complete-sign-up {
+    display: none;
+}
 
 /* ===============================================
                 User Profile 
@@ -661,18 +674,6 @@ ul.navbar-nav > li > a.home-nav-btn {
 
 #basic-profile-details {
     padding: 60px 0 45px 0;
-}
-
-.upload-picture span {
-    position: relative;
-    top: 45px;
-    left: 30%;
-}
-
-.upload-picture textarea {
-    resize: none;
-
-    padding-left: 40%;
 }
 
 #basic-profile-details .calendar {
@@ -752,6 +753,26 @@ ul.navbar-nav > li > a.home-nav-btn {
 #university-college-information button {
     margin: 15px;
 }
+
+.upload-picture input.upload {
+    /*height: 110px;
+    padding-top: 102px; */
+    display: inline-block;
+    width: 100%;
+    padding: 80px 0 0 27%;
+    height: 110px !important;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url('../Front_images/images/upload-file.png') center center no-repeat #fff;
+    background-size: 40px 40px;
+}
+
+input.upload::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
 
 /* ===============================================
                 Email verification
@@ -1574,11 +1595,40 @@ div.container.thanks-popup {
 
 #basic-note-details input.upload,
 #selling-information input.upload {
+    /*height: 110px;
+    padding-top: 102px; */
+    display: inline-block;
+    width: 100%;
+    padding: 80px 0 0 27%;
     height: 110px;
-    padding-top: 70px;
-    padding-left: 40%;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url('../Front_images/images/upload-file.png') center center no-repeat #fff;
+    background-size: 40px 40px;
 }
 
+.note-preview {
+    height: 76%;
+    border: 1px solid #d1d1d1;
+}
+
+.note-preview-input {
+    height: 100% !important;
+    border: none !important;
+    padding: 95px 0 0 25% !important;
+}
+
+input.upload::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#basic-note-details input.upload-note {
+    background: url('../Front_images/images/upload-note.png') center center no-repeat #fff;
+}
+
+/*
 #basic-note-details span img,
 #selling-information span img {
     position: absolute;
@@ -1586,6 +1636,7 @@ div.container.thanks-popup {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+*/
 
 #selling-information button.btn-addnote-save,
 #selling-information button.btn-addnote-publish {

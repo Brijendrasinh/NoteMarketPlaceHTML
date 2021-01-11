@@ -1,21 +1,54 @@
 .menu-icon {
     display: none;
 }
+
 .container {
     max-width: 1470px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
+/*
+html,body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+*/
 .note-title a.links {
     color: #6255a5;
 }
+
 .no a.links {
     color: #6255a5;
 }
-a.links:hover{
+
+a.links:hover {
     text-decoration: none;
 }
+
+#wrongPasswordError {
+    display: none;
+}
+
+.upload-picture input.upload {
+    /*height: 110px;
+    padding-top: 102px; */
+    display: inline-block;
+    width: 100%;
+    padding: 80px 0 0 27%;
+    height: 110px !important;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url('../images/upload-file.png') center center no-repeat #fff;
+    background-size: 40px 40px;
+}
+
+input.upload::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
 
 .col,
 .col-1,
@@ -108,7 +141,7 @@ textarea {
 
 .page-at-center {
     position: absolute;
-    top: 10vh;
+    top: 8vh;
     max-width: 610px;
 }
 
@@ -702,11 +735,6 @@ p.version-text {
     padding-bottom: 0;
 }
 
-#note-detail-top-wrapper .image img {
-    /*    height: 300px;
-    width: 240px;
-*/
-}
 
 #note-detail-top-wrapper h4.book-title {
     font-family: "Open Sans", sans-serif;
@@ -1120,10 +1148,6 @@ ul.social-list li a:hover {
     padding-left: 0;
 }
 
-.search-side-NUR {
-    /* margin-right: 15px;*/
-}
-
 .NUR label,
 .NUR select {
     font-family: "Open Sans", sans-serif;
@@ -1131,6 +1155,8 @@ ul.social-list li a:hover {
     font-weight: 400;
     line-height: 20px;
     color: #333333;
+    text-overflow: ellipsis;
+    display: inline-flex;
 }
 
 .btn-action {
@@ -1204,6 +1230,7 @@ th.action {
     line-height: 20px;
     color: #8a8a8a;
 }
+
 /* ===============================================
                 Download Notes
 =============================================== */

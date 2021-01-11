@@ -30,3 +30,19 @@ $(function () {
         }
     });
 });
+
+/* Password is right or wrong method */
+
+
+function validate() {
+    var pword = document.getElementById('exampleInputLoginPassword').value;
+
+    if (pword !== "admin") {
+        document.getElementById('exampleInputLoginPassword').style.border = "1px solid #ff5e5e"
+        document.getElementById('wrongPasswordError').style.display = "block";
+    } else if (pword == "admin") {
+        document.getElementById('exampleInputLoginPassword').style.border = "1px solid #6255a5"
+        document.getElementById('wrongPasswordError').style.display = "none";
+        alert(" correct password ");
+    }
+}

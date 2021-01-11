@@ -56,16 +56,19 @@
 #mobile-nav ul li {
     margin-bottom: 20px;
 }
+
 .dropdown-menu {
-   /* text-align: center; */
+    /* text-align: center; */
     position: static;
     float: none;
     border: none;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
 }
+
 .dropdown-menu.show {
     display: inline-grid;
 }
+
 #mobile-nav a {
     font-family: "Open Sans", sans-serif;
     font-size: 18px;
@@ -195,7 +198,7 @@
     .version-text,
     .copyright-text,
     .social-list {
-        text-align: left !important;
+        text-align: center !important;
     }
 
 }

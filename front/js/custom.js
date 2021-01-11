@@ -78,6 +78,38 @@ $(function () {
     });
 });
 
+/* Password is right or wrong method */
+
+
+function validate() {
+    var pword = document.getElementById('exampleInputLoginPassword').value;
+
+    if (pword !== "admin") {
+        document.getElementById('exampleInputLoginPassword').style.border = "1px solid #ff5e5e"
+        document.getElementById('wrongPasswordError').style.display = "block";
+    } else if (pword == "admin") {
+        document.getElementById('exampleInputLoginPassword').style.border = "1px solid #6255a5"
+        document.getElementById('wrongPasswordError').style.display = "none";
+        alert(" correct password ");
+    }
+}
+
+
+$(function () {
+    $('#sign-up').on("click", function () {
+        let valid = true;
+        $('[required]').each(function () {
+            if ($(this).is(':invalid') || !$(this).val()) valid = false;
+        });
+        if (!valid) {
+            alert("error please fill all fields!");
+        } else {
+            document.getElementById('complete-sign-up').style.display = "block";
+        }
+    });
+
+});
+
 /* ===============================================
                 Show or hide Faq header
 =============================================== 
@@ -101,14 +133,3 @@ $(function () {
 });
 
 */
-
-
-
-
-
-
-
-
-
-
-
