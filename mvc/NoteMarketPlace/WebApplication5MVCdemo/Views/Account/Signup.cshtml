@@ -1,0 +1,78 @@
+﻿@model NoteMarketPlace.Models.RegisterUser
+
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<section id="sign-up-page">
+    <div class="bg">
+        <div class="row justify-content-center">
+            <div class="page-at-center col-6 ml-auto mr-auto">
+                <div class="center-logo">
+                    <img class="logo-img" src="@Url.Content("~/images/pre-login/top-logo.png")" alt="logo">
+                </div>
+                <div class="form-container">
+                    <h3 class="text-center">Create an Account</h3>
+                    <p class="text-center top sign-up-top">Enter your details to signup</p>
+                    <p id="complete-sign-up" class="text-center text-success"><img src="@Url.Content("~/images/pre-login/true-mark.png")" alt="truemark"> Your account has been successfully created.</p>
+                    @*<form id="form-signUp">*@
+
+                    @using (Html.BeginForm("Signup", "Account", FormMethod.Post, new { role = "form" }))
+                    {
+
+                        @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FirstName)
+                            @Html.TextBoxFor(m => m.FirstName, new { Placeholder = "Enter Your First Name", @class = "form-control form-control-sign-up" })
+                            @Html.ValidationMessageFor(m => m.FirstName,"", new { @class = "text-danger" })
+                            @*<label for="exampleInputSignupFirstName">First Name *</label>
+                <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupFirstName" aria-describedby="emailSignupHelp" placeholder="Enter your first name" required>*@
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LastName)
+                            @Html.TextBoxFor(m => m.LastName, new { Placeholder = "Enter Your Last Name", @class = "form-control form-control-sign-up" })
+                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                           
+                            @*<label for="exampleInputSignupLastName">Last Name *</label>
+        <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupLastName" aria-describedby="emailSignupHelp" placeholder="Enter your last name" required>*@
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { Placeholder = "Enter Your Email Address", @class = "form-control form-control-sign-up" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            @*<label for="exampleInputSignupEmail">Email *</label>
+        <input type="email" class="form-control form-control-sign-up" id="exampleInputSignupEmail" aria-describedby="emailSignupHelp" placeholder="Enter your email address" required>*@
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { Placeholder = "Enter Your Password", @class = "form-control form-control-sign-up" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            @*<label for="exampleInputSignupPassword">Password</label>
+        <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupPassword" placeholder="Enter your Password" required>*@
+                            <span toggle="#Password" class="field-icon toggle-password"><img src="@Url.Content("~/images/pre-login/eye.png")" alt="eye"></span>
+                        </div>
+        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword)
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { Placeholder = "Re Enter Your Password", @class = "form-control form-control-sign-up" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            @*<label for="exampleInputSignupConfirmPassword">Confirm Password</label>
+        <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupConfirmPassword" placeholder="Re-enter your Password" required>*@
+                            <span toggle="#ConfirmPassword" class="field-icon toggle-password"><img src="@Url.Content("~/images/pre-login/eye.png")" alt="eye"></span>
+                        </div>
+                        <button id="sign-up" type="submit" class="btn btn-login btn-block">SIGN UP</button>
+
+                    }
+                    @*</form>*@
+                    <p class="text-center bottom">Already have an account? <a href="@Url.Action("Login","Account")">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/js/custom.min.js">
+
+</script>

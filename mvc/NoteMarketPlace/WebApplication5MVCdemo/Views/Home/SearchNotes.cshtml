@@ -1,0 +1,308 @@
+﻿@model NoteMarketPlace.Models.SellNote 
+@{
+    ViewBag.Title = "SearchNotes";
+    Layout = "~/Views/Shared/_LayoutWhiteNav.cshtml";
+}
+
+<section class="user-profile-image">
+    <img class="img-fluid" src="@Url.Content("~/images/User-Profile/banner-with-overlay.jpg")" alt="User Profile banner">
+    <div class="text-on-image-user-profile">
+        <h3>Search Notes</h3>
+    </div>
+</section>
+
+<section id="search-filters">
+    <div class="container">
+        <h5>Search and Filter notes</h5>
+        <div id="search-notes-filter-wrapper">
+            <form>
+                <div class="row">
+                    <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12 row-01">
+                        <input type="search" class="form-control" placeholder="Search notes here.." id="inputSearch">
+                        <span class="search"><img src="@Url.Content("~/Front_images/images/search-icon.png")" alt=""></span>
+                    </div>
+                    <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
+                        <select id="inputSelectType" class="form-control">
+                            <option selected>Select Type</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
+                        <select id="inputSelectCategory" class="form-control">
+                            <option selected>Select Category</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
+                        <select id="inputSelectUniversity" class="form-control">
+                            <option selected>Select University</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
+                        <select id="inputSelectCourse" class="form-control">
+                            <option selected>Select Course</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
+                        <select id="inputSelectCountry" class="form-control">
+                            <option selected>Select Country</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
+                        <select id="inputSelectRating" class="form-control">
+                            <option selected>Select Rating</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="book-lists">
+    <div class="container">
+        <h5>Total <span>18</span> notes</h5>
+        <div class="row">
+
+            @foreach (var note in SetViewData)
+            {
+
+            }
+
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/1.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Computer Operating System - Final Exam Book With Paper Solution</h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/2.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Computer Science<br class="remove-br"><br class="remove-br"></h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/3.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Basic Computer Engineering Tech India Publication Series</h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/4.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Computer Science Illuminted - Seventh Edition</h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/5.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">The Principle of Computer Hardware - Oxford</h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/6.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">The Computer Book<br class="remove-br"><br class="remove-br"></h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/1.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Computer Operating System - Final Exam Book With Paper Solution</h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/2.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Computer Science<br class="remove-br"><br class="remove-br"></h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                <div class="card">
+                    <img src="images/Search/3.jpg" class="card-img-top" alt="book image">
+                    <div class="card-body">
+                        <a href="note-detail.html">
+                            <h5 class="card-title">Basic Computer Engineering Tech India Publication Series</h5>
+                        </a>
+                        <p class="card-text"><img src="Front_images/images/university.png" alt=""> <span>University of California, US</span></p>
+                        <p class="card-text"><img src="Front_images/images/pages.png" alt=""> <span>204 Pages</span></p>
+                        <p class="card-text"><img src="Front_images/images/date.png" alt=""> <span>Thu, Nov 26 2020</span></p>
+                        <p class="card-text"><img src="Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                        <p class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="fa fa-star not-checked"></span>
+                            <span class="star-review">100 reviews</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="search-pagination">
+    <div class="container">
+        <div class="row justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true"><img src="Front_images/images/left-arrow.png" alt=""></span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link number active rounded-circle" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link number rounded-circle" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link number rounded-circle" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link number rounded-circle" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link number rounded-circle" href="#">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true"><img src="Front_images/images/right-arrow.png" alt=""></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
