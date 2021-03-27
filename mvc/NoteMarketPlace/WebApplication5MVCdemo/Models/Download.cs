@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NoteMarketPlace.Models
+namespace WebApplication5MVCdemo.Models
 {
     using System;
     using System.Collections.Generic;
@@ -45,5 +45,7 @@ namespace NoteMarketPlace.Models
         public virtual ICollection<NoteReport> NoteReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NoteReview> NoteReviews { get; set; }
+        public virtual Download Downloads1 { get; set; }
+        public virtual Download Download1 { get; set; }
     }
 }

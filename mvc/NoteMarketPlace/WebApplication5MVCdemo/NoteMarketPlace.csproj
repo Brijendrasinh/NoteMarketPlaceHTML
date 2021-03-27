@@ -128,15 +128,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CommanClasses\BuyerRequestViewModel.cs" />
+    <Compile Include="CommanClasses\ConfirmPasswordModel.cs" />
     <Compile Include="CommanClasses\ConstantStrings.cs" />
+    <Compile Include="CommanClasses\ContactPageLogedUSer.cs" />
+    <Compile Include="CommanClasses\DashBoardViewModel.cs" />
     <Compile Include="CommanClasses\Enums.cs" />
     <Compile Include="CommanClasses\LoginEntity.cs" />
+    <Compile Include="CommanClasses\NoteDetailViewModel.cs" />
+    <Compile Include="CommanClasses\SearchNotesViewModel.cs" />
     <Compile Include="CommanClasses\SellNotesAllDropdownList.cs" />
     <Compile Include="CommanClasses\SellNotesEntity.cs" />
+    <Compile Include="CommanClasses\UserProfileCombine.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SearchNotesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +156,15 @@
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gender.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSellerNotesDetails_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSellerNotesDetail_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSellNoteDetails_Result.cs">
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NoteCategory.cs">
@@ -291,7 +309,6 @@
     <Content Include="Content\DataTables\css\fixedHeader.semanticui.css" />
     <Content Include="Content\DataTables\css\fixedHeader.semanticui.min.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables.css" />
-    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
     <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
     <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
@@ -374,8 +391,12 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\emailVerification.html" />
+    <Content Include="EmailTemplates\AllowDownloadEmail.html" />
+    <Content Include="EmailTemplates\ContactUsMail.html" />
+    <Content Include="EmailTemplates\DownloadPaidNotesNotification.html" />
     <Content Include="EmailTemplates\emailVerification.html" />
     <Content Include="EmailTemplates\ForgotPasswordMail.html" />
+    <Content Include="EmailTemplates\PublishNoteNotification.html" />
     <Content Include="Front_images\images\arrow-down.png" />
     <Content Include="Front_images\images\arrow-down.svg" />
     <Content Include="Front_images\images\banner.png" />
@@ -691,14 +712,20 @@
     <Content Include="Views\Shared\_LayoutWhiteNav.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Home\SearchNotes.cshtml" />
     <Content Include="Views\Dashboard\AddNotes.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutSignedup.cshtml" />
-    <Content Include="Views\Home\userProfile.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\BuyerRequest.cshtml" />
+    <Content Include="Views\Profile\MyProfile.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Profile\MyDownloads.cshtml" />
+    <Content Include="Views\Profile\MySoldNotes.cshtml" />
+    <Content Include="Views\Profile\MyRejectedNotes.cshtml" />
+    <Content Include="Views\SearchNotes\Index.cshtml" />
+    <Content Include="Views\Dashboard\NoteDetail.cshtml" />
+    <Content Include="Views\SearchNotes\_SellNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using NoteMarketPlace.Models;
+using WebApplication5MVCdemo.Models;
 using System.Net;
 using System.Net.Mail;
 using System.Configuration;
@@ -13,7 +13,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
 using NoteMarketPlace.CommanClasses;
+using WebApplication5MVCdemo.CommanClasses;
 using System.Data.SqlClient;
+using System.Web.Security;
 
 namespace NoteMarketPlace.Controllers
 {
@@ -34,7 +36,7 @@ namespace NoteMarketPlace.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 using (NoteMarketPlaceEntities db = new NoteMarketPlaceEntities())
                 {
                     var passwordCorrectOrNot = db.Users.Where(a => a.EmailID.Equals(user.EmailID)).FirstOrDefault();
@@ -45,13 +47,23 @@ namespace NoteMarketPlace.Controllers
                         {
                             Session["ID"] = userExistOrNot.ID.ToString();
                             Session["EmailID"] = userExistOrNot.EmailID.ToString();
-                            if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.SuperAdmin) || userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin))
+
+
+                            //  Remember me functionality is remail 
+                            //  FormsAuthentication.SetAuthCookie(user.EmailID,true);
+
+                            UserProfile userProfileUpdated = db.UserProfiles.Where(x => x.UserID == userExistOrNot.ID).FirstOrDefault();
+                            if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.SuperAdmin))
                             {
                                 return RedirectToAction("Index", "Admin");
                             }
-                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member))
+                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member) && userProfileUpdated != null || userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin) && userProfileUpdated != null)
                             {
-                                return RedirectToAction("userProfile", "Home");
+                                return RedirectToAction("Index", "SearchNotes");
+                            }
+                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member) && userProfileUpdated == null || userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin) && userProfileUpdated == null)
+                            {
+                                return RedirectToAction("MyProfile", "Profile");
                             }
                         }
                         else
@@ -66,12 +78,12 @@ namespace NoteMarketPlace.Controllers
                         return View(user);
                     }
                 }
-                
+
             }
             return View(user);
         }
 
-       
+
 
         public ActionResult ForgotPassword()
         {
@@ -103,13 +115,13 @@ namespace NoteMarketPlace.Controllers
                         }
 
                         //update password in database
-                        var PasswordOfUser = db.Users.Where(x => x.EmailID.Equals(user.EmailID)).ToList().Select(x => x.Password = strrandom);                       
+                        var PasswordOfUser = db.Users.Where(x => x.EmailID.Equals(user.EmailID)).ToList().Select(x => x.Password = strrandom);
                         db.SaveChanges();
 
                         // Email sending
-                        var sender = new MailAddress("brijendrasinhchavda2018@gmail.com", "Brijendrasinh");
+                        var sender = new MailAddress(ConstantStrings.supportEmail, ConstantStrings.supportName);
                         var receiver = new MailAddress(user.EmailID, user.FirstName);
-                        var password = "b1k2chavda";
+                        var password = ConstantStrings.supportPassword;
                         var body = string.Empty;
                         var subject = "New Temporary Password has been created for you";
 
@@ -123,7 +135,7 @@ namespace NoteMarketPlace.Controllers
                         }
                         body = body.Replace("{newPassword}", strrandom);
 
-                       
+
                         var smtp = new SmtpClient
                         {
                             Host = "smtp.gmail.com",
@@ -168,7 +180,7 @@ namespace NoteMarketPlace.Controllers
         //[AllowAnonymous]
         public ActionResult Signup()
         {
-            
+
             return View();
         }
 
@@ -188,9 +200,9 @@ namespace NoteMarketPlace.Controllers
 
                     if (IsExist == false)
                     {
-                        var sender = new MailAddress("brijendrasinhchavda2018@gmail.com", "Brijendrasinh");
+                        var sender = new MailAddress(ConstantStrings.supportEmail, ConstantStrings.supportName);
                         var receiver = new MailAddress(model.Email, model.FirstName);
-                        var password = "b1k2chavda";
+                        var password = ConstantStrings.supportPassword;
                         var body = string.Empty;
                         var subject = "Note Marketplace - Email Verification";
 
@@ -226,7 +238,7 @@ namespace NoteMarketPlace.Controllers
 
                         }
 
-                        var  EmailExist = db.Users.Where(x => x.EmailID.Equals(model.Email) && x.IsActive == true).FirstOrDefault();
+                        var EmailExist = db.Users.Where(x => x.EmailID.Equals(model.Email) && x.IsActive == true).FirstOrDefault();
 
                         if (EmailExist == null)
                         {
@@ -253,8 +265,8 @@ namespace NoteMarketPlace.Controllers
                         ModelState.AddModelError("Email", "Email is Already Exist try with another Email ID");
                         return View(model);
                     }
-                    
-                    
+
+
                     return RedirectToAction("Login", "Account");
 
                 }
@@ -270,7 +282,7 @@ namespace NoteMarketPlace.Controllers
             return View();
         }
 
-        
+
         public ActionResult VefiryEmail(string Email)
         {
             LoginEntity login = new LoginEntity();
@@ -278,23 +290,76 @@ namespace NoteMarketPlace.Controllers
 
             if (IsVerify == false)
             {
-                
-                    try
-                    {
+
+                try
+                {
 
                     var updateEmailVerifiedStatus = db.Users.Where(x => x.EmailID.Equals(Email)).ToList().Select(x => x.IsEmailVerified = true);
                     db.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        String message = ex.Message;
-                       
-                    }
-              
+                }
+                catch (Exception ex)
+                {
+                    String message = ex.Message;
+
+                }
+
             }
-            
+
             return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult ChangePassword()
+        {
+            if (Session["ID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+           // return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ConfirmPasswordModel cp)
+        {
+
+            if (ModelState.IsValid)
+            {
+                int id = Convert.ToInt32(Session["ID"]);
+                User user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+
+                if (user.Password == cp.OldPassword)
+                {
+                    user.Password = cp.NewPassword;
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+
+                else
+                {
+                    ModelState.AddModelError("OldPassword", "Password is Not Match try Again");
+                    return View(cp);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return View(cp);
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            Session.RemoveAll();
+            // it will clear the session at the end of request
+            return RedirectToAction("Login", "Account");
+        }
     }
 }

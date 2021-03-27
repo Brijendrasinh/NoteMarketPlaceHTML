@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using NoteMarketPlace.Models;
+using WebApplication5MVCdemo.Models;
 
 namespace NoteMarketPlace.CommanClasses
 {

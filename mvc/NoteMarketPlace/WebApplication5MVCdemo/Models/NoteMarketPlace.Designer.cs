@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Brijendra\source\repos\NoteMarketPlace\NoteMarketPlace\Models\NoteMarketPlace.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\Models\NoteMarketPlace.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

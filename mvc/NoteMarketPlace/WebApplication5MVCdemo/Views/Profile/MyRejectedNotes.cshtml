@@ -1,0 +1,83 @@
+﻿@using WebApplication5MVCdemo.Models
+@model IEnumerable<SellNote>
+
+@{
+    ViewBag.Title = "MyRejectedNotes";
+    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+}
+
+<section class="buyer-request my-rejected">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-4 col-md-4 col-sm-4 col-12 left">
+                <h3>My Rejected Notes</h3>
+            </div>
+            <div class="pl-0 m-left-auto col-xl-7 col-lg-8 col-md-8 col-sm-8 col-12 row search-side align-items-end right">
+                <span class="magnifier"><img src="images/Dashboard/search.jpg" alt=""></span>
+                <input class="col-sm-7 col-7 m-left-auto" type="text" placeholder="Search" id="inputMyRejectedNoteSearch">
+
+                <button type="submit" class="col-sm-3 col-3 btn btn-mydownload-search">SEARCH</button>
+            </div>
+            <div class="col-12 table-scroll">
+                <table id="MyRejectedNote-table" class="table table-border">
+                    <thead>
+                        <tr>
+                            <th>SR NO.</th>
+                            <th>NOTE TITLE</th>
+                            <th>CATEGORY</th>
+                            <th>REMARK</th>
+                            <th>CLONE</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (SellNote data in Model)
+                        {
+                            <tr>
+                                <td>@data.ID</td>
+                                <td class="note-title">
+                                    <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.ID},null)" class="links">
+                                        @data.Title
+                                    </a>
+                                </td>
+                                <td>@data.NoteCategory.Name</td>
+                                <td>@data.AdminRemarks</td>
+                                <td>
+                                    Clone
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="~/Front_images/images/dots.png" alt="">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                            <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","Dashboard", new { noteId = data.ID},null)">Download Note</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            oTable = $('#MyRejectedNote-table').DataTable();
+            $('#inputMyRejectedNoteSearch').keyup(function () {
+                oTable.search($(this).val()).draw();
+            });
+
+            $('#MyRejectedNote-table').DataTable().page.len(3).draw();
+
+        });
+    </script>
+
+}

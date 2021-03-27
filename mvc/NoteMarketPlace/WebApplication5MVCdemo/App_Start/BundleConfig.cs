@@ -20,16 +20,16 @@ namespace NoteMarketPlace
             //            "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/js/bootstrap/bootstrap.min.js",
-                        "~/Scripts/js/dataTables.js",
-                        "~/Scripts/DataTables/dataTables.bootstrap.js",
-                      
+                        
+                        "~/Scripts/DataTables/jquery.dataTables.js",
+                        "~/Scripts/js/bootstrap/bootstrap.min.js",
                       "~/Scripts/js/custom.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/css/bootstrap/bootstrap.min.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                     
+                      "~/Content/DataTables/css/jquery.dataTables.css",
                       "~/Content/css/font-awesome/css/font-awesome.min.css",
+                       "~/Content/css/bootstrap/bootstrap.min.css",
                       "~/Content/css/custom.css",
                       "~/Content/css/responsive-layout.min.css"));
         }

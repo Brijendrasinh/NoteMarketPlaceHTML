@@ -1,8 +1,8 @@
-﻿
+﻿@using NoteMarketPlace.CommanClasses
 
 @model NoteMarketPlace.CommanClasses.SellNotesAllDropdownList
 
-@*@model NoteMarketPlace.Models.SellNote*@
+@*@model WebApplication5MVCdemo.Models.SellNote*@
 
 @{
     ViewBag.Title = "AddNotes";
@@ -26,6 +26,10 @@
             <h3>Basic Note Details</h3>
             @*<form>*@
             <div class="row">
+
+                @* Hidden Id Passed to Post Method to CRUD Operation *@
+                @Html.HiddenFor(x => x.SellNote.ID)
+
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Title)
                     @Html.TextBoxFor(m => m.SellNote.Title, new { placeholder = "Enter your Notes Title", @class = "form-control" })
@@ -188,8 +192,8 @@
                         </div>
                     </div>
                     <button type="submit" name="SavePublish" value="save" class="btn btn-addnote-save">SAVE</button>
-
                     <button type="submit" name="SavePublish" onclick="return confirm('@ViewBag.confirmationBox')" value="publish" class="btn btn-addnote-publish">PUBLISH</button>
+
                 </div>
             </div>
         </div>

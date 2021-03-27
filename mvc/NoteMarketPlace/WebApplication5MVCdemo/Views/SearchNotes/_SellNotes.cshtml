@@ -1,0 +1,26 @@
+﻿
+@foreach (var data in Model.sellNotes)
+{
+    <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+        <div class="card">
+            <img src="~/Members/@data.SellerID/@data.ID/@data.DisplayPicture" class="card-img-top" alt="book image">
+            <div class="card-body">
+                <a href="@Url.Action("NoteDetail","Dashboard", new { noteId = data.ID},null)">
+                    <h5 class="card-title">@data.Title</h5>
+                </a>
+                <p class="card-text"><img src="~/Front_images/images/university.png" alt=""> <span>@data.UniversityName, @data.Country1.Name </span></p>
+                <p class="card-text"><img src="~/Front_images/images/pages.png" alt=""> <span>@data.NumberOfPages Pages</span></p>
+                <p class="card-text"><img src="~/Front_images/images/date.png" alt=""> <span>@data.CreatedDate</span></p>
+                <p class="card-text"><img src="~/Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
+                <p>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star not-checked"></span>
+                    <span class="fa fa-star not-checked"></span>
+                    <span class="star-review">100 reviews</span>
+                </p>
+            </div>
+        </div>
+    </div>
+}

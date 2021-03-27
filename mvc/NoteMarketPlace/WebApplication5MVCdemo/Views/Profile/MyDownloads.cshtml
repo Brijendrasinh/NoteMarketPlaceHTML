@@ -1,0 +1,206 @@
+﻿@using WebApplication5MVCdemo.Models
+@model IEnumerable<Download>
+
+@{
+    ViewBag.Title = "MyDownloads";
+    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+}
+
+<section class="buyer-request">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-4 col-md-4 col-sm-4 col-12 left">
+                <h3>My Downloads</h3>
+            </div>
+            <div class="pl-0 m-left-auto col-xl-7 col-lg-8 col-md-8 col-sm-8 col-12 row search-side align-items-end right">
+                <span class="magnifier"><img src="~/images/Dashboard/search.jpg" alt=""></span>
+                <input class="col-sm-7 col-7 m-left-auto" type="text" placeholder="Search" id="inputMyDownloadSearch">
+                <button type="submit" class="col-sm-3 col-3 btn btn-mydownload-search">SEARCH</button>
+            </div>
+            <div class="col-12 table-scroll">
+                <table id="MyDownload-table" class="table table-border">
+                    <thead>
+                        <tr>
+                            <th>SR NO.</th>
+                            <th>NOTE TITLE</th>
+                            <th>CATEGORY</th>
+                            <th>BUYER</th>
+                            <th>SELL TYPE</th>
+                            <th>PRICE</th>
+                            <th>DOWNLOAD DATE/TIME</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Download data in Model)
+                        {
+                            <tr>
+                                <td>@data.ID</td>
+                                <td class="note-title">
+                                    <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.NoteID},null)" class="links">
+                                        @data.NoteTitle
+                                    </a>
+                                </td>
+                                <td>@data.NoteCategory</td>
+                                <td>@data.User1.EmailID</td>
+                                @if (data.IsPaid == true)
+                                {
+                                    <td>Paid</td>
+                                }
+                                else
+                                {
+                                    <td>Free</td>
+                                }
+                                <td>$@data.PurchasedPrice</td>
+                                <td>@data.CreatedDate</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.NoteID},null)" class="links">
+                                            <img src="~/images/Dashboard/eye.png" alt="">
+                                        </a>
+
+                                        <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="~/Front_images/images/dots.png" alt="">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                            <a class="dropdown-item" role="button" href="@Url.Action("DownloadNoteHasEntry","Dashboard", new { DownloadTableID = data.ID},null)">Download Note</a>
+                                            <a class="dropdown-item modalLink" data-id="@data.ID" data-noteid="@data.NoteID" data-toggle="modal" data-target="#addReviewPopupModal" role="button" href="">Add Reviews/Feedback</a>
+                                            <a class="dropdown-item modalLink1" data-id="@data.ID" data-noteid="@data.NoteID" data-toggle="modal" data-target="#addReportPopupModal" role="button" href="">Report as Inappropriate</a>
+                                        </div>
+                                    </div>
+                                    
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+@*Add Review Pop up
+    Modal*@
+<div class="modal fade" id="addReviewPopupModal" tabindex="-1" role="dialog" aria-labelledby="thanksPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container add-review-popup">
+                    @using (Html.BeginForm("Rating", "Profile", FormMethod.Post, new { role = "form" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-12 remove-height">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @Html.Hidden("hiddenNoteid")
+                            @Html.Hidden("hiddenId")
+                            <div class="col-md-12 col-12">
+                                <h5>Add Review</h5>
+                            </div>
+                            <div class="col-md-12 col-12 ">
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12 comment">
+                                <label for="AddReviewPopupComment">Comments *</label>
+                                <textarea rows="8" cols="50" placeholder="Enter your Comment" class="form-control" name="Comment" id="AddReviewPopupComment" required></textarea>
+                                @*<input type="text" class="form-control" placeholder="Enter your Comment" name="Comment" id="AddReviewPopupComment" required>*@
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <button type="submit" class="btn btn-add-review-popup">SUBMIT</button>
+                            </div>
+                        </div>
+                        
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addReportPopupModal" tabindex="-1" role="dialog" aria-labelledby="thanksPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container add-review-popup">
+                    @using (Html.BeginForm("ReportNote", "Profile", FormMethod.Post, new { role = "form" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-12 remove-height">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @Html.Hidden("hiddenNoteid")
+                            @Html.Hidden("hiddenId")
+                            <div class="col-md-12 col-12">
+                                <h5>Add Report</h5>
+                            </div>
+                            <div class="col-md-12 col-12 comment">
+                                <label for="AddReviewPopupComment">Remarks *</label>
+                                <textarea rows="8" cols="50" placeholder="Enter your Comment" class="form-control" name="Remark" id="AddReviewPopupComment" required></textarea>
+                                @*<input type="text" class="form-control" placeholder="Enter your Comment" name="Comment" id="AddReviewPopupComment" required>*@
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <button type="submit" class="btn btn-danger">SUBMIT</button>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            oTable = $('#MyDownload-table').DataTable();
+            $('#inputMyDownloadSearch').keyup(function () {
+                oTable.search($(this).val()).draw();
+            });
+
+            $('#MyDownload-table').DataTable().page.len(3).draw();
+
+        });
+        
+            debugger
+        $(".modalLink").on("click", function () {
+            var NoteID = $(this).data('noteid');
+            $(".modal-body #hiddenNoteid").val(NoteID);
+            var ID = $(this).data('id');
+            $(".modal-body #hiddenId").val(ID);
+        });
+
+        $(".modalLink1").on("click", function () {
+            var NoteID = $(this).data('noteid');
+            $(".modal-body #hiddenNoteid").val(NoteID);
+            var ID = $(this).data('id');
+            $(".modal-body #hiddenId").val(ID);
+        });
+        debugger
+
+    </script>
+
+}

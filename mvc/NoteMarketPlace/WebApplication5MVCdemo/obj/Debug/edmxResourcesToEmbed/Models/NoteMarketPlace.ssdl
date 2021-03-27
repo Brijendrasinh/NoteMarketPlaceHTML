@@ -222,6 +222,18 @@
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Downloads_Downloads">
+    <End Role="Downloads" Type="Self.Downloads" Multiplicity="1" />
+    <End Role="Downloads1" Type="Self.Downloads" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Downloads">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Downloads1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Downloads_SellNotes">
     <End Role="SellNotes" Type="Self.SellNotes" Multiplicity="1" />
     <End Role="Downloads" Type="Self.Downloads" Multiplicity="*" />
@@ -450,6 +462,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GetSellerNotesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_Type" Type="int" Mode="In" />
+    <Parameter Name="FK_Category" Type="int" Mode="In" />
+    <Parameter Name="FK_Country" Type="int" Mode="In" />
+    <Parameter Name="FK_University" Type="nvarchar" Mode="In" />
+    <Parameter Name="FK_Course" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="NoteMarketPlaceModelStoreContainer">
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Downloads" EntityType="Self.Downloads" Schema="dbo" store:Type="Tables" />
@@ -465,6 +484,10 @@
     <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Downloads_Downloads" Association="Self.FK_Downloads_Downloads">
+      <End Role="Downloads" EntitySet="Downloads" />
+      <End Role="Downloads1" EntitySet="Downloads" />
+    </AssociationSet>
     <AssociationSet Name="FK_Downloads_SellNotes" Association="Self.FK_Downloads_SellNotes">
       <End Role="SellNotes" EntitySet="SellNotes" />
       <End Role="Downloads" EntitySet="Downloads" />

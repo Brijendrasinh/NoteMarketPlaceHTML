@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NoteMarketPlace.Models
+namespace WebApplication5MVCdemo.Models
 {
     using System;
     using System.Collections.Generic;

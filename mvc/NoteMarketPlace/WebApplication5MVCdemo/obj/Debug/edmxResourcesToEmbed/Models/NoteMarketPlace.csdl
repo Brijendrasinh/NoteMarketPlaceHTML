@@ -39,6 +39,8 @@
     <NavigationProperty Name="User1" Relationship="Self.FK_Downloads_Users1" FromRole="Downloads" ToRole="Users" />
     <NavigationProperty Name="NoteReports" Relationship="Self.FK_NoteReports_Downloads" FromRole="Downloads" ToRole="NoteReports" />
     <NavigationProperty Name="NoteReviews" Relationship="Self.FK_NoteReviews_Downloads" FromRole="Downloads" ToRole="NoteReviews" />
+    <NavigationProperty Name="Downloads1" Relationship="NoteMarketPlaceModel.FK_Downloads_Downloads" FromRole="Download" ToRole="Download1" />
+    <NavigationProperty Name="Download1" Relationship="NoteMarketPlaceModel.FK_Downloads_Downloads" FromRole="Download1" ToRole="Download" />
   </EntityType>
   <EntityType Name="Gender">
     <Key>
@@ -579,5 +581,100 @@
       <End Role="UserRoles" EntitySet="UserRoles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <AssociationSet Name="FK_Downloads_Downloads" Association="NoteMarketPlaceModel.FK_Downloads_Downloads">
+      <End Role="Download" EntitySet="Downloads" />
+      <End Role="Download1" EntitySet="Downloads" />
+    </AssociationSet>
+    <FunctionImport Name="GetSellNoteDetails" ReturnType="Collection(NoteMarketPlaceModel.GetSellNoteDetails_Result)">
+      <Parameter Name="FK_Type" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Category" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Country" Mode="In" Type="Int32" />
+      <Parameter Name="FK_University" Mode="In" Type="String" />
+      <Parameter Name="FK_Course" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetSellerNotesDetail" ReturnType="Collection(NoteMarketPlaceModel.GetSellerNotesDetail_Result)">
+      <Parameter Name="FK_Type" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Category" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Country" Mode="In" Type="Int32" />
+      <Parameter Name="FK_University" Mode="In" Type="String" />
+      <Parameter Name="FK_Course" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetSellerNotesDetails" ReturnType="Collection(NoteMarketPlaceModel.GetSellerNotesDetails_Result)">
+      <Parameter Name="FK_Type" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Category" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Country" Mode="In" Type="Int32" />
+      <Parameter Name="FK_University" Mode="In" Type="String" />
+      <Parameter Name="FK_Course" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <Association Name="FK_Downloads_Downloads">
+    <End Type="NoteMarketPlaceModel.Download" Role="Download" Multiplicity="1" />
+    <End Type="NoteMarketPlaceModel.Download" Role="Download1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Download">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Download1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetSellNoteDetails_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="Int32" Name="ActionedBy" Nullable="false" />
+    <Property Type="String" Name="AdminRemarks" Nullable="true" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Category" Nullable="false" />
+    <Property Type="String" Name="DisplayPicture" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="NoteType" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfPages" Nullable="true" />
+    <Property Type="String" Name="Discription" Nullable="false" />
+    <Property Type="String" Name="UniversityName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="Country" Nullable="true" />
+    <Property Type="String" Name="Course" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CourseCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Professor" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="IsPaid" Nullable="false" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="NotesPreview" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetSellerNotesDetail_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="String" Name="DisplayPicture" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Category" Nullable="false" />
+    <Property Type="Int32" Name="Country" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UniversityName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="NumberOfPages" Nullable="true" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CountyName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Count" Nullable="true" />
+    <Property Type="Decimal" Name="Average" Nullable="true" Precision="38" Scale="6" />
+  </ComplexType>
+  <ComplexType Name="GetSellerNotesDetails_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="String" Name="DisplayPicture" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Category" Nullable="false" />
+    <Property Type="Int32" Name="Country" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UniversityName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="NumberOfPages" Nullable="true" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CountyName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Report" Nullable="true" />
+    <Property Type="Decimal" Name="Rating" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Int32" Name="TotalRating" Nullable="true" />
+  </ComplexType>
 </Schema>

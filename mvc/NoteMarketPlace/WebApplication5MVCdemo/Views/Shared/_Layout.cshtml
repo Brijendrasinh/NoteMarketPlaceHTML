@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication5MVCdemo.Models
+@using NoteMarketPlace.CommanClasses
+@using WebApplication5MVCdemo.CommanClasses
+
+@{
+    NoteMarketPlaceEntities db = new NoteMarketPlaceEntities();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,7 +26,7 @@
                 <div class="navbar-header">
                     <!-- Logo -->
                     <a href="@Url.Action("Index","Home")" class="navbar-brand">
-                        <img src="@Url.Content("~/images/pre-login/top-logo.png")" alt="logo">
+                        <img src="~/images/pre-login/top-logo.png" alt="logo">
                     </a>
                 </div>
 
@@ -27,20 +34,61 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ml-auto" id="main-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("SearchNotes","Home")">Search Notes</a>
+                            <a class="nav-link" href="@Url.Action("Index","SearchNotes")">Search Notes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AddNotes","Home")">Sell Your Notes</a>
+                            <a class="nav-link" href="@Url.Action("Index","Dashboard")">Sell Your Notes</a>
                         </li>
+                        @if (Session["ID"] != null)
+                        {
+                            int userid = Convert.ToInt32(Session["ID"]);
+                            User user = db.Users.Where(x => x.ID == userid).FirstOrDefault();
+                            if (user.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("BuyerRequest","Home")">Buyer Requests</a>
+                                </li>
+                            }
+
+                        }
                         <li class="nav-item">
-                            <a class="nav-link" href="" @Url.Action("FAQ", "Home") "">FAQ</a>
+                            <a class="nav-link" href="@Url.Action("FAQ", "Home")">FAQ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn home-nav-btn" href="@Url.Action("Login","Account")" title="Login" role="button">Login</a>
-                        </li>
+                        @if (Session["ID"] != null)
+                        {
+                            int userid = Convert.ToInt32(Session["ID"]);
+                            UserProfile user = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Members/@userid/@user.ProfilePicture" alt="pp">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a href="@Url.Action("MyProfile","Profile")" class="dropdown-item" role="button">My Profile</a>
+                                        <a href="@Url.Action("MyDownloads","Profile")" class="dropdown-item" role="button">My Downloads</a>
+                                        <a href="@Url.Action("MySoldNotes","Profile")" class="dropdown-item" role="button">My Sold Notes</a>
+                                        <a href="@Url.Action("MyRejectedNotes","Profile")" class="dropdown-item" role="button">My Rejected Notes</a>
+                                        <a href="@Url.Action("ChangePassword","Account")" class="dropdown-item" role="button">Change Password</a>
+                                        <a href="@Url.Action("Logout","Account")" class="dropdown-item" role="button">LOGOUT</a>
+
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn home-nav-btn" href="@Url.Action("Logout","Account")" title="Login" role="button">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn home-nav-btn" href="@Url.Action("Login","Account")" title="Login" role="button">Login</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
 
@@ -76,9 +124,9 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-12 text-right">
                     <ul class="social-list">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -91,50 +139,7 @@
 
     @Scripts.Render("~/bundles/bootstrap")
 
-
-    <script>
-        $(function () {
-
-            ShowHideNav();
-            // show hide nav on page load
-
-
-            $(window).scroll(function () {
-
-                // show hide nav on page load
-                ShowHideNav();
-            });
-        });
-
-        function ShowHideNav() {
-            if ($(window).scrollTop() > 50) {
-
-                // show white nav
-                $("nav").addClass("white-nav-top");
-
-                //show dark logo
-                $(".navbar-header img").attr("src", "/Content/images/pre-login/logo.png");
-
-                ////show back to top button
-                //$("#back-to-top").fadeIn();
-
-            } else {
-
-                // hide white nav
-                $("nav").removeClass("white-nav-top");
-
-                //hide dark logo
-                $(".navbar-header img").attr("src", "/Content/images/pre-login/top-logo.png");
-
-                ////hide back to top button
-                //$("#back-to-top").fadeOut();
-
-            }
-
-
-        }
-    </script>
-
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

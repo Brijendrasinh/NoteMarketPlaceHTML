@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NoteMarketPlace.Models
+namespace WebApplication5MVCdemo.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class NoteMarketPlaceEntities : DbContext
     {
@@ -39,5 +41,80 @@ namespace NoteMarketPlace.Models
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<GetSellNoteDetails_Result> GetSellNoteDetails(Nullable<int> fK_Type, Nullable<int> fK_Category, Nullable<int> fK_Country, string fK_University, string fK_Course)
+        {
+            var fK_TypeParameter = fK_Type.HasValue ?
+                new ObjectParameter("FK_Type", fK_Type) :
+                new ObjectParameter("FK_Type", typeof(int));
+    
+            var fK_CategoryParameter = fK_Category.HasValue ?
+                new ObjectParameter("FK_Category", fK_Category) :
+                new ObjectParameter("FK_Category", typeof(int));
+    
+            var fK_CountryParameter = fK_Country.HasValue ?
+                new ObjectParameter("FK_Country", fK_Country) :
+                new ObjectParameter("FK_Country", typeof(int));
+    
+            var fK_UniversityParameter = fK_University != null ?
+                new ObjectParameter("FK_University", fK_University) :
+                new ObjectParameter("FK_University", typeof(string));
+    
+            var fK_CourseParameter = fK_Course != null ?
+                new ObjectParameter("FK_Course", fK_Course) :
+                new ObjectParameter("FK_Course", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSellNoteDetails_Result>("GetSellNoteDetails", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter);
+        }
+    
+        public virtual ObjectResult<GetSellerNotesDetail_Result> GetSellerNotesDetail(Nullable<int> fK_Type, Nullable<int> fK_Category, Nullable<int> fK_Country, string fK_University, string fK_Course)
+        {
+            var fK_TypeParameter = fK_Type.HasValue ?
+                new ObjectParameter("FK_Type", fK_Type) :
+                new ObjectParameter("FK_Type", typeof(int));
+    
+            var fK_CategoryParameter = fK_Category.HasValue ?
+                new ObjectParameter("FK_Category", fK_Category) :
+                new ObjectParameter("FK_Category", typeof(int));
+    
+            var fK_CountryParameter = fK_Country.HasValue ?
+                new ObjectParameter("FK_Country", fK_Country) :
+                new ObjectParameter("FK_Country", typeof(int));
+    
+            var fK_UniversityParameter = fK_University != null ?
+                new ObjectParameter("FK_University", fK_University) :
+                new ObjectParameter("FK_University", typeof(string));
+    
+            var fK_CourseParameter = fK_Course != null ?
+                new ObjectParameter("FK_Course", fK_Course) :
+                new ObjectParameter("FK_Course", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSellerNotesDetail_Result>("GetSellerNotesDetail", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter);
+        }
+    
+        public virtual ObjectResult<GetSellerNotesDetails_Result> GetSellerNotesDetails(Nullable<int> fK_Type, Nullable<int> fK_Category, Nullable<int> fK_Country, string fK_University, string fK_Course)
+        {
+            var fK_TypeParameter = fK_Type.HasValue ?
+                new ObjectParameter("FK_Type", fK_Type) :
+                new ObjectParameter("FK_Type", typeof(int));
+    
+            var fK_CategoryParameter = fK_Category.HasValue ?
+                new ObjectParameter("FK_Category", fK_Category) :
+                new ObjectParameter("FK_Category", typeof(int));
+    
+            var fK_CountryParameter = fK_Country.HasValue ?
+                new ObjectParameter("FK_Country", fK_Country) :
+                new ObjectParameter("FK_Country", typeof(int));
+    
+            var fK_UniversityParameter = fK_University != null ?
+                new ObjectParameter("FK_University", fK_University) :
+                new ObjectParameter("FK_University", typeof(string));
+    
+            var fK_CourseParameter = fK_Course != null ?
+                new ObjectParameter("FK_Course", fK_Course) :
+                new ObjectParameter("FK_Course", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSellerNotesDetails_Result>("GetSellerNotesDetails", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter);
+        }
     }
 }

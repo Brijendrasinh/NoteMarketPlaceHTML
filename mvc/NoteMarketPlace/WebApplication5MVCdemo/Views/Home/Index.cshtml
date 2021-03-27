@@ -10,7 +10,7 @@
         <h3>Download Free/Paid Notes<br>or Sale your Book</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing.<br> elit Sed dicta dignissimos cupiditate minus.</p>
         <div id="home-02-btn">
-            <a class="btn btn-general text-center" href="FAQ.html" title="LEARN MORE" role="button">LEARN MORE</a>
+            <a class="btn btn-general text-center" href="@Url.Action("FAQ", "Home")" title="LEARN MORE" role="button">LEARN MORE</a>
         </div>
 
 
@@ -44,7 +44,7 @@
                     </div>
                     <h4 class="home-middle-sub-heading">Download Free/Paid Notes</h4>
                     <p>Get Material for your <br> Course etc.</p>
-                    <a class="btn home-middle-btn" id="home-middle-btn-01" href="search-notes.html" title="DOWNLOAD" role="button">DOWNLOAD</a>
+                    <a class="btn home-middle-btn" id="home-middle-btn-01" href="@Url.Action("SearchNotes","Home")" title="DOWNLOAD" role="button">DOWNLOAD</a>
                 </div>
 
             </div>
@@ -55,7 +55,7 @@
                     </div>
                     <h4 class="home-middle-sub-heading">Seller</h4>
                     <p>Upload and Download Course <br> and Materials etc.</p>
-                    <a class="btn home-middle-btn" id="home-middle-btn-02" href="#" title="SELL BOOK" role="button">SELL BOOK</a>
+                    <a class="btn home-middle-btn" id="home-middle-btn-02" href="@Url.Action("Index","Dashboard")" title="SELL BOOK" role="button">SELL BOOK</a>
                 </div>
 
             </div>
@@ -134,3 +134,49 @@
     </div>
 </section>
 
+@section scripts{
+
+    <script>
+        $(function () {
+
+            ShowHideNav();
+            // show hide nav on page load
+
+
+            $(window).scroll(function () {
+
+                // show hide nav on page load
+                ShowHideNav();
+            });
+        });
+
+        function ShowHideNav() {
+            if ($(window).scrollTop() > 50) {
+
+                // show white nav
+                $("nav").addClass("white-nav-top");
+
+                //show dark logo
+                $(".navbar-header > a > img").attr("src", "~/images/pre-login/logo.png");
+
+                ////show back to top button
+                //$("#back-to-top").fadeIn();
+
+            } else {
+
+                // hide white nav
+                $("nav").removeClass("white-nav-top");
+
+                //hide dark logo
+                $(".navbar-header > a > img").attr("src", "~/images/pre-login/top-logo.png");
+
+                ////hide back to top button
+                //$("#back-to-top").fadeOut();
+
+            }
+
+
+        }
+    </script>
+
+}
