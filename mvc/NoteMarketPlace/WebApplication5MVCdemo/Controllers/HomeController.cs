@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication5MVCdemo.Models;
-using NoteMarketPlace.CommanClasses;
 using WebApplication5MVCdemo.CommanClasses;
 using System.Net.Mail;
 using System.IO;

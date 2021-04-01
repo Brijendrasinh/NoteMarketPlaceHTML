@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication5MVCdemo.Models;
 
-namespace NoteMarketPlace.CommanClasses
+namespace WebApplication5MVCdemo.CommanClasses
 {
     public class SellNotesAllDropdownList
     {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication5MVCdemo.Models;
-using NoteMarketPlace.CommanClasses;
 using WebApplication5MVCdemo.CommanClasses;
 
 namespace WebApplication5MVCdemo.Controllers
@@ -42,16 +41,32 @@ namespace WebApplication5MVCdemo.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetFilterSearchNotes(int FK_Type=0,int FK_Category=0,int FK_Country=0,string FK_University=null,string FK_Course=null)
+        public ActionResult GetFilterSearchNotes(int FK_Type=0,int FK_Category=0,int FK_Country=0,string FK_University = null,string FK_Course = null, 
+                                                string PageNumber = "1", string PageSize = "2",string search = null,string rating=null)
         {
-
+            SearchNotesViewModel Model = new SearchNotesViewModel();
             if (string.IsNullOrEmpty(FK_University))
                 FK_University = null;
             if (string.IsNullOrEmpty(FK_Course))
                 FK_Course = null;
-            var getSellNotes = db.GetSellerNotesDetails(FK_Type, FK_Category, FK_Country, FK_University, FK_Course).ToList();
+            if (string.IsNullOrEmpty(search))
+                search = null;
+            if (string.IsNullOrEmpty(rating))
+                rating = null;
+
+            Model.PageNumber = PageNumber;
+            Model.PageSize = "2";
+            int pageNumber = Convert.ToInt32(PageNumber);
+            int pageSize = 2; /*Convert.ToInt32(PageSize);*/
+            List<NewGetSellerNotesDetails_Result> getSellNotes = db.NewGetSellerNotesDetails(FK_Type, FK_Category, FK_Country, FK_University, FK_Course, pageSize , pageNumber, search,rating ).ToList();
             
-            return Json(getSellNotes,JsonRequestBehavior.AllowGet);
+            Model.NewGetSellerNotesDetails_Result = getSellNotes;
+            foreach(var data in getSellNotes)
+            {
+                Model.TotalRecords = (int)data.TotalCount;
+            }
+            //Model.TotalRecords = Convert.ToInt32(getSellNotes.Count());
+            return PartialView("_SellNotes",Model);
             
         }
 

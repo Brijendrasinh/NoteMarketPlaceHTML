@@ -462,12 +462,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="GetSellerNotesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="getDahboardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetNotesUnderReviewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="data" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="NewGetSellerNotesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="FK_Type" Type="int" Mode="In" />
     <Parameter Name="FK_Category" Type="int" Mode="In" />
     <Parameter Name="FK_Country" Type="int" Mode="In" />
     <Parameter Name="FK_University" Type="nvarchar" Mode="In" />
     <Parameter Name="FK_Course" Type="nvarchar" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="PageNumber" Type="int" Mode="In" />
+    <Parameter Name="Search" Type="nvarchar" Mode="In" />
+    <Parameter Name="Rating" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="NoteMarketPlaceModelStoreContainer">
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />

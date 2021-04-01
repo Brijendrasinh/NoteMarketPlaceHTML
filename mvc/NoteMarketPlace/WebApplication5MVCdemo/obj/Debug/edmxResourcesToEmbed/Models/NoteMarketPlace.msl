@@ -237,9 +237,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GetSellerNotesDetails" FunctionName="NoteMarketPlaceModel.Store.GetSellerNotesDetails">
+    <FunctionImportMapping FunctionImportName="NewGetSellerNotesDetails" FunctionName="NoteMarketPlaceModel.Store.NewGetSellerNotesDetails">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="NoteMarketPlaceModel.GetSellerNotesDetails_Result">
+        <ComplexTypeMapping TypeName="NoteMarketPlaceModel.NewGetSellerNotesDetails_Result">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="SellerID" ColumnName="SellerID" />
           <ScalarProperty Name="DisplayPicture" ColumnName="DisplayPicture" />
@@ -251,9 +251,36 @@
           <ScalarProperty Name="NumberOfPages" ColumnName="NumberOfPages" />
           <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
           <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
           <ScalarProperty Name="Report" ColumnName="Report" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="TotalRating" ColumnName="TotalRating" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getDahboardData" FunctionName="NoteMarketPlaceModel.Store.getDahboardData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoteMarketPlaceModel.getDahboardData_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+          <ScalarProperty Name="NumberOfDownload" ColumnName="NumberOfDownload" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetNotesUnderReviewData" FunctionName="NoteMarketPlaceModel.Store.GetNotesUnderReviewData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoteMarketPlaceModel.GetNotesUnderReviewData_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="Seller" ColumnName="Seller" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

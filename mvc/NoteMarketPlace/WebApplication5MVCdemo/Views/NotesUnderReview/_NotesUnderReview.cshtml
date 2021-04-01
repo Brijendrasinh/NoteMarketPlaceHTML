@@ -1,0 +1,62 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.NotesUnderReviewViewModel
+
+@{ 
+    ViewBag.InReviewconfirmationBox = "Via marking the note In Review – System will let user know that review process has been initiated.Please press ok to continue.";
+    ViewBag.Approvedconfirmationbox = "If you approve the notes – System will publish the notes over portal. Please press yes to continue.";
+}
+
+
+<div class="col-12 table-scroll" id="NotesUnderReviewPartial">
+    <table class="table" id="NotesUnderReviewDataTable">
+        <thead>
+            <tr>
+                <th class="srno">SR NO.</th>
+                <th>NOTE TITLE</th>
+                <th>CATEGORY</th>
+                <th>SELLER</th>
+                <th>DATE ADDED</th>
+                <th>STATUS</th>
+                <th class="action">ACTION</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model.getNotesUnderReviewData_Results)
+            {
+                <tr>
+                    <td class="srno">@data.ID</td>
+                    <td class="note-title"><a href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.ID})" class="links">@data.Title</a></td>
+                    <td>@data.Category</td>
+                    <td>
+                        @data.Seller
+                        <img src="~/Admin-Images/images/eye.png" alt="">
+                    </td>
+                    <td>@data.DateAdded</td>
+                    <td>@data.Status</td>
+                    <td class="btn-action">
+                        @*<button type="submit" class="btn btn-approve">Approve</button>*@
+                        
+                        <a href="@Url.Action("Approve","NotesUnderReview",new { NoteID = data.ID})" onclick="return confirm('@ViewBag.Approvedconfirmationbox')" role="button" class="btn btn-approve">Approve</a>
+                        <button type="submit" data-id="@data.ID" data-title="@data.Title" data-toggle="modal" data-target="#rejectPopupModal" class="btn btn-reject modalLink">Reject</button>
+                        <a href="@Url.Action("InReview","NotesUnderReview",new { NoteID = data.ID})" onclick="return confirm('@ViewBag.InReviewconfirmationBox')" role="button" class="btn btn-inreview">InReview</a>
+
+                        @*<button type="submit" class="btn btn-inreview">InReview</button>*@
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/Admin-Images/images/dots.png" alt="">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","NoteDetail",new { noteId = data.ID})">Download Notes</a>
+                                <a class="dropdown-item" role="button" href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.ID})">View More Details</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>

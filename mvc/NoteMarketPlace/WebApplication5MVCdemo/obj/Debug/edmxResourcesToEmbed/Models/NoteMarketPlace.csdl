@@ -605,6 +605,24 @@
       <Parameter Name="FK_Country" Mode="In" Type="Int32" />
       <Parameter Name="FK_University" Mode="In" Type="String" />
       <Parameter Name="FK_Course" Mode="In" Type="String" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="Search" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NewGetSellerNotesDetails" ReturnType="Collection(NoteMarketPlaceModel.NewGetSellerNotesDetails_Result)">
+      <Parameter Name="FK_Type" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Category" Mode="In" Type="Int32" />
+      <Parameter Name="FK_Country" Mode="In" Type="Int32" />
+      <Parameter Name="FK_University" Mode="In" Type="String" />
+      <Parameter Name="FK_Course" Mode="In" Type="String" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="Search" Mode="In" Type="String" />
+      <Parameter Name="Rating" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getDahboardData" ReturnType="Collection(NoteMarketPlaceModel.getDahboardData_Result)" />
+    <FunctionImport Name="GetNotesUnderReviewData" ReturnType="Collection(NoteMarketPlaceModel.GetNotesUnderReviewData_Result)">
+      <Parameter Name="data" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Downloads_Downloads">
@@ -676,5 +694,40 @@
     <Property Type="Int32" Name="Report" Nullable="true" />
     <Property Type="Decimal" Name="Rating" Nullable="true" Precision="38" Scale="6" />
     <Property Type="Int32" Name="TotalRating" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="NewGetSellerNotesDetails_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="String" Name="DisplayPicture" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Category" Nullable="false" />
+    <Property Type="Int32" Name="Country" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UniversityName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="NumberOfPages" Nullable="true" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CountyName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="TotalCount" Nullable="true" />
+    <Property Type="Int32" Name="Report" Nullable="true" />
+    <Property Type="Decimal" Name="Rating" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Int32" Name="TotalRating" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getDahboardData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="IsPaid" Nullable="false" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NumberOfDownload" Nullable="true" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="GetNotesUnderReviewData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Seller" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
   </ComplexType>
 </Schema>

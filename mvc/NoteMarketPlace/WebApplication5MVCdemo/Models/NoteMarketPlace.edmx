@@ -467,12 +467,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetSellerNotesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="getDahboardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetNotesUnderReviewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="NewGetSellerNotesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FK_Type" Type="int" Mode="In" />
           <Parameter Name="FK_Category" Type="int" Mode="In" />
           <Parameter Name="FK_Country" Type="int" Mode="In" />
           <Parameter Name="FK_University" Type="nvarchar" Mode="In" />
           <Parameter Name="FK_Course" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="Search" Type="nvarchar" Mode="In" />
+          <Parameter Name="Rating" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="NoteMarketPlaceModelStoreContainer">
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
@@ -1179,6 +1187,24 @@
             <Parameter Name="FK_Country" Mode="In" Type="Int32" />
             <Parameter Name="FK_University" Mode="In" Type="String" />
             <Parameter Name="FK_Course" Mode="In" Type="String" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Search" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewGetSellerNotesDetails" ReturnType="Collection(NoteMarketPlaceModel.NewGetSellerNotesDetails_Result)">
+            <Parameter Name="FK_Type" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Category" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Country" Mode="In" Type="Int32" />
+            <Parameter Name="FK_University" Mode="In" Type="String" />
+            <Parameter Name="FK_Course" Mode="In" Type="String" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Search" Mode="In" Type="String" />
+            <Parameter Name="Rating" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getDahboardData" ReturnType="Collection(NoteMarketPlaceModel.getDahboardData_Result)" />
+          <FunctionImport Name="GetNotesUnderReviewData" ReturnType="Collection(NoteMarketPlaceModel.GetNotesUnderReviewData_Result)">
+            <Parameter Name="data" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <Association Name="FK_Downloads_Downloads">
@@ -1250,6 +1276,41 @@
           <Property Type="Int32" Name="Report" Nullable="true" />
           <Property Type="Decimal" Name="Rating" Nullable="true" Precision="38" Scale="6" />
           <Property Type="Int32" Name="TotalRating" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="NewGetSellerNotesDetails_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="SellerID" Nullable="false" />
+          <Property Type="String" Name="DisplayPicture" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Category" Nullable="false" />
+          <Property Type="Int32" Name="Country" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UniversityName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="NumberOfPages" Nullable="true" />
+          <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CountyName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="Report" Nullable="true" />
+          <Property Type="Decimal" Name="Rating" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="TotalRating" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getDahboardData_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsPaid" Nullable="false" />
+          <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="NumberOfDownload" Nullable="true" />
+          <Property Type="String" Name="Publisher" Nullable="true" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="GetNotesUnderReviewData_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Seller" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1493,9 +1554,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetSellerNotesDetails" FunctionName="NoteMarketPlaceModel.Store.GetSellerNotesDetails">
+          <FunctionImportMapping FunctionImportName="NewGetSellerNotesDetails" FunctionName="NoteMarketPlaceModel.Store.NewGetSellerNotesDetails">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NoteMarketPlaceModel.GetSellerNotesDetails_Result">
+              <ComplexTypeMapping TypeName="NoteMarketPlaceModel.NewGetSellerNotesDetails_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SellerID" ColumnName="SellerID" />
                 <ScalarProperty Name="DisplayPicture" ColumnName="DisplayPicture" />
@@ -1507,9 +1568,36 @@
                 <ScalarProperty Name="NumberOfPages" ColumnName="NumberOfPages" />
                 <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
                 <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
                 <ScalarProperty Name="Report" ColumnName="Report" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="TotalRating" ColumnName="TotalRating" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDahboardData" FunctionName="NoteMarketPlaceModel.Store.getDahboardData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoteMarketPlaceModel.getDahboardData_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="NumberOfDownload" ColumnName="NumberOfDownload" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetNotesUnderReviewData" FunctionName="NoteMarketPlaceModel.Store.GetNotesUnderReviewData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoteMarketPlaceModel.GetNotesUnderReviewData_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Seller" ColumnName="Seller" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

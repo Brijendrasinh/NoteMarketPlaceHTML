@@ -118,56 +118,56 @@
                     </div>
                     <div class="col-md-8 col-sm-7 col-8 text-right">
                         <span class="note-top-description">
-                            
-                                @if (Model.Rating > 0 && Model.Rating < 1)
-                                {
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                }
-                                else if (Model.Rating > 1 && Model.Rating < 2)
-                                {
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                }
-                                else if (Model.Rating > 2 && Model.Rating < 3)
-                                {
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                }
-                                else if (Model.Rating > 3 && Model.Rating < 4)
-                                {
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                }
-                                else if (Model.Rating > 4 && Model.Rating < 5)
-                                {
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star not-checked"></span>
-                                }
-                                else if (Model.Rating >= 5)
-                                {
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                }
-                            
+
+                            @if (Model.Rating >= 0 && Model.Rating < 1)
+                            {
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                            }
+                            else if (Model.Rating >= 1 && Model.Rating < 2)
+                            {
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                            }
+                            else if (Model.Rating >= 2 && Model.Rating < 3)
+                            {
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                            }
+                            else if (Model.Rating >= 3 && Model.Rating < 4)
+                            {
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                            }
+                            else if (Model.Rating >= 4 && Model.Rating < 5)
+                            {
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star not-checked"></span>
+                            }
+                            else if (Model.Rating >= 5)
+                            {
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            }
+
                             <span>@Model.ReviewCount Reviews</span>
                         </span>
                     </div>
@@ -206,76 +206,83 @@
 
                     @{
 
-                        int id = Convert.ToInt32(Session["ID"]);
+                       
                         NoteMarketPlaceEntities db = new NoteMarketPlaceEntities();
-                        UserProfile userProfile = db.UserProfiles.Where(x => x.UserID == id).FirstOrDefault();
 
+                        User reviewer = new User();
 
-
-                        foreach (var data in Model.noteReviews)
+                        if (Model.noteReviews.Count() != 0)
                         {
-                            var reviewer = db.Users.Where(x => x.ID == data.ReviewedByID).FirstOrDefault();
-                            <div class="row">
+                            foreach (NoteReview data in Model.noteReviews)
+                            {
+                                reviewer = db.Users.Where(x => x.ID == data.ReviewedByID).FirstOrDefault();
+                                UserProfile userProfile = db.UserProfiles.Where(x => x.UserID == data.ReviewedByID).FirstOrDefault();
+                                <div class="row">
 
-                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                    <img src="~/Members/@data.ReviewedByID/@userProfile.ProfilePicture" class="img-fluid rounded-circle" alt="prof.pict">
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
+                                        <img src="~/Members/@data.ReviewedByID/@userProfile.ProfilePicture" class="img-fluid rounded-circle" alt="prof.pict">
+                                    </div>
+                                    <div class="col-xl-10 col-lg-10 col-md-9 col-sm-10 col-12">
+                                        <p class="customer-name">@reviewer.FirstName @reviewer.LastName</p>
+                                        <p class="rating">
+                                            @if (@data.Ratings >= 0 && @data.Ratings < 1)
+                                            {
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                            }
+                                            else if (@data.Ratings >= 1 && @data.Ratings < 2)
+                                            {
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                            }
+                                            else if (@data.Ratings >= 2 && @data.Ratings < 3)
+                                            {
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                            }
+                                            else if (@data.Ratings >= 3 && @data.Ratings < 4)
+                                            {
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                            }
+                                            else if (@data.Ratings >= 4 && @data.Ratings < 5)
+                                            {
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star not-checked"></span>
+                                            }
+                                            else if (@data.Ratings >= 5)
+                                            {
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            }
+                                        </p>
+                                        <p class="customer-review">@data.Comments</p>
+                                    </div>
                                 </div>
-                                <div class="col-xl-10 col-lg-10 col-md-9 col-sm-10 col-12">
-                                    <p class="customer-name">@reviewer.FirstName @reviewer.LastName</p>
-                                    <p class="rating">
-                                        @if (@data.Ratings >= 0 && @data.Ratings < 1)
-                                        {
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        }
-                                        else if (@data.Ratings >= 1 && @data.Ratings < 2)
-                                        {
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        }
-                                        else if (@data.Ratings >= 2 && @data.Ratings < 3)
-                                        {
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        }
-                                        else if (@data.Ratings >= 3 && @data.Ratings < 4)
-                                        {
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        }
-                                        else if (@data.Ratings >= 4 && @data.Ratings < 5)
-                                        {
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star not-checked"></span>
-                                        }
-                                        else if (@data.Ratings >= 5)
-                                        {
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        }
-                                    </p>
-                                    <p class="customer-review">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta quod eius est voluptas officiis, facilis, illo doloribus iure.</p>
-                                </div>
-                            </div>
-                            <hr>
+                                <hr>
+                            }
+                        }
+                        else
+                        {
+                            <span> There Is No Review</span>
                         }
                     }
 
@@ -289,35 +296,35 @@
 <!-- Thanks Pop up -->
 <!-- Modal -->
 @*<div class="modal fade" id="thanksPopupModal" tabindex="-1" role="dialog" aria-labelledby="thanksPopupModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="container thanks-popup">
-                    <div class="row">
-                        <div class="col-md-12 col-12 remove-height">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container thanks-popup">
+                        <div class="row">
+                            <div class="col-md-12 col-12 remove-height">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="col-md-12 col-12 text-center">
+                                <img src="~/images/Notes-Details/SUCCESS.png" class="img-fluid text-center" alt="">
+                            </div>
+                            <div class="col-md-12 col-12 text-center">
+                                <h4>Thank you for Purchasing!</h4>
+                            </div>
+                            <div class="col-md-12 col-12 popup-text">
+                                <h5>Dear Smith,</h5>
+                                <p>As this is paid notes - you need to pay to seller Rahil Shah Offline. We will send him an email that you want to download this note. He may contact you further for payment process completion.</p>
+                                <p>In case, you have urgency,<br>Please contact us on +9195377345959 .</p>
+                                <p>Once he receives the payment and acknowledge us - selected notes you can see over my downloads tab for download.</p>
+                                <p>Have a good day.</p>
+                            </div>
                         </div>
-                        <div class="col-md-12 col-12 text-center">
-                            <img src="~/images/Notes-Details/SUCCESS.png" class="img-fluid text-center" alt="">
-                        </div>
-                        <div class="col-md-12 col-12 text-center">
-                            <h4>Thank you for Purchasing!</h4>
-                        </div>
-                        <div class="col-md-12 col-12 popup-text">
-                            <h5>Dear Smith,</h5>
-                            <p>As this is paid notes - you need to pay to seller Rahil Shah Offline. We will send him an email that you want to download this note. He may contact you further for payment process completion.</p>
-                            <p>In case, you have urgency,<br>Please contact us on +9195377345959 .</p>
-                            <p>Once he receives the payment and acknowledge us - selected notes you can see over my downloads tab for download.</p>
-                            <p>Have a good day.</p>
-                        </div>
+
+
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 

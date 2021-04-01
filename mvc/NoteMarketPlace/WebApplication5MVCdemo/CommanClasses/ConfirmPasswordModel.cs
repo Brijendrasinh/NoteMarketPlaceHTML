@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace NoteMarketPlace.CommanClasses
+namespace WebApplication5MVCdemo.CommanClasses
 {
     public class ConfirmPasswordModel
     {

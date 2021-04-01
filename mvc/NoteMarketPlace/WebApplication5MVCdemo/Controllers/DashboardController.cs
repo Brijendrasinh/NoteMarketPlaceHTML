@@ -6,7 +6,6 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
-using NoteMarketPlace.CommanClasses;
 using WebApplication5MVCdemo.CommanClasses;
 using WebApplication5MVCdemo.Models;
 using System.Net.Mail;
@@ -537,11 +536,15 @@ namespace NoteMarketPlace.Controllers
             model.sellNote = db.SellNotes.Where(x => x.ID == noteId).FirstOrDefault();
             model.noteReviews = db.NoteReviews.Where(x => x.NoteID == noteId).ToList();
             model.ReviewCount = model.noteReviews.Count();
-
-            decimal? v = (decimal?)db.NoteReviews.Where(x => x.NoteID == noteId).Select(x => x.Ratings).Average();
-            model.Rating = v;
-
             model.ReportCount = db.NoteReports.Where(x => x.NoteID == noteId).Count();
+            if(model.ReviewCount != 0)
+            {
+                model.Rating = (decimal)db.NoteReviews.Where(x => x.NoteID == noteId).Select(x => x.Ratings).Average();
+            }
+            else
+            {
+                model.Rating = 0;
+            }
             return View(model);
         }
 

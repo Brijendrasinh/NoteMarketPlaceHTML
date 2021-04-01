@@ -92,7 +92,7 @@ namespace WebApplication5MVCdemo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSellerNotesDetail_Result>("GetSellerNotesDetail", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter);
         }
     
-        public virtual ObjectResult<GetSellerNotesDetails_Result> GetSellerNotesDetails(Nullable<int> fK_Type, Nullable<int> fK_Category, Nullable<int> fK_Country, string fK_University, string fK_Course)
+        public virtual ObjectResult<GetSellerNotesDetails_Result> GetSellerNotesDetails(Nullable<int> fK_Type, Nullable<int> fK_Category, Nullable<int> fK_Country, string fK_University, string fK_Course, Nullable<int> pageSize, Nullable<int> pageNumber, string search)
         {
             var fK_TypeParameter = fK_Type.HasValue ?
                 new ObjectParameter("FK_Type", fK_Type) :
@@ -114,7 +114,74 @@ namespace WebApplication5MVCdemo.Models
                 new ObjectParameter("FK_Course", fK_Course) :
                 new ObjectParameter("FK_Course", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSellerNotesDetails_Result>("GetSellerNotesDetails", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter);
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var searchParameter = search != null ?
+                new ObjectParameter("Search", search) :
+                new ObjectParameter("Search", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSellerNotesDetails_Result>("GetSellerNotesDetails", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter, pageSizeParameter, pageNumberParameter, searchParameter);
+        }
+    
+        public virtual ObjectResult<NewGetSellerNotesDetails_Result> NewGetSellerNotesDetails(Nullable<int> fK_Type, Nullable<int> fK_Category, Nullable<int> fK_Country, string fK_University, string fK_Course, Nullable<int> pageSize, Nullable<int> pageNumber, string search, string rating)
+        {
+            var fK_TypeParameter = fK_Type.HasValue ?
+                new ObjectParameter("FK_Type", fK_Type) :
+                new ObjectParameter("FK_Type", typeof(int));
+    
+            var fK_CategoryParameter = fK_Category.HasValue ?
+                new ObjectParameter("FK_Category", fK_Category) :
+                new ObjectParameter("FK_Category", typeof(int));
+    
+            var fK_CountryParameter = fK_Country.HasValue ?
+                new ObjectParameter("FK_Country", fK_Country) :
+                new ObjectParameter("FK_Country", typeof(int));
+    
+            var fK_UniversityParameter = fK_University != null ?
+                new ObjectParameter("FK_University", fK_University) :
+                new ObjectParameter("FK_University", typeof(string));
+    
+            var fK_CourseParameter = fK_Course != null ?
+                new ObjectParameter("FK_Course", fK_Course) :
+                new ObjectParameter("FK_Course", typeof(string));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var searchParameter = search != null ?
+                new ObjectParameter("Search", search) :
+                new ObjectParameter("Search", typeof(string));
+    
+            var ratingParameter = rating != null ?
+                new ObjectParameter("Rating", rating) :
+                new ObjectParameter("Rating", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NewGetSellerNotesDetails_Result>("NewGetSellerNotesDetails", fK_TypeParameter, fK_CategoryParameter, fK_CountryParameter, fK_UniversityParameter, fK_CourseParameter, pageSizeParameter, pageNumberParameter, searchParameter, ratingParameter);
+        }
+    
+        public virtual ObjectResult<getDahboardData_Result> getDahboardData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDahboardData_Result>("getDahboardData");
+        }
+    
+        public virtual ObjectResult<GetNotesUnderReviewData_Result> GetNotesUnderReviewData(string data)
+        {
+            var dataParameter = data != null ?
+                new ObjectParameter("data", data) :
+                new ObjectParameter("data", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNotesUnderReviewData_Result>("GetNotesUnderReviewData", dataParameter);
         }
     }
 }

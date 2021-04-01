@@ -6,6 +6,47 @@
     Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
 }
 
+
+<style>
+
+    .jplist-pagination div {
+        display: inline-block;
+    }
+
+    .jplist-pagination button {
+        width: 34px;
+        height: 34px;
+        color: #333333;
+        background-color: white;
+        font-family: "Open Sans",sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 400;
+        border-radius: 50%;
+        border: none;
+    }
+
+        .jplist-pagination button:hover {
+            background-color: #6255a5 !important;
+            color: white !important;
+        }
+
+    .jplist-current {
+        background-color: #6255a5 !important;
+        color: white !important;
+    }
+
+    .jplist-pagination {
+        text-align: center;
+    }
+
+    .jplist-hidden,
+    .jplist-drop-down,
+    .jplist-label {
+        display: none;
+    }
+</style>
+
 <section class="user-profile-image">
     <img class="img-fluid" src="@Url.Content("~/images/User-Profile/banner-with-overlay.jpg")" alt="User Profile banner">
     <div class="text-on-image-user-profile">
@@ -44,9 +85,13 @@
 
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
-                        <select id="inputSelectRating" class="form-control">
-                            <option selected>Select Rating</option>
-                            <option>...</option>
+                        <select id="Rating" class="form-control">
+                            <option value="">Select Rating</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5</option>
                         </select>
                     </div>
                 </div>
@@ -56,37 +101,9 @@
 </section>
 
 <section id="book-lists">
-    <div class="container">
-        <h5>Total <span id="NoteCount">@Model.sellNotes.Count()</span> notes</h5>
-        <div class="row" id="partialIdOriginal">
+    <div class="container" id="DivSearchNotes">
 
-            @foreach (var data in Model.sellNotes)
-            {
-                <div class="col-xl-4 col-md-6 col-sm-6 col-12">
-                    <div class="card">
-                        <img src="~/Members/@data.SellerID/@data.ID/@data.DisplayPicture" class="card-img-top" alt="book image">
-                        <div class="card-body">
-                            <a href="@Url.Action("NoteDetail","Dashboard", new { noteId = data.ID},null)">
-                                <h5 class="card-title">@data.Title</h5>
-                            </a>
-                            <p class="card-text"><img src="~/Front_images/images/university.png" alt=""> <span>@data.UniversityName, @data.Country1.Name </span></p>
-                            <p class="card-text"><img src="~/Front_images/images/pages.png" alt=""> <span>@data.NumberOfPages Pages</span></p>
-                            <p class="card-text"><img src="~/Front_images/images/date.png" alt=""> <span>@data.CreatedDate</span></p>
-                            <p class="card-text"><img src="~/Front_images/images/flag.png" alt=""> <span>5 Users marked this note as inapropriate</span></p>
-                            <p>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="star-review">100 reviews</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            }
-
-
+        <div id="DivSearchNoteView">
 
         </div>
 
@@ -94,90 +111,84 @@
 </section>
 
 
-@section scripts{
+@section scripts {
+
+    <script src="@Url.Content("~/Scripts/Jplist/jplist.core.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Jplist/jplist.pagination-bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Jplist/jplist.textbox-filter.min.js")"></script>
 
     <script type="text/javascript">
 
-
+        $(document).ready(function () {
+            BindSearchNotes();
+        });
+        $("#inputSearch").keyup(function () {
+            BindSearchNotes();
+        });
         $("#universityId").on('change', function () {
             BindSearchNotes()
         });
 
-    $("#typeId").on('change',function (e) {
+        $("#typeId").on('change',function (e) {
             BindSearchNotes()
         });
 
-    $("#categoryId").on('change',function (e) {
+        $("#categoryId").on('change',function (e) {
             BindSearchNotes()
         });
 
-    $("#countryId").on('change',function (e) {
+        $("#countryId").on('change',function (e) {
             BindSearchNotes()
         });
 
-    $("#courseId").on('change',function (e) {
+        $("#courseId").on('change',function (e) {
+            BindSearchNotes()
+        });
+        $("#Rating").on('change', function (e) {
             BindSearchNotes()
         });
 
-    function BindSearchNotes() {
-        debugger
+        function BindSearchNotes() {
+            debugger
             var FK_Type_val = $("#typeId").val();
             var FK_Category_val = $("#categoryId").val();
             var FK_Country_val = $("#countryId").val();
             var FK_University_val = $("#universityId").val();
             var FK_Course_val = $("#courseId").val();
-
-             @*@Url.Action("Index","SearchNotes",new { FK_Type = Model.typeId, FK_Category = Model.categoryId, FK_Country=Model.countryId, FK_University= Model.universityId, FK_Course=Model.courseId},null)*@
+            var Search = $("#inputSearch").val();
+            var Rating = $("#Rating").val();
+            debugger
+            var pageSize = "2"; /*$("#DivSearchNotes .jplist-select").length > 0 ? $("#DivSearchNotes .jplist-select option:selected").attr("data-number") : "2";*/
+            var pageNumber = $("#DivSearchNotes .jplist-pagination").length > 0 && $("#DivSearchNotes .jplist-pagination .jplist-current").val() != "" ? $("#DivSearchNotes .jplist-pagination .jplist-current").val() : "1";
+            debugger
             $.ajax({
                 type: 'GET',
-                dataType: "json",
                 url: "@Url.Action("GetFilterSearchNotes", "SearchNotes")",
                 data: {
-                    FK_Type: FK_Type_val, FK_Category: FK_Category_val, FK_Country: FK_Country_val, FK_University: FK_University_val, FK_Course: FK_Course_val
+                    FK_Type: FK_Type_val, FK_Category: FK_Category_val, FK_Country: FK_Country_val, FK_University: FK_University_val, FK_Course: FK_Course_val,
+                    PageNumber: pageNumber, PageSize: pageSize, search: Search, rating: Rating
                 },
-                contentType: "application/json; charset=utf-8",
-
                 success: function (Result) {
-                    console.log(Result);
-                    var id = $('#partialIdOriginal');
-                    $('#NoteCount').html('');
-                    $('#NoteCount').html(Result.length)
-                    $('#partialIdOriginal').html('');
-                    var newhtml = "";
-                    Result.forEach(data => {
-                        var wrapper = `<div class="col-xl-4 col-md-6 col-sm-6 col-12">
-                                            <div class="card">
-                                                <img src="/Members/${data.SellerID}/${data.ID}/${data.DisplayPicture}" class="card-img-top" alt="book image">
-                                                <div class="card-body">
-                                                    <a href="/Dashboard/NoteDetail?noteId=${data.ID}">
-                                                        <h5 class="card-title">${data.Title}</h5>
-                                                    </a>
-                                                    <p class="card-text"><img src="/Front_images/images/university.png" alt=""> <span>${data.UniversityName}, ${data.CountyName} </span></p>
-                                                    <p class="card-text"><img src="/Front_images/images/pages.png" alt=""> <span>${data.NumberOfPages} Pages</span></p>
-                                                    <p class="card-text"><img src="/Front_images/images/date.png" alt=""> <span>${Date(data.CreatedDate)}</span></p>
-                                                    <p class="card-text"><img src="/Front_images/images/flag.png" alt=""> <span>${data.Report} Users marked this note as inapropriate</span></p>
-                                                    <p>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star not-checked"></span>
-                                                        <span class="fa fa-star not-checked"></span>
-                                                        <span class="star-review">${data.TotalRating} reviews</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>`;
-                        $('#partialIdOriginal').append(wrapper);
-
-                    })
-
+                    debugger
+                    $("#DivSearchNoteView").replaceWith(Result);
+                    $("#DivSearchNotes .jplist-pagination").find("button").bind("click", function (event) {
+                        debugger
+                        $("#DivSearchNotes .jplist-pagination").find("button").removeClass("jplist-current");
+                        $(this).addClass("jplist-current");
+                        debugger
+                        BindSearchNotes();
+                    });
+                    //$("#DivSearchNotes .jplist-select").unbind();
+                    $("#DivSearchNotes .jplist-select").bind("change", function (event) {
+                        $("#DivSearchNotes .jplist-pagination").remove();
+                        BindSearchNotes();
+                    });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    $('#ajax').html("sorry, could not find URL");
+                    debugger
+                    alert("sorry");
                 }
             });
-        debugger
-
         }
 
     </script>
