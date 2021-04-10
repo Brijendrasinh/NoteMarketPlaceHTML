@@ -103,9 +103,6 @@
                             </div>
                         </div>
                     }
-
-
-
                 </div>
             </div>
         </div>
@@ -123,8 +120,6 @@
             BindSellNotesDetail()
         });
         function BindSellNotesDetail() {
-
-            debugger
             var month = $("#monthList").val();
             $.ajax({
                 type: 'GET',
@@ -133,7 +128,6 @@
                     Month: month
                 },
                 success: function (Result) {
-                    debugger
                     $("#DashboardPartial").replaceWith(Result);
                     $("#datatableDashboardAdmin").DataTable();
                     oTable = $('#datatableDashboardAdmin').DataTable();
@@ -147,12 +141,9 @@
                         var Title = $(this).data('title');
                         $(".modal-body #Note-title").html(Title);
                     });
-                    $('#datatableDashboardAdmin').DataTable().page.len(1).draw();
-                    
-
+                    $('#datatableDashboardAdmin').DataTable().page.len(5).draw();                   
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    debugger
                     alert("sorry");
                 }
             });

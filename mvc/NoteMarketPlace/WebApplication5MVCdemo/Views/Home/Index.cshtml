@@ -141,10 +141,7 @@
 
             ShowHideNav();
             // show hide nav on page load
-
-
             $(window).scroll(function () {
-
                 // show hide nav on page load
                 ShowHideNav();
             });
@@ -152,30 +149,16 @@
 
         function ShowHideNav() {
             if ($(window).scrollTop() > 50) {
-
                 // show white nav
                 $("nav").addClass("white-nav-top");
-
                 //show dark logo
                 $(".navbar-header > a > img").attr("src", "/images/pre-login/logo.png");
-
-                ////show back to top button
-                //$("#back-to-top").fadeIn();
-
             } else {
-
                 // hide white nav
                 $("nav").removeClass("white-nav-top");
-
                 //hide dark logo
                 $(".navbar-header > a > img").attr("src", "/images/pre-login/top-logo.png");
-
-                ////hide back to top button
-                //$("#back-to-top").fadeOut();
-
             }
-
-
         }
     </script>
 

@@ -1,6 +1,6 @@
 ﻿@model WebApplication5MVCdemo.CommanClasses.NotesUnderReviewViewModel
 
-@{ 
+@{
     ViewBag.InReviewconfirmationBox = "Via marking the note In Review – System will let user know that review process has been initiated.Please press ok to continue.";
     ViewBag.Approvedconfirmationbox = "If you approve the notes – System will publish the notes over portal. Please press yes to continue.";
 }
@@ -40,13 +40,9 @@
                     <td>@data.DateAdded</td>
                     <td>@data.Status</td>
                     <td class="btn-action">
-                        @*<button type="submit" class="btn btn-approve">Approve</button>*@
-                        
                         <a href="@Url.Action("Approve","NotesUnderReview",new { NoteID = data.ID})" onclick="return confirm('@ViewBag.Approvedconfirmationbox')" role="button" class="btn btn-approve">Approve</a>
                         <button type="submit" data-id="@data.ID" data-title="@data.Title" data-toggle="modal" data-target="#rejectPopupModal" class="btn btn-reject modalLink">Reject</button>
                         <a href="@Url.Action("InReview","NotesUnderReview",new { NoteID = data.ID})" onclick="return confirm('@ViewBag.InReviewconfirmationBox')" role="button" class="btn btn-inreview">InReview</a>
-
-                        @*<button type="submit" class="btn btn-inreview">InReview</button>*@
                     </td>
                     <td>
                         <div class="dropdown">
@@ -61,8 +57,6 @@
                     </td>
                 </tr>
             }
-
-
         </tbody>
     </table>
 </div>

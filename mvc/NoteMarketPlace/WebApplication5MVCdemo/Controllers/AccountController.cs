@@ -25,8 +25,7 @@ namespace NoteMarketPlace.Controllers
 
         public ActionResult Login()
         {
-            //User UserModel = new User();
-            //UserModel.EmailID = "Abc@123gmail.com";
+           
             return View();
         }
 
@@ -124,10 +123,6 @@ namespace NoteMarketPlace.Controllers
                         var body = string.Empty;
                         var subject = "New Temporary Password has been created for you";
 
-                        //string URL = ConfigurationManager.AppSettings["Localhost"] + "Account/VefiryEmail?Email=" + user.EmailID + "";
-                        //  string New_URL = ConfigurationManager.AppSettings["Localhost"] + Url.Action("VefiryEmail", "Account", new { Email = model.Email });
-                        // verify link problem on email 
-
                         using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTemplates/ForgotPasswordMail.html")))
                         {
                             body = reader.ReadToEnd();
@@ -137,11 +132,11 @@ namespace NoteMarketPlace.Controllers
 
                         var smtp = new SmtpClient
                         {
-                            Host = "smtp.gmail.com",
-                            Port = 587,
-                            EnableSsl = true,
+                            Host = ConfigurationManager.AppSettings["Host"],
+                            Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
+                            EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]),
                             DeliveryMethod = SmtpDeliveryMethod.Network,
-                            UseDefaultCredentials = false,
+                            UseDefaultCredentials = Convert.ToBoolean(ConfigurationManager.AppSettings["UseDefaultCredentials"]),
                             Credentials = new NetworkCredential(sender.Address, password)
                         };
 
@@ -176,7 +171,7 @@ namespace NoteMarketPlace.Controllers
         }
 
         // GET: /Account/Signup
-        //[AllowAnonymous]
+        
         public ActionResult Signup()
         {
 
@@ -185,8 +180,6 @@ namespace NoteMarketPlace.Controllers
 
         // POST: /Account/Register
         [HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public ActionResult Signup(RegisterUser model)
         {
             // below code is for email sending
@@ -206,9 +199,7 @@ namespace NoteMarketPlace.Controllers
                         var subject = "Note Marketplace - Email Verification";
 
                         string URL = ConfigurationManager.AppSettings["Localhost"] + "Account/VefiryEmail?Email=" + model.Email + "";
-                        //  string New_URL = ConfigurationManager.AppSettings["Localhost"] + Url.Action("VefiryEmail", "Account", new { Email = model.Email });
-                        // verify link problem on email 
-
+                       
                         using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTemplates/emailVerification.html")))
                         {
                             body = reader.ReadToEnd();
@@ -218,11 +209,11 @@ namespace NoteMarketPlace.Controllers
                         body = body.Replace("{confirmUrl}", URL);
                         var smtp = new SmtpClient
                         {
-                            Host = "smtp.gmail.com",
-                            Port = 587,
-                            EnableSsl = true,
+                            Host = ConfigurationManager.AppSettings["Host"],
+                            Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
+                            EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]),
                             DeliveryMethod = SmtpDeliveryMethod.Network,
-                            UseDefaultCredentials = false,
+                            UseDefaultCredentials = Convert.ToBoolean(ConfigurationManager.AppSettings["UseDefaultCredentials"]),
                             Credentials = new NetworkCredential(sender.Address, password)
                         };
 
@@ -317,7 +308,7 @@ namespace NoteMarketPlace.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-           // return View();
+           
         }
 
         [HttpPost]

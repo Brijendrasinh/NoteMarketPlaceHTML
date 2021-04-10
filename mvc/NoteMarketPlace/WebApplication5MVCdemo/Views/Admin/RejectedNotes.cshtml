@@ -29,7 +29,6 @@
 
 @section scripts {
     <script>
-        debugger
         $("#RejectedNotesDataTable").DataTable();
         $("#Seller").on("change", function () {
             BindSellNotesDetail()
@@ -38,8 +37,6 @@
             BindSellNotesDetail()
         });
         function BindSellNotesDetail() {
-
-            debugger
             var sellerID = $("#Seller").val();
             $.ajax({
                 type: 'GET',
@@ -48,19 +45,15 @@
                     SellerId: sellerID
                 },
                 success: function (Result) {
-                    debugger
                     $("#RejectedNotesPartialView").replaceWith(Result);
                     $("#RejectedNotesDataTable").DataTable();
                     oTable = $('#RejectedNotesDataTable').DataTable();
                     $('#inputSearch').keyup(function () {
                         oTable.search($(this).val()).draw();
                     });
-
-                    $('#RejectedNotesDataTable').DataTable().page.len(1).draw();
-
+                    $('#RejectedNotesDataTable').DataTable().page.len(10).draw();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    debugger
                     alert("sorry");
                 }
             });

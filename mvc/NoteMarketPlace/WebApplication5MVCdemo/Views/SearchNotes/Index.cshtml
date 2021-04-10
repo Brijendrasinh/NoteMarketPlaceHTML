@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Search Notes";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -66,23 +66,18 @@
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
                         @Html.DropDownListFor(x => x.typeId, new SelectList(Model.noteTypes, "ID", "Name"), "Select Type", new { @class = "form-control" })
-
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
                         @Html.DropDownListFor(x => x.categoryId, new SelectList(Model.noteCategories, "ID", "Name"), "Select Category", new { @class = "form-control" })
-
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
                         @Html.DropDownListFor(x => x.universityId, Model.UniversityNames, "Select University", new { @class = "form-control" })
-
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
                         @Html.DropDownListFor(x => x.courseId, Model.Courses, "Select Course", new { @class = "form-control" })
-
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
                         @Html.DropDownListFor(x => x.countryId, new SelectList(Model.countries, "ID", "Name"), "Select Country", new { @class = "form-control" })
-
                     </div>
                     <div class="form-group col-xl-2 col-md-4 col-sm-6 col-12 row-02">
                         <select id="Rating" class="form-control">
@@ -102,11 +97,7 @@
 
 <section id="book-lists">
     <div class="container" id="DivSearchNotes">
-
-        <div id="DivSearchNoteView">
-
-        </div>
-
+        <div id="DivSearchNoteView"></div>
     </div>
 </section>
 
@@ -149,7 +140,6 @@
         });
 
         function BindSearchNotes() {
-            debugger
             var FK_Type_val = $("#typeId").val();
             var FK_Category_val = $("#categoryId").val();
             var FK_Country_val = $("#countryId").val();
@@ -157,10 +147,8 @@
             var FK_Course_val = $("#courseId").val();
             var Search = $("#inputSearch").val();
             var Rating = $("#Rating").val();
-            debugger
-            var pageSize = "9"; /*$("#DivSearchNotes .jplist-select").length > 0 ? $("#DivSearchNotes .jplist-select option:selected").attr("data-number") : "9";*/
+            var pageSize = "9"; 
             var pageNumber = $("#DivSearchNotes .jplist-pagination").length > 0 && $("#DivSearchNotes .jplist-pagination .jplist-current").val() != "" ? $("#DivSearchNotes .jplist-pagination .jplist-current").val() : "1";
-            debugger
             $.ajax({
                 type: 'GET',
                 url: "@Url.Action("GetFilterSearchNotes", "SearchNotes")",
@@ -169,30 +157,23 @@
                     PageNumber: pageNumber, PageSize: pageSize, search: Search, rating: Rating
                 },
                 success: function (Result) {
-                    debugger
                     $("#DivSearchNoteView").replaceWith(Result);
                     $("#DivSearchNotes .jplist-pagination").find("button").bind("click", function (event) {
-                        debugger
                         $("#DivSearchNotes .jplist-pagination").find("button").removeClass("jplist-current");
                         $(this).addClass("jplist-current");
-                        debugger
                         BindSearchNotes();
                     });
-                    //$("#DivSearchNotes .jplist-select").unbind();
                     $("#DivSearchNotes .jplist-select").bind("change", function (event) {
                         $("#DivSearchNotes .jplist-pagination").remove();
                         BindSearchNotes();
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    debugger
                     alert("sorry");
                 }
             });
         }
-
     </script>
-
 }
 
 

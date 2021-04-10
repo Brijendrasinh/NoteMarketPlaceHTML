@@ -43,7 +43,6 @@
 
 @section scripts {
     <script>
-        debugger
         $("#DownloadedNotesDataTable").DataTable();
         $(document).ready(function () {
             BindDownloadedNotesDetail()
@@ -57,10 +56,7 @@
         $("#Buyer").on("change", function () {
             BindDownloadedNotesDetail()
         });
-        
         function BindDownloadedNotesDetail() {
-
-            debugger
             var noteID = $("#NoteID").val();
             var sellerID = $("#Seller").val();
             var buyerID = $("#Buyer").val();
@@ -71,19 +67,15 @@
                     NoteId: noteID, SellerId: sellerID, BuyerId: buyerID
                 },
                 success: function (Result) {
-                    debugger
                     $("#DownloadedNotesPartialView").replaceWith(Result);
                     $("#DownloadedNotesDataTable").DataTable();
                     oTable = $('#DownloadedNotesDataTable').DataTable();
                     $('#inputSearch').keyup(function () {
                         oTable.search($(this).val()).draw();
-                    });
-                    
-                    $('#DownloadedNotesDataTable').DataTable().page.len(1).draw();
-
+                    });             
+                    $('#DownloadedNotesDataTable').DataTable().page.len(10).draw();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    debugger
                     alert("sorry");
                 }
             });

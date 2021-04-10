@@ -18,19 +18,12 @@
                     <div class="block col-12">
                         @Html.LabelFor(x => x.Type)
                         @Html.TextBoxFor(x => x.Type, new { placeholder = "Enter your Note Type Name", @class = "form-control", required = "required" })
-                        @*<label for="inputMyProfileCountryName">Country Name *</label>
-                    <input class="form-control" placeholder="Enter your Country Name" type="text" id="inputMyProfileCountryName" value="India" required>*@
                     </div>
                     <div class="block col-12">
                         @Html.LabelFor(x => x.Description)
                         @Html.TextBoxFor(x => x.Description, new { placeholder = "Enter Note Type Description", @class = "form-control", required = "required" })
-                        @*<label for="inputMyProfileCountryCode">Country Code *</label>
-                    <input class="form-control" placeholder="Enter Country Code" type="text" id="inputMyProfileCountryCode" required>*@
                     </div>
-
-
                     <button type="submit" class="btn btn-submit">SUBMIT</button>
-
                 </div>
             }
         </div>

@@ -57,9 +57,6 @@
                             </div>
                         </div>
                     }
-
-
-
                 </div>
             </div>
         </div>
@@ -68,7 +65,6 @@
 
 @section scripts {
     <script>
-        debugger
         $("#PublishedNotesDataTable").DataTable();
         $("#Seller").on("change", function () {
             BindSellNotesDetail()
@@ -77,8 +73,6 @@
             BindSellNotesDetail()
         });
         function BindSellNotesDetail() {
-
-            debugger
             var sellerID = $("#Seller").val();
             $.ajax({
                 type: 'GET',
@@ -87,7 +81,6 @@
                     SellerId: sellerID
                 },
                 success: function (Result) {
-                    debugger
                     $("#PublishedNotesPartialView").replaceWith(Result);
                     $("#PublishedNotesDataTable").DataTable();
                     oTable = $('#PublishedNotesDataTable').DataTable();
@@ -101,11 +94,9 @@
                         var Title = $(this).data('title');
                         $(".modal-body #Note-title").html(Title);
                     });
-                    $('#PublishedNotesDataTable').DataTable().page.len(1).draw();
-
+                    $('#PublishedNotesDataTable').DataTable().page.len(10).draw();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    debugger
                     alert("sorry");
                 }
             });

@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "MyDownloads";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="buyer-request">
@@ -81,10 +81,6 @@
     </div>
 </section>
 
-
-
-@*Add Review Pop up
-    Modal*@
 <div class="modal fade" id="addReviewPopupModal" tabindex="-1" role="dialog" aria-labelledby="thanksPopupModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -120,15 +116,12 @@
                             <div class="col-md-12 col-12 comment">
                                 <label for="AddReviewPopupComment">Comments *</label>
                                 <textarea rows="8" cols="50" placeholder="Enter your Comment" class="form-control" name="Comment" id="AddReviewPopupComment" required></textarea>
-                                @*<input type="text" class="form-control" placeholder="Enter your Comment" name="Comment" id="AddReviewPopupComment" required>*@
                             </div>
                             <div class="col-md-12 col-12">
                                 <button type="submit" class="btn btn-add-review-popup">SUBMIT</button>
                             </div>
-                        </div>
-                        
+                        </div>  
                     }
-
                 </div>
             </div>
         </div>
@@ -156,15 +149,12 @@
                             <div class="col-md-12 col-12 comment">
                                 <label for="AddReviewPopupComment">Remarks *</label>
                                 <textarea rows="8" cols="50" placeholder="Enter your Comment" class="form-control" name="Remark" id="AddReviewPopupComment" required></textarea>
-                                @*<input type="text" class="form-control" placeholder="Enter your Comment" name="Comment" id="AddReviewPopupComment" required>*@
                             </div>
                             <div class="col-md-12 col-12">
                                 <button type="submit" class="btn btn-danger">SUBMIT</button>
                             </div>
                         </div>
-
                     }
-
                 </div>
             </div>
         </div>
@@ -186,20 +176,14 @@
                 var ID = $(this).data('id');
                 $(".modal-body #hiddenId").val(ID);
             });
-
             $(".modalLink1").on("click", function () {
                 var NoteID = $(this).data('noteid');
                 $(".modal-body #hiddenNoteid").val(NoteID);
                 var ID = $(this).data('id');
                 $(".modal-body #hiddenId").val(ID);
             });
-            $('#MyDownload-table').DataTable().page.len(3).draw();
-
+            $('#MyDownload-table').DataTable().page.len(10).draw();
         });
-        
-            debugger
-        
-        debugger
 
     </script>
 

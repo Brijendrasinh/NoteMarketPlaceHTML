@@ -4,28 +4,20 @@
 @model IEnumerable<BuyerRequestViewModel>
 @{
     ViewBag.Title = "BuyerRequest";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />*@
+
 <section class="buyer-request">
     <div class="container">
-
-        @*@using (Html.BeginForm("BuyerRequest", "Home", FormMethod.Get))
-            {*@
         <div class="row">
             <div class="col-xl-5 col-lg-4 col-md-4 col-sm-4 col-12 left">
                 <h3>Buyer Requests</h3>
             </div>
-
-
             <div class="pl-0 m-left-auto col-xl-7 col-lg-8 col-md-8 col-sm-8 col-12 row search-side align-items-end right">
                 <span class="magnifier"><img src="~/images/Dashboard/search.jpg" alt=""></span>
                 <input class="col-sm-7 col-7 m-left-auto" aria-controls="Plugin-table" type="text" name="search" placeholder="Search" id="inputBuyerRequestSearch">
-
                 <button type="submit" class="col-sm-3 col-3 btn btn-mydownload-search">SEARCH</button>
             </div>
-
-
             <div class="col-md-12 table-scroll">
                 <table id="Buyer-request-table" class="table table-border">
                     <thead>
@@ -42,21 +34,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         @foreach (var data in Model)
                         {
 
                             <tr>
                                 <td>@data.ID</td>
                                 <td class="note-title">
-                                    <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.NoteID},null)" class="links">    
+                                    <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.NoteID},null)" class="links">
                                         @data.NoteTitle
                                     </a>
                                 </td>
                                 <td>@data.NoteCategory</td>
                                 <td>@data.EmailID</td>
                                 <td>@data.CountryCode @data.PhoneNumber</td>
-                                @if(data.IsPaid == true)
+                                @if (data.IsPaid == true)
                                 {
                                     <td>Paid</td>
                                 }
@@ -83,16 +75,10 @@
 
                             </tr>
                         }
-
-
                     </tbody>
                 </table>
             </div>
         </div>
-
-
-        @*}*@
-
     </div>
 </section>
 
@@ -101,15 +87,12 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-            //  var stable = $("#Buyer-request-table").DataTable();
             oTable = $('#Buyer-request-table').DataTable();
             $('#inputBuyerRequestSearch').keyup(function () {
                 oTable.search($(this).val()).draw();
             });
+            $('#Buyer-request-table').DataTable().page.len(10).draw();
 
-            $('#Buyer-request-table').DataTable().page.len(10).draw(); 
-           
         });
     </script>
 

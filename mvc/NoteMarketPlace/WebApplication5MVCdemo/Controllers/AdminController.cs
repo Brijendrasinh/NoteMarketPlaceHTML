@@ -34,9 +34,6 @@ namespace NoteMarketPlace.Controllers
 
                     Model.NewRegistrationCount = db.Users.Where(x => x.CreatedDate > date && x.RoleID == member).Count();
 
-
-                    //Model.getDahboardData_Results = db.NewGetDashboadrd().ToList();
-
                     return View(Model);
                 }
                 else
@@ -58,8 +55,6 @@ namespace NoteMarketPlace.Controllers
             Model.getDahboardData_Results = db.NewGetDashboadrd(month).ToList();
 
             return PartialView("_Dashboard", Model);
-            
-
             
         }
 
@@ -156,8 +151,8 @@ namespace NoteMarketPlace.Controllers
             getSellnote.Status = Convert.ToInt32(Enums.ReferenceNoteStatus.Removed);
             getSellnote.AdminRemarks = Request.Form["remarks"];
             getSellnote.ModifiedDate = DateTime.Now;
-            getSellnote.RejectedBy = 3;//Convert.ToInt32(Session["ID"]);
-            getSellnote.ModifiedBy = 3;//Convert.ToInt32(Session["ID"]);
+            getSellnote.RejectedBy = Convert.ToInt32(Session["ID"]);
+            getSellnote.ModifiedBy = Convert.ToInt32(Session["ID"]);
             db.SaveChanges();
             return RedirectToAction("PublishedNotes", "Admin");
         }

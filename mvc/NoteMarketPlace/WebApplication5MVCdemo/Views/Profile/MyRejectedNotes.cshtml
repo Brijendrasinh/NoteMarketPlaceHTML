@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "MyRejectedNotes";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="buyer-request my-rejected">
@@ -75,7 +75,7 @@
                 oTable.search($(this).val()).draw();
             });
 
-            $('#MyRejectedNote-table').DataTable().page.len(3).draw();
+            $('#MyRejectedNote-table').DataTable().page.len(10).draw();
 
         });
     </script>

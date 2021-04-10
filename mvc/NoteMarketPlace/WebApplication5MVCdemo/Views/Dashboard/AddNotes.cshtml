@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "AddNotes";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.confirmationBox = "Publishing this note will send note to administrator for review, once administrator review and approve then this note will be published to portal.Press ok to continue.";
 }
 
@@ -22,126 +22,73 @@
     <section id="basic-note-details">
         <div class="container">
             <h3>Basic Note Details</h3>
-            @*<form>*@
             <div class="row">
-
-                @* Hidden Id Passed to Post Method to CRUD Operation *@
                 @Html.HiddenFor(x => x.SellNote.ID)
-
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Title)
                     @Html.TextBoxFor(m => m.SellNote.Title, new { placeholder = "Enter your Notes Title", @class = "form-control", required = "required" })
-                    @*<label for="inputAddNoteTitle">Title *</label>
-                        <input type="text" class="form-control" id="inputAddNoteTitle" placeholder="Enter your notes title" required>*@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Category)
                     @Html.DropDownListFor(m => m.SellNote.Category, new SelectList(Model.NoteCategories, "ID", "Name"), "Select Category", new { @class = "form-control", required = "required" })
-                    @*<label for="inputAdNoteCategory">Category *</label>
-                        <select id="inputAddNoteCategory" class="form-control" required>
-                            <option selected disabled value="">Select your category</option>
-                            <option>India</option>
-                            <option>U.K.</option>
-                            <option>U.S.A</option>
-                        </select>*@
-
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.DisplayPicture)
-                    @*@Html.TextBoxFor(m => m.SellNote.DisplayPicture, new { placeholder = "Enter your Notes Title", @class = "form-control" })
-                        <label for="inputAdNoteDisplayPicture">Display Picture</label>*@
                     <input type="file" class="upload form-control" name="DisplayPictureFile" id="SellNote_DisplayPicture">
-                    <!--  <span><img src="images/User-Profile/upload.png" alt="">Upload a picture</span> -->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                    @*@Html.LabelFor(m => m.SellNote)*@
                     <label for="inputAdNoteUploadNotes">Upload Notes *</label>
                     <input type="file" class="upload upload-note form-control" id="inputAdNoteUploadNotes" name="UploadedPdfFile" multiple required>
-                    <!--  <span><img src="Front_images/images/upload-note.png" alt=""></span>  -->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.NoteType)
-                    @Html.DropDownListFor(m => m.SellNote.NoteType, new SelectList(Model.NoteTypes, "ID", "Name"), "Select Category", new { @class = "form-control" })
-                    @*<label for="inputAdNoteType">Type</label>
-                            <select id="inputAddNoteType" class="form-control">
-                                <option selected disabled value="">Select your note type</option>
-                                <option>India</option>
-                                <option>U.K.</option>
-                                <option>U.S.A</option>
-                        </select>*@
+                    @Html.DropDownListFor(m => m.SellNote.NoteType, new SelectList(Model.NoteTypes, "ID", "Name"), "Select Category", new { @class = "form-control", required = "required" })
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.NumberOfPages)
                     @Html.TextBoxFor(m => m.SellNote.NumberOfPages, new { placeholder = "Enter Number of Notes Pages", @class = "form-control" })
-                    @*<label for="inputAdNoteNumberOfPages">Number of Pages</label>
-                        <input type="text" class="form-control" id="inputAdNoteNumberOfPages" placeholder="Enter numberof note pages">*@
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                     @Html.LabelFor(m => m.SellNote.Discription)
                     @Html.TextAreaFor(m => m.SellNote.Discription, new { placeholder = "Enter your Discription", @class = "form-control", required = "required" })
-                    @*<label for="inputAdNoteDescription">Description *</label>
-                        <textarea rows="6" cols="50" class="form-control" id="inputAdNoteDescription" placeholder="Enter your Description" required></textarea>*@
-
                 </div>
-
             </div>
-            @*</form>*@
         </div>
     </section>
 
     <section id="institution-information">
         <div class="container">
             <h3>Institution Information</h3>
-            @*<form>*@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Country)
-                    @Html.DropDownListFor(m => m.SellNote.Country, new SelectList(Model.Countries, "ID", "Name"), "Select Category", new { @class = "form-control" })
-                    @*<label for="inputAddNoteCountry">Country</label>
-                        <select id="inputAddNoteCountry" class="form-control">
-                            <option selected disabled value="">Select your country</option>
-                            <option>India</option>
-                            <option>U.K.</option>
-                            <option>U.S.A</option>
-                        </select>*@
-
+                    @Html.DropDownListFor(m => m.SellNote.Country, new SelectList(Model.Countries, "ID", "Name"), "Select Category", new { @class = "form-control", required = "required" })
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.UniversityName)
                     @Html.TextBoxFor(m => m.SellNote.UniversityName, new { placeholder = "Enter your Institution Name", @class = "form-control" })
-                    @*<label for="inputAdNoteInstitutionName">Institution Name</label>
-                        <input type="text" id="inputAddNoteInstitutionName" placeholder="Enter your institution name" class="form-control">*@
                 </div>
             </div>
-            @*</form>*@
         </div>
     </section>
 
     <section id="institution-information">
         <div class="container">
             <h3>Course Details</h3>
-            @*<form>*@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Course)
                     @Html.TextBoxFor(m => m.SellNote.Course, new { placeholder = "Enter your Course Name", @class = "form-control" })
-                    @*<label for="inputAdNoteCourseName">Course Name</label>
-                        <input type="text" id="inputAddNoteCourseName" placeholder="Enter your course name" class="form-control">*@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.CourseCode)
                     @Html.TextBoxFor(m => m.SellNote.CourseCode, new { placeholder = "Enter your Course Code", @class = "form-control" })
-                    @*<label for="inputAdNoteCourseCode">Course Code</label>
-                        <input type="text" id="inputAddNoteCourseCode" placeholder="Enter your course code" class="form-control">*@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Professor)
                     @Html.TextBoxFor(m => m.SellNote.Professor, new { placeholder = "Enter your Professor Name", @class = "form-control" })
-                    @*<label for="inputAdNoteProfessorName">Professor / Lecture</label>
-                        <input type="text" id="inputAddNoteProfessorName" placeholder="Enter your Professor name" class="form-control">*@
                 </div>
             </div>
-            @*</form>*@
         </div>
     </section>
 
@@ -159,22 +106,14 @@
                             <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
                                 @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free" , onchange="radioValue(this)"@*, required = "required"*@ })
                                 <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
-                                @*<input type="radio" value="false" id="customRadioFree" name="customRadioInline1" class="custom-control-input" onclick="document.getElementById('YourRadioButtonValue').value = this.value;" >
-                                    <label style="margin-left: 50px" class="custom-control-label" for="customRadioFree" >Free</label>*@
-
                             </div>
                             <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
                                 @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)"@*, required = "required"*@ })
                                 <label class="custom-control-label" for="paid">Paid</label>
-                                @*<input type="radio" value="true" id="customRadioPaid" name="customRadioInline1" class="custom-control-input" onclick="document.getElementById('YourRadioButtonValue').value = this.value;">
-                                        <label class="custom-control-label" for="customRadioPaid" >Paid</label>
-                                    <input type="hidden" name="YourRadioButtonValue" id="YourRadioButtonValue" value="none"/>*@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 @Html.LabelFor(m => m.SellNote.SellingPrice)
                                 @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
-                                @*<label for="inputAddNoteSellPrice">Sell Price *</label>
-                                    <input type="text" id="inputAddNoteSellPrice" placeholder="Enter your price" class="form-control">*@
                             </div>
                         </div>
                     </div>

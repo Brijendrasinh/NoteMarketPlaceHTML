@@ -5,176 +5,161 @@
 
 @if (Model != null && Model.NewGetSellerNotesDetails_Result != null && Model.NewGetSellerNotesDetails_Result.Count() > 0)
 {
-    
-    double dblPageCount = (double)((decimal)Model.TotalRecords / decimal.Parse(Model.PageSize));
-    int pageCount = (int)Math.Ceiling(dblPageCount);
-<div id="DivSearchNoteView">
-    <h5>Total <span id="NoteCount">@Model.TotalRecords</span> notes</h5>
-    <div class="row" id="partialIdOriginal">
-        @foreach (var data in Model.NewGetSellerNotesDetails_Result)
-        {
-            <div class="col-xl-4 col-md-6 col-sm-6 col-12">
-                <div class="card">
-                    @if (data.DisplayPicture != null)
-                    {
-                        <img src="~/Members/@data.SellerID/@data.ID/@data.DisplayPicture" class="card-img-top" alt="book image">
-                    }
-                    else
-                    {
-                        <img src="@ConstantStrings.Default_Noteimage_path" class="card-img-top" alt="book image">
-                    }
-                    <div class="card-body">
-                        <a href="@Url.Action("NoteDetail", "Dashboard", new { noteId = data.ID }, null)">
-                            <h5 class="card-title">@data.Title</h5>
-                        </a>
-                        <p class="card-text"><img src="~/Front_images/images/university.png" alt=""> <span>@data.UniversityName, @data.CountyName </span></p>
-                        <p class="card-text"><img src="~/Front_images/images/pages.png" alt=""> <span>@data.NumberOfPages Pages</span></p>
-                        <p class="card-text"><img src="~/Front_images/images/date.png" alt=""> <span>@data.CreatedDate</span></p>
-                        <p class="card-text">
-                            <img src="~/Front_images/images/flag.png" alt="">
-                            @if (data.Report != null)
-                            {
-                                <span>@data.Report Users marked this note as inapropriate</span>
-                            }
-                            else
-                            {
-                                <span>Nobody is Reported this note</span>
-                            }
-                        </p>
-                        <p>
-                            @if (data.Rating >= 0 && data.Rating < 1)
-                            {
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                            }
-                            else if (data.Rating >= 1 && data.Rating < 2)
-                            {
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                            }
-                            else if (data.Rating >= 2 && data.Rating < 3)
-                            {
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                            }
-                            else if (data.Rating >= 3 && data.Rating < 4)
-                            {
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                            }
-                            else if (data.Rating >= 4 && data.Rating < 5)
-                            {
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star not-checked"></span>
-                            }
-                            else if (data.Rating >= 5)
-                            {
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            }
-                            else
-                            {
-                                <span>No Reviews</span>
-                            }
-                            @if (data.TotalRating != null)
-                            {
-                                <span class="star-review">@data.TotalRating reviews</span>
-                            }
-                        </p>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
 
-    <div class="jplist-panel">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="row">
-                <!--<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
-                    <!-- pagination results -->
-                    <!--<div class="jplist-label" data-type="Showing {start} to {end} of {all} entries" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging">
-                        Showing @((Convert.ToInt32(Model.PageNumber) - 1) * Convert.ToInt32(Model.PageSize) + 1) to @(Convert.ToInt32(Model.PageNumber) * Convert.ToInt32(Model.PageSize) <= Model.TotalRecords ? Convert.ToInt32(Model.PageNumber) * Convert.ToInt32(Model.PageSize) : Model.TotalRecords) of @Model.TotalRecords entries
+    double dblPageCount = (double)((decimal)Model.TotalRecords / (decimal)Model.PageSize);
+    int pageCount = (int)Math.Ceiling(dblPageCount);
+    <div id="DivSearchNoteView">
+        <h5>Total <span id="NoteCount">@Model.TotalRecords</span> notes</h5>
+        <div class="row" id="partialIdOriginal">
+            @foreach (var data in Model.NewGetSellerNotesDetails_Result)
+            {
+                <div class="col-xl-4 col-md-6 col-sm-6 col-12">
+                    <div class="card">
+                        @if (data.DisplayPicture != null)
+                        {
+                            <img src="~/Members/@data.SellerID/@data.ID/@data.DisplayPicture" class="card-img-top" alt="book image">
+                        }
+                        else
+                        {
+                            <img src="@ConstantStrings.Default_Noteimage_path" class="card-img-top" alt="book image">
+                        }
+                        <div class="card-body">
+                            <a href="@Url.Action("NoteDetail", "Dashboard", new { noteId = data.ID }, null)">
+                                <h5 class="card-title">@data.Title</h5>
+                            </a>
+                            <p class="card-text"><img src="~/Front_images/images/university.png" alt=""> <span>@data.UniversityName, @data.CountyName </span></p>
+                            <p class="card-text"><img src="~/Front_images/images/pages.png" alt=""> <span>@data.NumberOfPages Pages</span></p>
+                            <p class="card-text"><img src="~/Front_images/images/date.png" alt=""> <span>@data.CreatedDate</span></p>
+                            <p class="card-text">
+                                <img src="~/Front_images/images/flag.png" alt="">
+                                @if (data.Report != null)
+                                {
+                                    <span>@data.Report Users marked this note as inapropriate</span>
+                                }
+                                else
+                                {
+                                    <span>Nobody is Reported this note</span>
+                                }
+                            </p>
+                            <p>
+                                @if (data.Rating >= 0 && data.Rating < 1)
+                                {
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                }
+                                else if (data.Rating >= 1 && data.Rating < 2)
+                                {
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                }
+                                else if (data.Rating >= 2 && data.Rating < 3)
+                                {
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                }
+                                else if (data.Rating >= 3 && data.Rating < 4)
+                                {
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                }
+                                else if (data.Rating >= 4 && data.Rating < 5)
+                                {
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star not-checked"></span>
+                                }
+                                else if (data.Rating >= 5)
+                                {
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                }
+                                else
+                                {
+                                    <span>No Reviews</span>
+                                }
+                                @if (data.TotalRating != null)
+                                {
+                                    <span class="star-review">@data.TotalRating reviews</span>
+                                }
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="jplist-drop-down dataTables_length" data-control-type="items-per-page-drop-down" data-control-name="paging" data-control-action="paging">
-                        Show&nbsp;<select class="jplist-select" data-control-type="items-per-page-select" data-control-name="paging" data-control-action="paging">
-                            <option data-number="9" @(Model.PageSize == "9" ? "selected = \"selected\"" : "")>2</option>
-                            <option data-number="@Model.TotalRecords" @(Model.PageSize == Model.TotalRecords.ToString() ? "selected = \"selected\"" : "")>View All</option>
-                        </select>&nbsp;entries
-                    </div>
-                </div>-->
-                <div class="col-12" style="text-align:center">
-                    <!-- pagination data-prev="<" data-next=">" data-first="<<" data-last=">>" -->
-                    <div class="jplist-pagination" data-control-type="pagination" data-control-name="paging" data-control-action="paging" data-range="5">
-                        @if (pageCount > 1 && Convert.ToInt32(Model.PageNumber) > 1)
-                        {
-                            <div class="jplist-pagingprev jplist-hidden" data-type="pagingprev">
-                                @*<button type="button" class="jplist-first" data-number="0" data-type="first" title="" value="1">«</button>*@
-                                <button type="button" class="jplist-prev" data-type="prev" title="" data-number="0" value="@(Convert.ToInt32(Model.PageNumber) - 1)">‹</button>
-                            </div>
-                        }
-                        <div class="jplist-pagingmid" data-type="pagingmid">
-                            <div class="jplist-pagesbox" data-type="pagesbox">
-                                @if (pageCount > 1)
-                                {
-                                    int startPage = 1, endPage = pageCount;
-                                    if (pageCount > 5)
+            }
+        </div>
+
+        <div class="jplist-panel">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+
+                    <div class="col-12" style="text-align:center">
+                        <!-- pagination data-prev="<" data-next=">" -->
+                        <div class="jplist-pagination" data-control-type="pagination" data-control-name="paging" data-control-action="paging" data-range="5">
+                            @if (pageCount > 1 && Convert.ToInt32(Model.PageNumber) > 1)
+                            {
+                                <div class="jplist-pagingprev jplist-hidden" data-type="pagingprev">
+                                    <button type="button" class="jplist-prev" data-type="prev" title="" data-number="0" value="@(Convert.ToInt32(Model.PageNumber) - 1)">‹</button>
+                                </div>
+                            }
+                            <div class="jplist-pagingmid" data-type="pagingmid">
+                                <div class="jplist-pagesbox" data-type="pagesbox">
+                                    @if (pageCount > 1)
                                     {
-                                        if (Convert.ToInt32(Model.PageNumber) - 2 > 0)
+                                        int startPage = 1, endPage = pageCount;
+                                        if (pageCount > 5)
                                         {
-                                            startPage = Convert.ToInt32(Model.PageNumber) - 2;
+                                            if (Convert.ToInt32(Model.PageNumber) - 2 > 0)
+                                            {
+                                                startPage = Convert.ToInt32(Model.PageNumber) - 2;
+                                            }
+                                            if (Convert.ToInt32(Model.PageNumber) + 2 <= pageCount)
+                                            {
+                                                endPage = Convert.ToInt32(Model.PageNumber) + 2;
+                                            }
                                         }
-                                        if (Convert.ToInt32(Model.PageNumber) + 2 <= pageCount)
+                                        for (int iPage = startPage; iPage <= endPage; iPage++)
                                         {
-                                            endPage = Convert.ToInt32(Model.PageNumber) + 2;
+                                            if (iPage != Convert.ToInt32(Model.PageNumber))
+                                            {
+                                                <button type="button" data-type="page" data-number="@iPage" title="" value="@iPage">@iPage</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" data-type="page" class="jplist-current" data-active="true" data-number="@iPage" title="" value="@iPage">@iPage</button>
+                                            }
                                         }
                                     }
-                                    for (int iPage = startPage; iPage <= endPage; iPage++)
-                                    {
-                                        if (iPage != Convert.ToInt32(Model.PageNumber))
-                                        {
-                                            <button type="button" data-type="page" data-number="@iPage" title="" value="@iPage">@iPage</button>
-                                        }
-                                        else
-                                        {
-                                            <button type="button" data-type="page" class="jplist-current" data-active="true" data-number="@iPage" title="" value="@iPage">@iPage</button>
-                                        }
-                                    }
-                                }
+                                </div>
                             </div>
+                            @if (pageCount > 1 && Convert.ToInt32(Model.PageNumber) < pageCount)
+                            {
+                                <div class="jplist-pagingnext" data-type="pagingnext">
+                                    <button type="button" class="jplist-next" data-type="next" title="" data-number="@(Convert.ToInt32(Model.PageNumber) + 1)" value="@(Convert.ToInt32(Model.PageNumber) + 1)">›</button>
+                                </div>
+                            }
                         </div>
-                        @if (pageCount > 1 && Convert.ToInt32(Model.PageNumber) < pageCount)
-                        {
-                            <div class="jplist-pagingnext" data-type="pagingnext">
-                                <button type="button" class="jplist-next" data-type="next" title="" data-number="@(Convert.ToInt32(Model.PageNumber) + 1)" value="@(Convert.ToInt32(Model.PageNumber) + 1)">›</button>
-                                @*<button type="button" class="jplist-last" data-type="last" title="" data-number="@pageCount" value="@pageCount">»</button>*@
-                            </div>
-                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 else
 {

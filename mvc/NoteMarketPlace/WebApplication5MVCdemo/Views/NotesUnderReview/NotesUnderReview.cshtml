@@ -15,8 +15,7 @@
         </div>
         <div class="col-xl-5 col-lg-4 col-md-3 col-sm-3 col-12 NUR">
             @Html.LabelFor(x => x.Seller)
-            @Html.DropDownListFor(x => x.Seller, Model.SellerName, "Select Seller", new { @class = "form-control" })
-            
+            @Html.DropDownListFor(x => x.Seller, Model.SellerName, "Select Seller", new { @class = "form-control" })           
         </div>
         <div class="pl-0 m-left-auto align-items-end col-xl-7 col-lg-8 col-md-9 col-sm-9 col-12 row search-side search-side-NUR">
             <span class="NURandManageAdminSpan"><img src="~/Admin-Images/images/search-icon.png" alt=""></span>
@@ -61,9 +60,6 @@
                             </div>
                         </div>
                     }
-
-
-
                 </div>
             </div>
         </div>
@@ -72,7 +68,6 @@
 
 @section scripts {
     <script>
-        debugger
         $("#NotesUnderReviewDataTable").DataTable();
         $("#Seller").on("change", function () {
             BindSellNotesDetail()
@@ -81,8 +76,6 @@
             BindSellNotesDetail()
         });
         function BindSellNotesDetail() {
-
-            debugger
             var sellerID = $("#Seller").val();
             $.ajax({
                 type: 'GET',
@@ -91,7 +84,6 @@
                     SellerId: sellerID
                 },
                 success: function (Result) {
-                    debugger
                     $("#NotesUnderReviewPartial").replaceWith(Result);
                     $("#NotesUnderReviewDataTable").DataTable();
                     oTable = $('#NotesUnderReviewDataTable').DataTable();
@@ -105,11 +97,9 @@
                         var Title = $(this).data('title');
                         $(".modal-body #Note-title").html(Title);
                     });
-                    $('#NotesUnderReviewDataTable').DataTable().page.len(1).draw();
-
+                    $('#NotesUnderReviewDataTable').DataTable().page.len(10).draw();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    debugger
                     alert("sorry");
                 }
             });

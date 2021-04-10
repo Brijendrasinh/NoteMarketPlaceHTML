@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "MySoldNotes";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="buyer-request">
@@ -91,7 +91,7 @@
                 oTable.search($(this).val()).draw();
             });
 
-            $('#MySoldNote-table').DataTable().page.len(3).draw();
+            $('#MySoldNote-table').DataTable().page.len(10).draw();
 
         });
     </script>

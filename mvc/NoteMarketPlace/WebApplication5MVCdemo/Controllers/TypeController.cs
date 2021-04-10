@@ -13,7 +13,6 @@ namespace WebApplication5MVCdemo.Controllers
     {
         // GET: Type
         NoteMarketPlaceEntities db = new NoteMarketPlaceEntities();
-        // GET: Country
         public ActionResult ManageType()
         {
             if (Session["ID"] != null)

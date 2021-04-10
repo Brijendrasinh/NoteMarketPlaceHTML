@@ -8,6 +8,7 @@ using WebApplication5MVCdemo.CommanClasses;
 using System.Net.Mail;
 using System.IO;
 using System.Net;
+using System.Configuration;
 
 namespace NoteMarketPlace.Controllers
 {
@@ -27,7 +28,6 @@ namespace NoteMarketPlace.Controllers
                 user.EmailID = Session["EmailID"].ToString();
 
                 var result = db.Users.Where(x => x.EmailID.Equals(user.EmailID)).FirstOrDefault();
-                //var fullname = SELECT FirstName +' ' + LastName FROM Users AS FullName;
                 var fullName = result.FirstName + ' ' + result.LastName;
                 ContactPageLogedUSer model = new ContactPageLogedUSer();
                 model.FullName = fullName;
@@ -52,7 +52,6 @@ namespace NoteMarketPlace.Controllers
                 user.EmailId = Session["EmailID"].ToString();
 
                 var result = db.Users.Where(x => x.EmailID.Equals(user.EmailId)).FirstOrDefault();
-                //var fullname = SELECT FirstName +' ' + LastName FROM Users AS FullName;
                 var fullName = result.FirstName + ' ' + result.LastName;
 
                 user.FullName = fullName;
@@ -74,11 +73,11 @@ namespace NoteMarketPlace.Controllers
 
             var smtp = new SmtpClient
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
+                Host = ConfigurationManager.AppSettings["Host"],
+                Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
+                EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]),
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
+                UseDefaultCredentials = Convert.ToBoolean(ConfigurationManager.AppSettings["UseDefaultCredentials"]),
                 Credentials = new NetworkCredential(sender.Address, password)
             };
 

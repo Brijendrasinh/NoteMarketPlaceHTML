@@ -26,8 +26,8 @@ namespace WebApplication5MVCdemo.CommanClasses
         public IEnumerable<SelectListItem> UniversityNames { get; set; }
         public IEnumerable<SelectListItem> Courses { get; set; }
         public int TotalRecords { get; set; }
-        public string PageNumber { get; set; }
-        public string PageSize { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
     }
 
        

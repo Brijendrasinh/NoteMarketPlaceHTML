@@ -18,19 +18,17 @@ namespace WebApplication5MVCdemo.Controllers
             SerachNotes.countries = db.Countries.Where(x => x.IsActive == true).ToList();
             SerachNotes.noteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
             SerachNotes.noteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
-            //var universities1 = db.SellNotes.Select(x => x.UniversityName).Distinct().ToList();
-            //var courses1 = db.SellNotes.Select(x => x.Course).Distinct().ToList();
             int approve = Convert.ToInt32(Enums.ReferenceNoteStatus.Approved);
-            
-                SerachNotes.sellNotes = db.SellNotes.Where(x => x.Status == approve).ToList();
-       
+
+            SerachNotes.sellNotes = db.SellNotes.Where(x => x.Status == approve).ToList();
+
 
             SerachNotes.UniversityNames = db.SellNotes.Select(x => new SelectListItem()
             {
                 Value = x.UniversityName,
                 Text = x.UniversityName
             }).Distinct().ToList();
-            
+
             SerachNotes.Courses = db.SellNotes.Select(x => new SelectListItem()
             {
                 Value = x.Course,
@@ -41,8 +39,8 @@ namespace WebApplication5MVCdemo.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetFilterSearchNotes(int FK_Type=0,int FK_Category=0,int FK_Country=0,string FK_University = null,string FK_Course = null, 
-                                                string PageNumber = "1", string PageSize = "9",string search = null,string rating=null)
+        public ActionResult GetFilterSearchNotes(int FK_Type = 0, int FK_Category = 0, int FK_Country = 0, string FK_University = null, string FK_Course = null,
+                                                int PageNumber = 1, int PageSize = 9, string search = null, string rating = null)
         {
             SearchNotesViewModel Model = new SearchNotesViewModel();
             if (string.IsNullOrEmpty(FK_University))
@@ -55,21 +53,19 @@ namespace WebApplication5MVCdemo.Controllers
                 rating = null;
 
             Model.PageNumber = PageNumber;
-            Model.PageSize = "9";
-            int pageNumber = Convert.ToInt32(PageNumber);
-            int pageSize = 9; /*Convert.ToInt32(PageSize);*/
-            List<NewGetSellerNotesDetails_Result> getSellNotes = db.NewGetSellerNotesDetails(FK_Type, FK_Category, FK_Country, FK_University, FK_Course, pageSize , pageNumber, search,rating ).ToList();
+            Model.PageSize = PageSize;
             
+            List<NewGetSellerNotesDetails_Result> getSellNotes = db.NewGetSellerNotesDetails(FK_Type, FK_Category, FK_Country, FK_University, FK_Course, PageSize, PageNumber, search, rating).ToList();
+
             Model.NewGetSellerNotesDetails_Result = getSellNotes;
-            foreach(var data in getSellNotes)
+            foreach (var data in getSellNotes)
             {
                 Model.TotalRecords = (int)data.TotalCount;
             }
-            //Model.TotalRecords = Convert.ToInt32(getSellNotes.Count());
-            return PartialView("_SellNotes",Model);
-            
+            return PartialView("_SellNotes", Model);
+
         }
 
-        
+
     }
 }

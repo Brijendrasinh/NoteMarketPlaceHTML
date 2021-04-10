@@ -28,7 +28,7 @@ namespace WebApplication5MVCdemo.Controllers
                 {
                     AdminProfileViewModel Model = new AdminProfileViewModel();
                     Model.countries = db.Countries.Where(x => x.IsActive == true).ToList();
-                    //int id = Convert.ToInt32(Session["ID"]);
+                   
                     User userModel = db.Users.Where(x => x.ID == id).FirstOrDefault();
 
                     Model.user = userModel;

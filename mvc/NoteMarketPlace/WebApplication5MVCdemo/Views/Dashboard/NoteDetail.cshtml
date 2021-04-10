@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "NoteDetail";
     ViewBag.confirmationBoxForPayment = "Are you sure you want to download this Paid note. Please confirm.";
-    Layout = "~/Views/Shared/_LayoutSignedup.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section id="note-detail-top">
@@ -64,7 +64,7 @@
                         </div>
                     }
 
-                    @if (Model.sellNote.Country1.Name != null)
+                    @if (Model.sellNote.Country != null)
                     {
                         <div class="col-md-4 col-sm-5 col-4 text-left">
                             <span class="note-top-title">Country:</span>
@@ -312,39 +312,4 @@
         </div>
     </div>
 </section>
-
-<!-- Thanks Pop up -->
-<!-- Modal -->
-@*<div class="modal fade" id="thanksPopupModal" tabindex="-1" role="dialog" aria-labelledby="thanksPopupModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container thanks-popup">
-                        <div class="row">
-                            <div class="col-md-12 col-12 remove-height">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="col-md-12 col-12 text-center">
-                                <img src="~/images/Notes-Details/SUCCESS.png" class="img-fluid text-center" alt="">
-                            </div>
-                            <div class="col-md-12 col-12 text-center">
-                                <h4>Thank you for Purchasing!</h4>
-                            </div>
-                            <div class="col-md-12 col-12 popup-text">
-                                <h5>Dear Smith,</h5>
-                                <p>As this is paid notes - you need to pay to seller Rahil Shah Offline. We will send him an email that you want to download this note. He may contact you further for payment process completion.</p>
-                                <p>In case, you have urgency,<br>Please contact us on +9195377345959 .</p>
-                                <p>Once he receives the payment and acknowledge us - selected notes you can see over my downloads tab for download.</p>
-                                <p>Have a good day.</p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
 

@@ -66,35 +66,12 @@ namespace WebApplication5MVCdemo.Controllers
             using (var zip = new ZipFile())
             {
                 zip.AddDirectory(Server.MapPath(filePath));
-
-                //zip.AddEntry("file1.txt", "content1");
-                //zip.AddEntry("file2.txt", "content2");
                 zip.Save(outputStream);
             }
 
             outputStream.Position = 0;
             return File(outputStream.ToArray(), "application/zip", noteISPaidOrNot.Title + ".zip");
-
-            //for single note download code below
-
-            //string fullName = Server.MapPath(filePath);
-
-            //byte[] fileBytes = GetFile(fullName);
-
-            //return File(
-            //       fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, filePath);
         }
-
-        byte[] GetFile(string s)
-        {
-            System.IO.FileStream fs = System.IO.File.OpenRead(s);
-            byte[] data = new byte[fs.Length];
-            int br = fs.Read(data, 0, data.Length);
-            if (br != fs.Length)
-                throw new System.IO.IOException(s);
-            return data;
-        }
-
         public ActionResult DeleteReview(int? ID)
         {
             if (ID != null)

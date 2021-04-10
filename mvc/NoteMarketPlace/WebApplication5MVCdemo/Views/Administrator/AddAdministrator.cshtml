@@ -15,39 +15,23 @@
                     <div class="block col-12">
                         @Html.LabelFor(x => x.FirstName)
                         @Html.TextBoxFor(x => x.FirstName,new { placeholder = "Enter your First Name",@class="form-control", required= "required"})
-                        @*<label for="inputMyProfileFirstName">First Name *</label>
-                        <input class="form-control" placeholder="Enter your First Name" type="text" id="inputMyProfileFirstName" required>*@
                     </div>
                     <div class="block col-12">
                         @Html.LabelFor(x => x.LastName)
                         @Html.TextBoxFor(x => x.LastName, new { placeholder = "Enter your Last Name", @class = "form-control", required = "required" })
-                        @*<label for="inputMyProfileLastName">Last Name *</label>
-                        <input class="form-control" placeholder="Enter your Last Name" type="text" id="inputMyProfileLastName" required>*@
                     </div>
                     <div class="block col-12">
                         @Html.LabelFor(x => x.Email)
                         @Html.TextBoxFor(x => x.Email, new { placeholder = "Enter your Email Address", @class = "form-control", required = "required" })
-                        @*<label for="inputMyProfileEmail">Email Address *</label>
-                        <input class="form-control" placeholder="Enter your Email Address" type="Email" id="inputMyProfileEmail" required>*@
                     </div>
                     <div class="block col-sm-3 col-6">
                         @Html.LabelFor(x => x.PhoneNumber)
-                        @Html.DropDownListFor(x => x.CountryCode, new SelectList(Model.countries, "CountryCode", "CountryCode"), "Select Country Code", new { @class = "form-control" })
-                        @*<label for="inputMyProfilePhoneNumberCountryCode">Phone Number</label>
-                        <select id="inputMyProfilePhoneNumberCountryCode" class="form-control">
-                            <option selected>+91</option>
-                            <option>+92</option>
-                            <option>+93</option>
-                            <option>+94</option>
-                        </select>*@
+                        @Html.DropDownListFor(x => x.CountryCode, new SelectList(Model.countries, "CountryCode", "CountryCode"), "Select Country Code", new { @class = "form-control" ,required = "required" })
                     </div>
                     <div class="block col-sm-9 col-12 phone-number">
                         <label class="label-hide" for="inputMyProfilePhoneNumber"> <br> </label>
-                        @Html.TextBoxFor(x => x.PhoneNumber, new { placeholder = "Enter your Phone Number", @class = "form-control" })
-                        @*<input type="text" class="form-control" id="inputMyProfilePhoneNumber" placeholder="Enter your phone number">*@
+                        @Html.TextBoxFor(x => x.PhoneNumber, new { placeholder = "Enter your Phone Number", @class = "form-control" , required = "required" })
                     </div>
-
-                    <!-- Not working proper because there is no form tag -->
                     <button type="submit" class="btn btn-submit">SUBMIT</button>
                 </div>
             }
