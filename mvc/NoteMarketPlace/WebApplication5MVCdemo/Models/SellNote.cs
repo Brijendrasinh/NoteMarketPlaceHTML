@@ -48,6 +48,9 @@ namespace WebApplication5MVCdemo.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
+        public Nullable<int> RejectedBy { get; set; }
+        public string AttachmentSize { get; set; }
     
         public virtual Country Country1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -63,5 +66,7 @@ namespace WebApplication5MVCdemo.Models
         public virtual ICollection<SellNoteAttachment> SellNoteAttachments { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        public virtual User User2 { get; set; }
+        public virtual User User3 { get; set; }
     }
 }

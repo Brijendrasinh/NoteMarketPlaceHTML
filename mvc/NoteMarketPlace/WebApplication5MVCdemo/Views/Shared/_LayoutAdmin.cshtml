@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication5MVCdemo.Models
+@using WebApplication5MVCdemo.CommanClasses
+
+@{ 
+    NoteMarketPlaceEntities db = new NoteMarketPlaceEntities();
+}
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -8,9 +16,9 @@
     <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/Content/admin/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/admin/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    
+
     <link href="~/Content/admin/css/custom.css" rel="stylesheet" />
-    <link href="~/Content/admin/css/header.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/css/header.css" rel="stylesheet" />
     <link href="~/Content/admin/css/responsive-layout.min.css" rel="stylesheet" />
     <link href="~/Content/admin/css/responsive-header-footer.min.css" rel="stylesheet" />
 </head>
@@ -26,7 +34,7 @@
 
                 <div class="navbar-header">
                     <!-- Logo -->
-                    <a href="#" class="navbar-brand">
+                    <a href="@Url.Action("Dashboard","Admin")" class="navbar-brand">
                         <img src="~/Admin-Images/images/logo.png" />
                     </a>
                 </div>
@@ -35,64 +43,93 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ml-auto" id="main-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                            <a class="nav-link" href="@Url.Action("Dashboard","Admin")">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a role="button" class="nav-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Notes
-                                </button>
+                                </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <a href="notes-under-review.html" class="dropdown-item" role="button">Notes Under Review</a>
-                                    <a href="published-notes.html" class="dropdown-item" role="button">Publishd Notes</a>
-                                    <a href="download-notes.html" class="dropdown-item" role="button">Downloaded Notes</a>
-                                    <a href="rejected-notes.html" class="dropdown-item" role="button">Rejected Notes</a>
+                                    <a href="@Url.Action("NotesUnderReview","NotesUnderReview")" class="dropdown-item" role="button">Notes Under Review</a>
+                                    <a href="@Url.Action("PublishedNotes","Admin")" class="dropdown-item" role="button">Publishd Notes</a>
+                                    <a href="@Url.Action("DownloadedNotes","Admin")" class="dropdown-item" role="button">Downloaded Notes</a>
+                                    <a href="@Url.Action("RejectedNotes","Admin")" class="dropdown-item" role="button">Rejected Notes</a>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="members.html">Members</a>
+                            <a class="nav-link" href="@Url.Action("Members","AdminMembers")">Members</a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a role="button" class="nav-link" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Reports
-                                </button>
+                                </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                                    <a href="spam-reports.html" class="dropdown-item" role="button">Spam Reports</a>
+                                    <a href="@Url.Action("SpamReport","Report")" class="dropdown-item" role="button">Spam Reports</a>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a role="button" class="nav-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Settings
-                                </button>
+                                </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <a href="manage-system-configuration.html" class="dropdown-item" role="button">Manage System Configuration</a>
-                                    <a href="manage-administrator.html" class="dropdown-item" role="button">Manage Administrator</a>
-                                    <a href="manag-category.html" class="dropdown-item" role="button">Manage Category</a>
-                                    <a href="manage-type.html" class="dropdown-item" role="button">Manage Type</a>
-                                    <a href="manage-contry.html" class="dropdown-item" role="button">Manage Countries</a>
+
+                                    @if (Session["ID"] != null)
+                                    {
+                                        int id = Convert.ToInt32(Session["ID"]);
+                                        int SuperAdmin = Convert.ToInt32(Enums.UserRoleId.SuperAdmin);
+                                        User user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+                                        if (user.RoleID == SuperAdmin)
+                                        {
+                                            <a href="@Url.Action("ManageSystemConfiguration","SystemConfiguration")" class="dropdown-item" role="button">Manage System Configuration</a>
+                                            <a href="@Url.Action("ManageAdministrator","Administrator")" class="dropdown-item" role="button">Manage Administrator</a>
+                                        }
+                                    }
+
+                                    <a href="@Url.Action("ManageCategory","Category")" class="dropdown-item" role="button">Manage Category</a>
+                                    <a href="@Url.Action("ManageType","Type")" class="dropdown-item" role="button">Manage Type</a>
+                                    <a href="@Url.Action("ManageCountry","Country")" class="dropdown-item" role="button">Manage Countries</a>
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Admin-Images/images/user-img.png" alt="pp">
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <a href="my-profile.html" class="dropdown-item" role="button">Update Profile</a>
-                                    <a href="../front/change-password.html" class="dropdown-item" role="button">Change Password</a>
-                                    <a href="login.html" class="dropdown-item logout" role="button">LOGOUT</a>
+                        @if (Session["ID"] != null)
+                        {
+                            int userid = Convert.ToInt32(Session["ID"]);
+                            UserProfile user = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @if (user != null)
+                                        {
+                                            if (user.ProfilePicture != null)
+                                            {
+                                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Members/@userid/@user.ProfilePicture" alt="pp">
+                                            }
+                                            else
+                                            {
+                                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="dp">
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="dp">
+                                        }
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a href="@Url.Action("Profiles", "AdminProfile")" class="dropdown-item" role="button">Update Profile</a>
+                                        <a href="@Url.Action("ChangePassword", "Account")" class="dropdown-item" role="button">Change Password</a>
+                                        <a href="@Url.Action("Logout", "Account")" class="dropdown-item logout" role="button">LOGOUT</a>
 
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="btn home-nav-btn" href="login.html" title="Login" role="button">Logout</a>
+                            <a class="btn home-nav-btn" href="@Url.Action("Logout","Account")" title="Login" role="button">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -105,7 +142,7 @@
 
                     <div id="mobile-nav-content">
                         <ul class="nav flex-column">
-                            <li><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+                            <li><a class="nav-link" href="@Url.Action("Dashboard","Admin")">Dashboard</a></li>
                             <li>
                                 <div class="dropdown">
                                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,10 +150,10 @@
                                         <span><i class="fa fa-caret-down"></i></span>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <a href="notes-under-review.html" class="dropdown-item" role="button">Notes Under Review</a>
-                                        <a href="published-notes.html" class="dropdown-item" role="button">Publishd Notes</a>
-                                        <a href="download-notes.html" class="dropdown-item" role="button">Downloaded Notes</a>
-                                        <a href="rejected-notes.html" class="dropdown-item" role="button">Rejected Notes</a>
+                                        <a href="@Url.Action("NotesUnderReview","NotesUnderReview")" class="dropdown-item" role="button">Notes Under Review</a>
+                                        <a href="@Url.Action("PublishedNotes","Admin")" class="dropdown-item" role="button">Publishd Notes</a>
+                                        <a href="@Url.Action("DownloadedNotes","Admin")" class="dropdown-item" role="button">Downloaded Notes</a>
+                                        <a href="@Url.Action("RejectedNotes","Admin")" class="dropdown-item" role="button">Rejected Notes</a>
                                     </div>
                                 </div>
                             </li>
@@ -128,7 +165,7 @@
                                         <span><i class="fa fa-caret-down"></i></span>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                                        <a href="spam-reports.html" class="dropdown-item" role="button">Spam Reports</a>
+                                        <a href="@Url.Action("SpamReport","Report")" class="dropdown-item" role="button">Spam Reports</a>
                                     </div>
                                 </div>
                             </li>
@@ -139,30 +176,57 @@
                                         <span><i class="fa fa-caret-down"></i></span>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <a href="manage-system-configuration.html" class="dropdown-item" role="button">Manage System Configuration</a>
-                                        <a href="manage-administrator.html" class="dropdown-item" role="button">Manage Administrator</a>
-                                        <a href="manag-category.html" class="dropdown-item" role="button">Manage Category</a>
-                                        <a href="manage-type.html" class="dropdown-item" role="button">Manage Type</a>
-                                        <a href="manage-contry.html" class="dropdown-item" role="button">Manage Countries</a>
+                                        @if (Session["ID"] != null)
+                                        {
+                                            int id = Convert.ToInt32(Session["ID"]);
+                                            int SuperAdmin = Convert.ToInt32(Enums.UserRoleId.SuperAdmin);
+                                            User user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+                                            if (user.RoleID == SuperAdmin)
+                                            {
+                                                <a href="@Url.Action("ManageSystemConfiguration","SystemConfiguration")" class="dropdown-item" role="button">Manage System Configuration</a>
+                                                <a href="@Url.Action("ManageAdministrator","Administrator")" class="dropdown-item" role="button">Manage Administrator</a>
+                                            }
+                                        }
+                                        <a href="@Url.Action("ManageCategory","Category")" class="dropdown-item" role="button">Manage Category</a>
+                                        <a href="@Url.Action("ManageType","Type")" class="dropdown-item" role="button">Manage Type</a>
+                                        <a href="@Url.Action("ManageCountry","Country")" class="dropdown-item" role="button">Manage Countries</a>
                                     </div>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <div class="dropdown">
-                                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Admin-Images/images/user-img.png" alt="pp">
-                                        <span><i class="fa fa-caret-down"></i></span>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <a href="my-profile.html" class="dropdown-item" role="button">Update Profile</a>
-                                        <a href="../front/change-password.html" class="dropdown-item" role="button">Change Password</a>
-                                        <a href="login.html" class="dropdown-item" role="button">LOGOUT</a>
+                            @if (Session["ID"] != null)
+                            {
+                                int userid = Convert.ToInt32(Session["ID"]);
+                                UserProfile user = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @if (user != null)
+                                            {
+                                                if (user.ProfilePicture != null)
+                                                {
+                                                    <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Members/@userid/@user.ProfilePicture" alt="pp">
+                                                }
+                                                else
+                                                {
+                                                    <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="dp">
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="dp">
+                                            }
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <a href="@Url.Action("Profiles", "AdminProfile")" class="dropdown-item" role="button">Update Profile</a>
+                                            <a href="@Url.Action("ChangePassword", "Account")" class="dropdown-item" role="button">Change Password</a>
+                                            <a href="@Url.Action("Logout", "Account")" class="dropdown-item logout" role="button">LOGOUT</a>
 
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            }
                             <li class="nav-item">
-                                <a class="btn home-nav-btn" href="login.html" title="Logout" role="button">Logout</a>
+                                <a class="btn home-nav-btn" href="@Url.Action("Logout","Account")" title="Logout" role="button">Logout</a>
                             </li>
                         </ul>
                     </div>

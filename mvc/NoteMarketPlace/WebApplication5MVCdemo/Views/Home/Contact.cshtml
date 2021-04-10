@@ -32,7 +32,7 @@
                                 else
                                 {
                                     @Html.LabelFor(x => x.FullName)
-                                    @Html.TextBoxFor(m => m.FullName, new { placeholder = "Enter your full name", @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.FullName, new { placeholder = "Enter your full name", @class = "form-control", required = "required" })
                                     @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                                 }
 
@@ -52,7 +52,7 @@
                                 else
                                 {
                                     @Html.LabelFor(x => x.EmailId)
-                                    @Html.TextBoxFor(m => m.EmailId, new { placeholder = "Enter your full name", @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.EmailId, new { placeholder = "Enter your full name", @class = "form-control", required = "required" })
                                     @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "text-danger" })
                                 }
 
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-md-12 col-12">
                             @Html.LabelFor(x => x.Subject)
-                            @Html.TextBoxFor(m => m.Subject, new { placeholder = "Enter your Subject", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Subject, new { placeholder = "Enter your Subject", @class = "form-control", required = "required" })
                             @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
                             @*<label for="inputContactUsSubject">Subject *</label>
                                 <input type="text" class="form-control" id="inputContactUsSubject" placeholder="Enter your subject" required>*@
@@ -75,7 +75,7 @@
                     <div class="row">
                         <div class="col-md-12 col-12 padding-top-hide">
                             @Html.LabelFor(x => x.Comment)
-                            @Html.TextAreaFor(m => m.Comment, new { placeholder = "Comments...", rows = "11", cols = "50", @class = "comment form-control" })
+                            @Html.TextAreaFor(m => m.Comment, new { placeholder = "Comments...", rows = "11", cols = "50", @class = "comment form-control", required = "required" })
                             @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
                             @*<label for="inputContactUsComment">Comments / Questions *</label>
                                 <textarea type="text" class="comment form-control" id="inputContactUsComment" placeholder="Comments..." cols="50" rows="11" required></textarea>*@

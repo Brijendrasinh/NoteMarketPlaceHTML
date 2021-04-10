@@ -18,6 +18,9 @@ namespace WebApplication5MVCdemo.CommanClasses
         public string Publisher { get; set; }
         public DateTime PublishedDate { get; set; }
         public int NumberOfDownload { get; set; }
-        public IEnumerable<getDahboardData_Result> getDahboardData_Results { get; set; } 
+        public IEnumerable<NewGetDashboadrd_Result> getDahboardData_Results { get; set; } 
+        public int NotesUnderReviewCount { get; set; }
+        public int NewDownloadCount { get; set; }
+        public int NewRegistrationCount { get; set; }
     }
 }

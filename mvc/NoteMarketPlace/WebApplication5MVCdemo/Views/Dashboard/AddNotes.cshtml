@@ -1,8 +1,6 @@
-﻿@using NoteMarketPlace.CommanClasses
+﻿@model WebApplication5MVCdemo.CommanClasses.SellNotesAllDropdownList
 
-@model NoteMarketPlace.CommanClasses.SellNotesAllDropdownList
 
-@*@model WebApplication5MVCdemo.Models.SellNote*@
 
 @{
     ViewBag.Title = "AddNotes";
@@ -32,13 +30,13 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Title)
-                    @Html.TextBoxFor(m => m.SellNote.Title, new { placeholder = "Enter your Notes Title", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.SellNote.Title, new { placeholder = "Enter your Notes Title", @class = "form-control", required = "required" })
                     @*<label for="inputAddNoteTitle">Title *</label>
                         <input type="text" class="form-control" id="inputAddNoteTitle" placeholder="Enter your notes title" required>*@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.Category)
-                    @Html.DropDownListFor(m => m.SellNote.Category, new SelectList(Model.NoteCategories, "ID", "Name"), "Select Category", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.SellNote.Category, new SelectList(Model.NoteCategories, "ID", "Name"), "Select Category", new { @class = "form-control", required = "required" })
                     @*<label for="inputAdNoteCategory">Category *</label>
                         <select id="inputAddNoteCategory" class="form-control" required>
                             <option selected disabled value="">Select your category</option>
@@ -52,13 +50,13 @@
                     @Html.LabelFor(m => m.SellNote.DisplayPicture)
                     @*@Html.TextBoxFor(m => m.SellNote.DisplayPicture, new { placeholder = "Enter your Notes Title", @class = "form-control" })
                         <label for="inputAdNoteDisplayPicture">Display Picture</label>*@
-                    <input type="file" class="upload form-control" name="DisplayPictureFile">
+                    <input type="file" class="upload form-control" name="DisplayPictureFile" id="SellNote_DisplayPicture">
                     <!--  <span><img src="images/User-Profile/upload.png" alt="">Upload a picture</span> -->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @*@Html.LabelFor(m => m.SellNote)*@
                     <label for="inputAdNoteUploadNotes">Upload Notes *</label>
-                    <input type="file" class="upload upload-note form-control" id="inputAdNoteUploadNotes" name="UploadedPdfFile" required>
+                    <input type="file" class="upload upload-note form-control" id="inputAdNoteUploadNotes" name="UploadedPdfFile" multiple required>
                     <!--  <span><img src="Front_images/images/upload-note.png" alt=""></span>  -->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -80,7 +78,7 @@
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                     @Html.LabelFor(m => m.SellNote.Discription)
-                    @Html.TextAreaFor(m => m.SellNote.Discription, new { placeholder = "Enter your Discription", @class = "form-control" })
+                    @Html.TextAreaFor(m => m.SellNote.Discription, new { placeholder = "Enter your Discription", @class = "form-control", required = "required" })
                     @*<label for="inputAdNoteDescription">Description *</label>
                         <textarea rows="6" cols="50" class="form-control" id="inputAdNoteDescription" placeholder="Enter your Description" required></textarea>*@
 
@@ -159,14 +157,14 @@
 
 
                             <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
-                                @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free" })
+                                @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free" , onchange="radioValue(this)"@*, required = "required"*@ })
                                 <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
                                 @*<input type="radio" value="false" id="customRadioFree" name="customRadioInline1" class="custom-control-input" onclick="document.getElementById('YourRadioButtonValue').value = this.value;" >
                                     <label style="margin-left: 50px" class="custom-control-label" for="customRadioFree" >Free</label>*@
 
                             </div>
                             <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
-                                @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid" })
+                                @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)"@*, required = "required"*@ })
                                 <label class="custom-control-label" for="paid">Paid</label>
                                 @*<input type="radio" value="true" id="customRadioPaid" name="customRadioInline1" class="custom-control-input" onclick="document.getElementById('YourRadioButtonValue').value = this.value;">
                                         <label class="custom-control-label" for="customRadioPaid" >Paid</label>
@@ -174,7 +172,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 @Html.LabelFor(m => m.SellNote.SellingPrice)
-                                @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control" })
+                                @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
                                 @*<label for="inputAddNoteSellPrice">Sell Price *</label>
                                     <input type="text" id="inputAddNoteSellPrice" placeholder="Enter your price" class="form-control">*@
                             </div>
@@ -183,12 +181,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <label for="inputAddNotePreview">Note Preview</label>
                         <div class="note-preview">
-                            <!--  <span>
-                                                            <img src="images/User-Profile/upload.png" alt="">
-                            -->
                             <input type="file" id="inputAddNotePreview" name="PreviewFile" placeholder="Upload a file" class="upload note-preview-input form-control">
-                            <!-- <p style="margin-left: 44%;margin-top: -50px;color: #d1d1d1;">Upload a file</p>
-                            </span> -->
                         </div>
                     </div>
                     <button type="submit" name="SavePublish" value="save" class="btn btn-addnote-save">SAVE</button>
@@ -199,4 +192,20 @@
         </div>
     </section>
 
+}
+
+
+@section scripts{
+    <script>
+
+        function radioValue(radio) {
+            if (radio.value == "false") {
+                $('#inputAddNotePreview').prop('required', false);
+            }
+            else {
+                $('#inputAddNotePreview').prop('required', true);
+            }
+        }
+        
+    </script>    
 }

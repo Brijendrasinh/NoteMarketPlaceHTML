@@ -21,7 +21,7 @@
                         
                         <div class="form-group email">
                             @Html.LabelFor(m => m.EmailID)
-                            @Html.TextBoxFor(m => m.EmailID, new { placeholder = "Enter your Email", @class = "form-control form-control-login" })
+                            @Html.TextBoxFor(m => m.EmailID, new { placeholder = "Enter your Email", @class = "form-control form-control-login", required = "required" })
                             @Html.ValidationMessageFor(m => m.EmailID,"",new { @class = "text-danger" })
                             @*<label for="exampleInputLoginEmail">Email</label>
                 <input type="email" class="form-control form-control-login" id="exampleInputLoginEmail" aria-describedby="emailLoginHelp" placeholder="Enter your email address" required>*@
@@ -29,13 +29,13 @@
                         <div class="form-group password">
                             @Html.LabelFor(m => m.Password)
                             <label class="float-right"><a href="@Url.Action("ForgotPassword","Account")">Forgot Password?</a></label>
-                            @Html.PasswordFor(m => m.Password, new { placeholder = "Enter your Password", @class = "form-control form-control-login" })
+                            @Html.PasswordFor(m => m.Password, new { placeholder = "Enter your Password", @class = "form-control form-control-login", required = "required" })
 
                             @*<label for="exampleInputLoginPassword">Password</label>
 
         <input type="password" class="form-control form-control-login" id="exampleInputLoginPassword" placeholder="Enter your Password" required>*@
 
-                            <span toggle="#Password" class="field-icon toggle-password"><img src="~/Content/images/pre-login/eye.png" alt="eye"></span>
+                            <span toggle="#Password" class="field-icon toggle-password"><img src="~/images/pre-login/eye.png" alt="eye"></span>
 
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>

@@ -1,0 +1,69 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.DownloadedNotesViewModel
+
+
+<div class="col-12 table-scroll" id="DownloadedNotesPartialView">
+    <table class="table" id="DownloadedNotesDataTable">
+        <thead>
+            <tr>
+                <th class="srno">SR NO.</th>
+                <th>NOTE TITLE</th>
+                <th>CATEGORY</th>
+                <th>BUYER</th>
+                <th>SELLER</th>
+                <th>SELL TYPE</th>
+                <th>PRICE</th>
+                <th>Downloaded Date/Time</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model.getDownloadedNotesData_Results)
+            {
+                <tr>
+                    <td class="srno">@data.ID</td>
+                    <td class="note-title">
+                        <a href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.NoteID})" class="links">
+                            @data.NoteTitle
+                        </a>
+                    </td>
+                    <td>@data.NoteCategory</td>
+                    <td>
+                        @data.BuyerName
+                        <a href="@Url.Action("MemberDetails","AdminMembers",new { SellerID = data.BuyerID})">
+                            <img src="~/Admin-Images/images/eye.png" alt="">
+                        </a>
+                    </td>
+                    <td>
+                        @data.SellerName
+                        <a href="@Url.Action("MemberDetails","AdminMembers",new { SellerID = data.SellerID})">
+                            <img src="~/Admin-Images/images/eye.png" alt="">
+                        </a>
+                    </td>
+                    @if (data.SellType == true)
+                    {
+                        <td>Paid</td>
+                    }
+                    else
+                    {
+                        <td>Free</td>
+                    }
+
+                    <td>$@data.PurchasedPrice</td>
+                    <td>@data.AttachmentDownloadDate</td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/Admin-Images/images/dots.png" alt="">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","NoteDetail",new { NoteID = data.NoteID})">Download Notes</a>
+                                <a class="dropdown-item" role="button" href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.NoteID})">View More Details</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

@@ -10,7 +10,7 @@ namespace WebApplication5MVCdemo.CommanClasses
     public class NotesUnderReviewViewModel
     {
         public IEnumerable<SellNote> sellNotes { get; set; }
-        public IEnumerable<GetNotesUnderReviewData_Result> getNotesUnderReviewData_Results { get; set; }
+        public IEnumerable<NewGetNotesUnderReviewData_Result> getNotesUnderReviewData_Results { get; set; }
         public List<SelectListItem> SellerName { get; set; }
         public int Seller { get; set; }
     }

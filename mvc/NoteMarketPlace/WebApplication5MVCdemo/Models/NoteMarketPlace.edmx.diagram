@@ -39,6 +39,8 @@
         <AssociationConnector Association="NoteMarketPlaceModel.FK_UserProfile_Users" ManuallyRouted="false" />
         <AssociationConnector Association="NoteMarketPlaceModel.FK_Users_UserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="NoteMarketPlaceModel.FK_Downloads_Downloads" />
+        <AssociationConnector Association="NoteMarketPlaceModel.FK_SellNotes_Users2" />
+        <AssociationConnector Association="NoteMarketPlaceModel.FK_SellNotes_Users3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

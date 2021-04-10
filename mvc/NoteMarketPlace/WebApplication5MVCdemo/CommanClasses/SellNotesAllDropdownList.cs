@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication5MVCdemo.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication5MVCdemo.CommanClasses
 {
@@ -14,5 +15,6 @@ namespace WebApplication5MVCdemo.CommanClasses
         public IEnumerable<NoteType> NoteTypes { get; set; }
         public IEnumerable<Country> Countries { get; set; }
         public String IsPaidOrNot { get; set; }
+
     }
 }

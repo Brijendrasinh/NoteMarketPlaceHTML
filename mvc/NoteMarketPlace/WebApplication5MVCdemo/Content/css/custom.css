@@ -24,6 +24,10 @@ button:focus {
     text-decoration: none;
 }
 
+#DivSearchNoteView > h5 {
+    color: #6255a5;
+}
+
 .note-title a.links {
     color: #6255a5;
 }

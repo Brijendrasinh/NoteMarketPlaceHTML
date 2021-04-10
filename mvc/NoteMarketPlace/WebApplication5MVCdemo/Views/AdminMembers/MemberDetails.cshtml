@@ -1,0 +1,163 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.AdminMemberDetailsViewModel
+@using WebApplication5MVCdemo.CommanClasses
+
+@{
+    ViewBag.Title = "MemberDetails";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (Model.userProfile != null)
+{
+    <div class="container members-detail" style="margin-top: 70px">
+        <div class="row" style="border-bottom: 1px solid #d1d1d1">
+            <div class="col-12">
+                <h3>Member Details</h3>
+            </div>
+
+            <div class="col-xl-6 col-12">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-12">
+                        @if (Model.userProfile.ProfilePicture != null)
+                        {
+                            <img class="img-fluid" src="~/Members/@Model.user.ID/@Model.userProfile.ProfilePicture" alt="">
+                        }
+                        else
+                        {
+                            <img src="@ConstantStrings.Default_Profileimage_path" class="img-fluid" />
+                        }
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-12 member-detail-info">
+                        <div class="row right-border" style="padding-right: 10px">
+                            <div class="col-5 title">First Name:</div>
+                            <div class="col-7 detail">@Model.user.FirstName</div>
+                            <div class="col-5 title">Last Name:</div>
+                            <div class="col-7 detail">@Model.user.LastName</div>
+                            <div class="col-5 title">Email:</div>
+                            <div class="col-7 detail">@Model.user.EmailID</div>
+                            <div class="col-5 title">DOB:</div>
+                            <div class="col-7 detail">@Model.userProfile.DOB</div>
+                            <div class="col-5 title">Phone Number:</div>
+                            <div class="col-7 detail">@Model.userProfile.CountryCode @Model.userProfile.PhoneNumber</div>
+                            <div class="col-5 title">College/University:</div>
+                            <div class="col-7 detail">@Model.userProfile.University</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-12">
+                <div class="row">
+                    <div class="offset-xl-1 col-12 member-detail-info">
+                        <div class="row">
+                            <div class="col-sm-4 col-5 title">Address 1:</div>
+                            <div class="col-sm-8 col-7 detail">@Model.userProfile.AddressLine1</div>
+                            <div class="col-sm-4 col-5 title">Address 2:</div>
+                            <div class="col-sm-8 col-7 detail">@Model.userProfile.AddressLine2</div>
+                            <div class="col-sm-4 col-5 title">City:</div>
+                            <div class="col-sm-8 col-7 detail">@Model.userProfile.City</div>
+                            <div class="col-sm-4 col-5 title">State:</div>
+                            <div class="col-sm-8 col-7 detail">@Model.userProfile.State</div>
+                            <div class="col-sm-4 col-5 title">Country:</div>
+                            <div class="col-sm-8 col-7 detail">@Model.userProfile.Country</div>
+                            <div class="col-sm-4 col-5 title">Zip Code:</div>
+                            <div class="col-sm-8 col-7 detail">@Model.userProfile.ZipCode</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="container members-detail" style="margin-top: 85px">
+        <p>There is No Profile Detail Filled by Member</p>
+    </div>
+}
+
+<div class="container members-detail-bottom">
+    <div class="row">
+        <div class="col-12">
+            <h6>Notes</h6>
+        </div>
+        <div class="col-12 table-scroll">
+            <table class="table" id="MemberDetailsDataTable">
+                <thead>
+                    <tr>
+                        <th class="srno">SR NO.</th>
+                        <th>NOTE TITLE</th>
+                        <th>CATEGORY</th>
+                        <th>STATUS</th>
+                        <th class="no1">DOWNLOADED NOTES</th>
+                        <th class="no1">TOTAL EARNINGS</th>
+                        <th>DATE ADDED</th>
+                        <th>PUBLISHED DATE</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model.getMembersDetails_Results)
+                    {
+                        <tr>
+                            <td class="srno">@data.ID</td>
+                            <td class="note-title">
+                                <a href="@Url.Action("NoteDetail", "NoteDetail", new { NoteID = data.ID })" class="links">
+                                    @data.Title
+                                </a>
+                            </td>
+                            <td>@data.Category</td>
+                            <td>@data.Status</td>
+                            @if (data.NumberOfDownload != null)
+                            {
+                                <td class="no">
+                                    <a href="@Url.Action("DownloadedNotes", "Admin", new { sellerid = Model.SellerID })" class="links">
+                                        @data.NumberOfDownload
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="no">0</td>
+                            }
+                            @if (data.TotalEarnings != null)
+                            {
+                                <td class="no1">$@data.TotalEarnings</td>
+                            }
+                            else
+                            {
+                                <td class="no1">$0</td>
+                            }
+                            <td>@data.CreatedDate</td>
+                            @if (data.Status == "Approved")
+                            {
+                                <td>@data.PublishedDate</td>
+                            }
+                            else
+                            {
+                                <td>N A</td>
+                            }
+
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/Admin-Images/images/dots.png" alt="">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                        <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote", "NoteDetail", new { NoteID = data.ID })">Download Notes</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $("#MemberDetailsDataTable").DataTable();
+        $('#MemberDetailsDataTable').DataTable().page.len(1).draw();
+    </script>
+}

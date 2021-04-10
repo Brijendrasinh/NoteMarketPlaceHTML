@@ -12,7 +12,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
-
 using WebApplication5MVCdemo.CommanClasses;
 using System.Data.SqlClient;
 using System.Web.Security;
@@ -42,26 +41,26 @@ namespace NoteMarketPlace.Controllers
                     var passwordCorrectOrNot = db.Users.Where(a => a.EmailID.Equals(user.EmailID)).FirstOrDefault();
                     if (passwordCorrectOrNot.Password == user.Password)
                     {
-                        var userExistOrNot = db.Users.Where(a => a.EmailID.Equals(user.EmailID) && a.Password.Equals(user.Password) && a.IsEmailVerified == true).FirstOrDefault();
+                        var userExistOrNot = db.Users.Where(a => a.EmailID.Equals(user.EmailID) && a.Password.Equals(user.Password) && a.IsEmailVerified == true && a.IsActive == true).FirstOrDefault();
                         if (userExistOrNot != null)
                         {
                             Session["ID"] = userExistOrNot.ID.ToString();
                             Session["EmailID"] = userExistOrNot.EmailID.ToString();
 
 
-                            //  Remember me functionality is remail 
+                            //  Remember me functionality is remain 
                             //  FormsAuthentication.SetAuthCookie(user.EmailID,true);
 
                             UserProfile userProfileUpdated = db.UserProfiles.Where(x => x.UserID == userExistOrNot.ID).FirstOrDefault();
-                            if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.SuperAdmin))
+                            if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.SuperAdmin) || userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin))
                             {
-                                return RedirectToAction("Index", "Admin");
+                                return RedirectToAction("Dashboard", "Admin");
                             }
-                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member) && userProfileUpdated != null || userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin) && userProfileUpdated != null)
+                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member) && userProfileUpdated != null )
                             {
                                 return RedirectToAction("Index", "SearchNotes");
                             }
-                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member) && userProfileUpdated == null || userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin) && userProfileUpdated == null)
+                            else if (userExistOrNot.RoleID == Convert.ToInt32(Enums.UserRoleId.Member) && userProfileUpdated == null )
                             {
                                 return RedirectToAction("MyProfile", "Profile");
                             }
@@ -173,7 +172,7 @@ namespace NoteMarketPlace.Controllers
                 throw;
             }
 
-            return View();
+            return RedirectToAction("Login","Account");
         }
 
         // GET: /Account/Signup
@@ -341,6 +340,7 @@ namespace NoteMarketPlace.Controllers
                     {
                         throw;
                     }
+                    return RedirectToAction("Login", "Account");
                 }
 
                 else
@@ -348,7 +348,7 @@ namespace NoteMarketPlace.Controllers
                     ModelState.AddModelError("OldPassword", "Password is Not Match try Again");
                     return View(cp);
                 }
-                return RedirectToAction("Index", "Home");
+  
             }
             return View(cp);
         }

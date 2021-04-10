@@ -1,0 +1,84 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.ManageTypeViewModel
+
+
+@{
+    ViewBag.Title = "ManageType";
+    ViewBag.DeleteType = "Are you sure you want to make this type inactive?";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container manage-admin">
+    <div class="row">
+        <div class="col-12">
+            <h3>Manage Type</h3>
+        </div>
+        <div class="padding-top-hide col-xl-5 col-lg-4 col-md-3 col-sm-3 col-12 text-left category">
+            <a href="@Url.Action("AddType","Type")" role="button" class="btn">ADD TYPE</a>
+        </div>
+        <div class="padding-top-hide pl-0 m-left-auto col-xl-7 col-lg-8 col-md-9 col-sm-9 col-12 row search-side">
+            <span class="NURandManageAdminSpan"><img src="~/Admin-Images/images/search-icon.png" alt=""></span>
+            <input class="col-sm-7 col-7 m-left-auto" type="text" id="inputSearch" placeholder="Search">
+            <button type="submit" class="col-sm-3 col-3 btn btn-search">
+                SEARCH
+            </button>
+        </div>
+
+        <div class="col-12 table-scroll">
+            <table class="table" id="TypeDataTable">
+                <thead>
+                    <tr>
+                        <th class="srno">SR NO.</th>
+                        <th>TYPE</th>
+                        <th>DESCRIPTION</th>
+                        <th>DATE ADDED</th>
+                        <th>ADDED BY</th>
+                        <th>ACTIVE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model.getNoteTypeData_Results)
+                    {
+                        <tr>
+                            <td class="srno">@data.ID</td>
+                            <td>@data.Type</td>
+                            <td class="cc">@data.Description</td>
+                            <td>@data.DateAdded</td>
+                            <td>@data.AddedBy</td>
+                            @if (data.Active == true)
+                            {
+                                <td>yes</td>
+                            }
+                            else
+                            {
+                                <td>no</td>
+                            }
+                            <td>
+                                <a href="@Url.Action("AddType","Type",new { ID = data.ID})">
+                                    <img src="~/Admin-Images/images/edit.png" alt="">
+                                </a>
+                                <a href="@Url.Action("DeleteType","Type",new { ID = data.ID})" onclick="return confirm('@ViewBag.DeleteType')">
+                                    <img src="~/Admin-Images/images/delete.png" alt="">
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        $("#TypeDataTable").DataTable();
+        oTable = $('#TypeDataTable').DataTable();
+        $('#inputSearch').keyup(function () {
+            oTable.search($(this).val()).draw();
+        });
+        $('#TypeDataTable').DataTable().page.len(1).draw();
+    </script>
+
+}

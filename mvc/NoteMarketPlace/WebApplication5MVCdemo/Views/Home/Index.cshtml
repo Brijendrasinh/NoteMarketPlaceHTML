@@ -44,7 +44,7 @@
                     </div>
                     <h4 class="home-middle-sub-heading">Download Free/Paid Notes</h4>
                     <p>Get Material for your <br> Course etc.</p>
-                    <a class="btn home-middle-btn" id="home-middle-btn-01" href="@Url.Action("SearchNotes","Home")" title="DOWNLOAD" role="button">DOWNLOAD</a>
+                    <a class="btn home-middle-btn" id="home-middle-btn-01" href="@Url.Action("Index","SearchNotes")" title="DOWNLOAD" role="button">DOWNLOAD</a>
                 </div>
 
             </div>
@@ -157,7 +157,7 @@
                 $("nav").addClass("white-nav-top");
 
                 //show dark logo
-                $(".navbar-header > a > img").attr("src", "~/images/pre-login/logo.png");
+                $(".navbar-header > a > img").attr("src", "/images/pre-login/logo.png");
 
                 ////show back to top button
                 //$("#back-to-top").fadeIn();
@@ -168,7 +168,7 @@
                 $("nav").removeClass("white-nav-top");
 
                 //hide dark logo
-                $(".navbar-header > a > img").attr("src", "~/images/pre-login/top-logo.png");
+                $(".navbar-header > a > img").attr("src", "/images/pre-login/top-logo.png");
 
                 ////hide back to top button
                 //$("#back-to-top").fadeOut();

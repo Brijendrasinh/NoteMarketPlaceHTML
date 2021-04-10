@@ -1,0 +1,60 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.RejectedNotesViewModel
+
+@{ 
+    ViewBag.Approvedconfirmationbox = "If you approve the notes – System will publish the notes over portal. Please press yes to continue.";
+}
+
+<div class="col-12 table-scroll" id="RejectedNotesPartialView">
+    <table class="table" id="RejectedNotesDataTable">
+        <thead>
+            <tr>
+                <th class="srno">SR NO.</th>
+                <th>NOTE TITLE</th>
+                <th>CATEGORY</th>
+                <th>SELLER</th>
+                <th>DATE ADDED</th>
+                <th>REJECTED BY</th>
+                <th>REMARK</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model.getRejectedNotesData_Results)
+            {
+                <tr>
+                    <td class="srno">@data.ID</td>
+                    <td class="note-title">
+                        <a href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.ID})" class="links">
+                            @data.Title
+                        </a>
+                    </td>
+                    <td>@data.Category</td>
+                    <td>
+                        @data.Seller
+                        <a href="@Url.Action("MemberDetails","AdminMembers",new { SellerID = data.SellerID})" class="links">
+                            <img src="~/Admin-Images/images/eye.png" alt="">
+                        </a>
+                    </td>
+                    <td>@data.DateEdited</td>
+                    <td>@data.RejectedBy</td>
+                    <td>
+                        @data.Remarks
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/Admin-Images/images/dots.png" alt="">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                <a class="dropdown-item" role="button" href="@Url.Action("Approve","NotesUnderReview",new { NoteID = data.ID})" onclick="return confirm('@ViewBag.Approvedconfirmationbox')">Approve</a>
+                                <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","NoteDetail",new { noteId = data.ID})">Download Notes</a>
+                                <a class="dropdown-item" role="button" href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.ID})">View More Details</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

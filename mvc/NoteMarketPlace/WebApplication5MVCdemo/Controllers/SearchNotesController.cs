@@ -42,7 +42,7 @@ namespace WebApplication5MVCdemo.Controllers
 
         [HttpGet]
         public ActionResult GetFilterSearchNotes(int FK_Type=0,int FK_Category=0,int FK_Country=0,string FK_University = null,string FK_Course = null, 
-                                                string PageNumber = "1", string PageSize = "2",string search = null,string rating=null)
+                                                string PageNumber = "1", string PageSize = "9",string search = null,string rating=null)
         {
             SearchNotesViewModel Model = new SearchNotesViewModel();
             if (string.IsNullOrEmpty(FK_University))
@@ -55,9 +55,9 @@ namespace WebApplication5MVCdemo.Controllers
                 rating = null;
 
             Model.PageNumber = PageNumber;
-            Model.PageSize = "2";
+            Model.PageSize = "9";
             int pageNumber = Convert.ToInt32(PageNumber);
-            int pageSize = 2; /*Convert.ToInt32(PageSize);*/
+            int pageSize = 9; /*Convert.ToInt32(PageSize);*/
             List<NewGetSellerNotesDetails_Result> getSellNotes = db.NewGetSellerNotesDetails(FK_Type, FK_Category, FK_Country, FK_University, FK_Course, pageSize , pageNumber, search,rating ).ToList();
             
             Model.NewGetSellerNotesDetails_Result = getSellNotes;

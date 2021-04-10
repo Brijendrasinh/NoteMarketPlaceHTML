@@ -1,0 +1,87 @@
+﻿@using WebApplication5MVCdemo.Models
+@model  IEnumerable<NoteReport>
+@{
+    ViewBag.Title = "SpamReport";
+    ViewBag.DeleteReport = "Are you sure you want to delete reported issue";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container members">
+    <div class="row">
+        <div class=" col-xl-5 col-sm-4  col-12 text-left category">
+            <h3 class="spam-report">Spam Reports</h3>
+        </div>
+        <div class=" pl-0 m-left-auto col-xl-7 col-sm-8 col-12 row search-side align-items-end">
+            <span class="members-span"><img src="images/search-icon.png" alt=""></span>
+            <input class="col-sm-7 col-7 m-left-auto" type="text" id="inputSearch" placeholder="Search">
+            <button type="submit" class="col-sm-3 col-3 btn btn-search">
+                SEARCH
+            </button>
+        </div>
+        <div class="col-12 table-scroll">
+            <table class="table" id="ReportDataTable">
+                <thead>
+                    <tr>
+                        <th class="srno">SR NO.</th>
+                        <th>REPORTED BY</th>
+                        <th>NOTE TITLE</th>
+                        <th>CATEGORY</th>
+                        <th>DATE EDITED</th>
+                        <th>REMARK</th>
+                        <th>ACTION</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model)
+                    {
+                        <tr>
+                            <td class="srno">@data.ID</td>
+                            <td>@data.User.FirstName @data.User.LastName</td>
+                            <td class="note-title">
+                                <a href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.NoteID})" class="links">
+                                    @data.SellNote.Title
+                                </a>
+                            </td>
+                            <td>@data.SellNote.NoteCategory.Name</td>
+                            <td>@data.CreatedDate</td>
+                            <td>@data.Remarks</td>
+                            <td>
+                                <a href="@Url.Action("DeleteReport","Report",new { ID = data.ID})" onclick="return confirm('@ViewBag.DeleteReport')">
+                                    <img src="~/Admin-Images/images/delete.png" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/Admin-Images/images/dots.png" alt="">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                        <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","NoteDetail",new { noteId = data.NoteID})">Download Notes</a>
+                                        <a class="dropdown-item" role="button" href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.NoteID})">View More Details</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $("#ReportDataTable").DataTable();
+        oTable = $('#ReportDataTable').DataTable();
+        $('#inputSearch').keyup(function () {
+            oTable.search($(this).val()).draw();
+        });
+        $('#ReportDataTable').DataTable().page.len(1).draw();
+    </script>
+
+}
+
+
+

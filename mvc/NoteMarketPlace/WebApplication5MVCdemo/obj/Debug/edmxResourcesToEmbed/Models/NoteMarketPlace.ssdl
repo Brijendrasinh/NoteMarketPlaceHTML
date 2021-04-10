@@ -153,6 +153,9 @@
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="RejectedBy" Type="int" />
+    <Property Name="AttachmentSize" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="SystemConfiguration">
     <Key>
@@ -426,6 +429,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SellNotes_Users2">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="SellNotes" Type="Self.SellNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SellNotes">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellNotes_Users3">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="SellNotes" Type="Self.SellNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SellNotes">
+        <PropertyRef Name="RejectedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserProfile_Gender">
     <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
     <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
@@ -462,8 +489,36 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GetCategoryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetCountryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="getDahboardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetDownloadedNotesData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoteID" Type="int" Mode="In" />
+    <Parameter Name="SellerID" Type="int" Mode="In" />
+    <Parameter Name="DownloaderID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetMembersData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetMembersDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetNotesUnderReviewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="data" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetNoteTypeData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetPublishedNotesData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="data" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetRejectedNotesData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="data" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="NewGetDashboadrd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="data" Type="int" Mode="In" />
+  </Function>
+  <Function Name="NewGetMembersData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="NewGetMembersDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="NewGetNotesUnderReviewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="data" Type="varchar" Mode="In" />
   </Function>
   <Function Name="NewGetSellerNotesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -557,6 +612,14 @@
       <End Role="SellNotes" EntitySet="SellNotes" />
     </AssociationSet>
     <AssociationSet Name="FK_SellNotes_Users1" Association="Self.FK_SellNotes_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SellNotes" EntitySet="SellNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellNotes_Users2" Association="Self.FK_SellNotes_Users2">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SellNotes" EntitySet="SellNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellNotes_Users3" Association="Self.FK_SellNotes_Users3">
       <End Role="Users" EntitySet="Users" />
       <End Role="SellNotes" EntitySet="SellNotes" />
     </AssociationSet>

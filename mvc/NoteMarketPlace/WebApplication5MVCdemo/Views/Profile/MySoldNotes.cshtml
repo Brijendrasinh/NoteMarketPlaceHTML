@@ -34,42 +34,42 @@
                     <tbody>
                         @foreach (Download data in Model)
                         {
-                        <tr>
-                            <td>@data.ID</td>
-                            <td class="note-title">
-                                <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.ID},null)" class="links">
-                                    @data.NoteTitle
-                                </a>
-                            </td>
-                            <td>@data.NoteCategory</td>
-                            <td>@data.User1.EmailID</td>
-                            @if (data.IsPaid == true)
-                            {
-                                <td>Paid</td>
-                            }
-                            else
-                            {
-                                <td>Free</td>
-                            }
-                            <td>$@data.PurchasedPrice</td>
-                            <td>@data.CreatedDate</td>
-                            <td>
-                                <div class="dropdown">
-                                    <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.ID},null)" class="links">
-                                        <img src="~/images/Dashboard/eye.png" alt="">
+                            <tr>
+                                <td>@data.ID</td>
+                                <td class="note-title">
+                                    <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.NoteID},null)" class="links">
+                                        @data.NoteTitle
                                     </a>
+                                </td>
+                                <td>@data.NoteCategory</td>
+                                <td>@data.User1.EmailID</td>
+                                @if (data.IsPaid == true)
+                                {
+                                    <td>Paid</td>
+                                }
+                                else
+                                {
+                                    <td>Free</td>
+                                }
+                                <td>$@data.PurchasedPrice</td>
+                                <td>@data.CreatedDate</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a href="@Url.Action("NoteDetail","Dashboard",new { noteId = data.NoteID},null)" class="links">
+                                            <img src="~/images/Dashboard/eye.png" alt="">
+                                        </a>
 
-                                    <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="~/Front_images/images/dots.png" alt="">
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
-                                        <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","Dashboard", new { noteId = data.ID},null)">Download Note</a>
+                                        <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="~/Front_images/images/dots.png" alt="">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                            <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","Dashboard", new { noteId = data.NoteID},null)">Download Note</a>
+                                        </div>
                                     </div>
-                                </div>
 
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

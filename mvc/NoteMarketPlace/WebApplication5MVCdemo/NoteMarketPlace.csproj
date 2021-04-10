@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -129,28 +132,47 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="CommanClasses\AdminDashboardViewModel.cs" />
+    <Compile Include="CommanClasses\AdminMemberDetailsViewModel.cs" />
+    <Compile Include="CommanClasses\AdminMembersViewModel.cs" />
+    <Compile Include="CommanClasses\AdminProfileViewModel.cs" />
     <Compile Include="CommanClasses\BuyerRequestViewModel.cs" />
     <Compile Include="CommanClasses\ConfirmPasswordModel.cs" />
     <Compile Include="CommanClasses\ConstantStrings.cs" />
     <Compile Include="CommanClasses\ContactPageLogedUSer.cs" />
     <Compile Include="CommanClasses\DashBoardViewModel.cs" />
+    <Compile Include="CommanClasses\DownloadedNotesViewModel.cs" />
     <Compile Include="CommanClasses\Enums.cs" />
     <Compile Include="CommanClasses\LoginEntity.cs" />
+    <Compile Include="CommanClasses\ManageAdministratorViewModel.cs" />
+    <Compile Include="CommanClasses\ManageCategoryViewModel.cs" />
+    <Compile Include="CommanClasses\ManageCountryViewModel.cs" />
+    <Compile Include="CommanClasses\ManageTypeViewModel.cs" />
     <Compile Include="CommanClasses\NoteDetailViewModel.cs" />
     <Compile Include="CommanClasses\NotesUnderReviewViewModel.cs" />
+    <Compile Include="CommanClasses\PublishedNotesViewModel.cs" />
+    <Compile Include="CommanClasses\RejectedNotesViewModel.cs" />
     <Compile Include="CommanClasses\SearchNotesViewModel.cs" />
     <Compile Include="CommanClasses\SellNotesAllDropdownList.cs" />
     <Compile Include="CommanClasses\SellNotesEntity.cs" />
+    <Compile Include="CommanClasses\SpamReportViewModel.cs" />
+    <Compile Include="CommanClasses\SystemConfigurationViewModel.cs" />
     <Compile Include="CommanClasses\UserProfileCombine.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AdminMemberController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\AdminMembersController.cs" />
+    <Compile Include="Controllers\AdminProfileController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NoteDetailController.cs" />
     <Compile Include="Controllers\NotesUnderReviewController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SearchNotesController.cs" />
+    <Compile Include="Controllers\SystemConfigurationController.cs" />
+    <Compile Include="Controllers\TypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,10 +185,34 @@
     <Compile Include="Models\Gender.cs">
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetCategoryData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCountryData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\getDahboardData_Result.cs">
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetDownloadedNotesData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMembersData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMembersDetails_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetNotesUnderReviewData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetNoteTypeData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPublishedNotesData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetRejectedNotesData_Result.cs">
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSellerNotesDetails_Result.cs">
@@ -176,6 +222,18 @@
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSellNoteDetails_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewGetDashboadrd_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewGetMembersData_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewGetMembersDetails_Result.cs">
+      <DependentUpon>NoteMarketPlace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewGetNotesUnderReviewData_Result.cs">
       <DependentUpon>NoteMarketPlace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NewGetSellerNotesDetails_Result.cs">
@@ -1022,7 +1080,26 @@
     <Content Include="Views\NotesUnderReview\_NotesUnderReview.cshtml" />
     <Content Include="Views\NotesUnderReview\NotesUnderReview.cshtml" />
     <Content Include="Views\NoteDetail\NoteDetail.cshtml" />
-    <Content Include="Views\AdminMember\MemberDetail.cshtml" />
+    <Content Include="Views\Admin\PublishedNotes.cshtml" />
+    <Content Include="Views\Admin\_PublishedNotes.cshtml" />
+    <Content Include="Views\Admin\RejectedNotes.cshtml" />
+    <Content Include="Views\Admin\_RejectedNotes.cshtml" />
+    <Content Include="Views\AdminMembers\Members.cshtml" />
+    <Content Include="Views\AdminMembers\MemberDetails.cshtml" />
+    <Content Include="Views\Admin\DownloadedNotes.cshtml" />
+    <Content Include="Views\Admin\_DownloadedNotes.cshtml" />
+    <Content Include="Views\Country\ManageCountry.cshtml" />
+    <Content Include="Views\Country\AddCountry.cshtml" />
+    <Content Include="Views\Type\ManageType.cshtml" />
+    <Content Include="Views\Type\AddType.cshtml" />
+    <Content Include="Views\Category\ManageCategory.cshtml" />
+    <Content Include="Views\Category\AddCategory.cshtml" />
+    <Content Include="Views\Administrator\ManageAdministrator.cshtml" />
+    <Content Include="Views\Administrator\AddAdministrator.cshtml" />
+    <Content Include="Views\SystemConfiguration\ManageSystemConfiguration.cshtml" />
+    <Content Include="Views\Report\SpamReport.cshtml" />
+    <Content Include="Views\Admin\_Dashboard.cshtml" />
+    <Content Include="Views\AdminProfile\Profiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

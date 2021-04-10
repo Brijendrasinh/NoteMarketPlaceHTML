@@ -182,6 +182,11 @@
     <NavigationProperty Name="SellNoteAttachments" Relationship="Self.FK_SellNoteAttachments_SellNotes" FromRole="SellNotes" ToRole="SellNoteAttachments" />
     <NavigationProperty Name="User" Relationship="Self.FK_SellNotes_Users" FromRole="SellNotes" ToRole="Users" />
     <NavigationProperty Name="User1" Relationship="Self.FK_SellNotes_Users1" FromRole="SellNotes" ToRole="Users" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="RejectedBy" Type="Int32" />
+    <NavigationProperty Name="User2" Relationship="NoteMarketPlaceModel.FK_SellNotes_Users2" FromRole="SellNote" ToRole="User" />
+    <NavigationProperty Name="User3" Relationship="NoteMarketPlaceModel.FK_SellNotes_Users3" FromRole="SellNote" ToRole="User" />
+    <Property Name="AttachmentSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="SystemConfiguration">
     <Key>
@@ -261,6 +266,8 @@
     <NavigationProperty Name="SellNotes1" Relationship="Self.FK_SellNotes_Users1" FromRole="Users" ToRole="SellNotes" />
     <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_Users" FromRole="Users" ToRole="UserProfile" />
     <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_UserRoles" FromRole="Users" ToRole="UserRoles" />
+    <NavigationProperty Name="SellNotes2" Relationship="NoteMarketPlaceModel.FK_SellNotes_Users2" FromRole="User" ToRole="SellNote" />
+    <NavigationProperty Name="SellNotes3" Relationship="NoteMarketPlaceModel.FK_SellNotes_Users3" FromRole="User" ToRole="SellNote" />
   </EntityType>
   <Association Name="FK_SellNotes_Countries">
     <End Role="Countries" Type="Self.Country" Multiplicity="0..1" />
@@ -624,6 +631,42 @@
     <FunctionImport Name="GetNotesUnderReviewData" ReturnType="Collection(NoteMarketPlaceModel.GetNotesUnderReviewData_Result)">
       <Parameter Name="data" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="FK_SellNotes_Users2" Association="NoteMarketPlaceModel.FK_SellNotes_Users2">
+      <End Role="User" EntitySet="Users" />
+      <End Role="SellNote" EntitySet="SellNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellNotes_Users3" Association="NoteMarketPlaceModel.FK_SellNotes_Users3">
+      <End Role="User" EntitySet="Users" />
+      <End Role="SellNote" EntitySet="SellNotes" />
+    </AssociationSet>
+    <FunctionImport Name="GetMembersData" ReturnType="Collection(NoteMarketPlaceModel.GetMembersData_Result)" />
+    <FunctionImport Name="GetPublishedNotesData" ReturnType="Collection(NoteMarketPlaceModel.GetPublishedNotesData_Result)">
+      <Parameter Name="data" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetRejectedNotesData" ReturnType="Collection(NoteMarketPlaceModel.GetRejectedNotesData_Result)">
+      <Parameter Name="data" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NewGetNotesUnderReviewData" ReturnType="Collection(NoteMarketPlaceModel.NewGetNotesUnderReviewData_Result)">
+      <Parameter Name="data" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetMembersDetails" ReturnType="Collection(NoteMarketPlaceModel.GetMembersDetails_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="NewGetMembersDetails" ReturnType="Collection(NoteMarketPlaceModel.NewGetMembersDetails_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetDownloadedNotesData" ReturnType="Collection(NoteMarketPlaceModel.GetDownloadedNotesData_Result)">
+      <Parameter Name="NoteID" Mode="In" Type="Int32" />
+      <Parameter Name="SellerID" Mode="In" Type="Int32" />
+      <Parameter Name="DownloaderID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="NewGetMembersData" ReturnType="Collection(NoteMarketPlaceModel.NewGetMembersData_Result)" />
+    <FunctionImport Name="GetCountryData" ReturnType="Collection(NoteMarketPlaceModel.GetCountryData_Result)" />
+    <FunctionImport Name="GetCategoryData" ReturnType="Collection(NoteMarketPlaceModel.GetCategoryData_Result)" />
+    <FunctionImport Name="GetNoteTypeData" ReturnType="Collection(NoteMarketPlaceModel.GetNoteTypeData_Result)" />
+    <FunctionImport Name="NewGetDashboadrd" ReturnType="Collection(NoteMarketPlaceModel.NewGetDashboadrd_Result)">
+      <Parameter Name="data" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Downloads_Downloads">
     <End Type="NoteMarketPlaceModel.Download" Role="Download" Multiplicity="1" />
@@ -729,5 +772,154 @@
     <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
     <Property Type="String" Name="Seller" Nullable="true" MaxLength="101" />
     <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <Association Name="FK_SellNotes_Users2">
+    <End Type="NoteMarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="NoteMarketPlaceModel.SellNote" Role="SellNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SellNote">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellNotes_Users3">
+    <End Type="NoteMarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="NoteMarketPlaceModel.SellNote" Role="SellNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SellNote">
+        <PropertyRef Name="RejectedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetMembersData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EmailID" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NotesUnderReview" Nullable="true" />
+    <Property Type="Int32" Name="PublishedNotes" Nullable="true" />
+    <Property Type="Int32" Name="DownloadedNote" Nullable="true" />
+    <Property Type="Decimal" Name="TotalExpenses" Nullable="true" Precision="38" Scale="0" />
+    <Property Type="Decimal" Name="TotalEarnings" Nullable="true" Precision="38" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="GetPublishedNotesData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="IsPaid" Nullable="false" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Seller" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="numberOfDownload" Nullable="true" />
+    <Property Type="String" Name="ApprovedBy" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="GetRejectedNotesData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="DateEdited" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Seller" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="Remarks" Nullable="true" />
+    <Property Type="String" Name="RejectedBy" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="NewGetNotesUnderReviewData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Seller" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetMembersDetails_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NumberOfDownload" Nullable="true" />
+    <Property Type="Decimal" Name="TotalEarnings" Nullable="true" Precision="38" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="NewGetMembersDetails_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NumberOfDownload" Nullable="true" />
+    <Property Type="Decimal" Name="TotalEarnings" Nullable="true" Precision="38" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="GetDownloadedNotesData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="NoteID" Nullable="false" />
+    <Property Type="String" Name="NoteTitle" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="NoteCategory" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="BuyerID" Nullable="false" />
+    <Property Type="Int32" Name="SellerID" Nullable="false" />
+    <Property Type="Boolean" Name="SellType" Nullable="false" />
+    <Property Type="Decimal" Name="PurchasedPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="DateTime" Name="AttachmentDownloadDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsAttachmentDownloaded" Nullable="false" />
+    <Property Type="String" Name="SellerName" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="BuyerName" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="NewGetMembersData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EmailID" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NotesUnderReview" Nullable="true" />
+    <Property Type="Int32" Name="PublishedNotes" Nullable="true" />
+    <Property Type="Int32" Name="DownloadedNote" Nullable="true" />
+    <Property Type="Decimal" Name="TotalExpenses" Nullable="true" Precision="38" Scale="0" />
+    <Property Type="Decimal" Name="TotalEarnings" Nullable="true" Precision="38" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="GetCountryData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CountryName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CountryCode" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="AddedBy" Nullable="true" MaxLength="101" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetCategoryData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="AddedBy" Nullable="true" MaxLength="101" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetNoteTypeData_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="DateTime" Name="DateAdded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="AddedBy" Nullable="true" MaxLength="101" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="NewGetDashboadrd_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="IsPaid" Nullable="false" />
+    <Property Type="String" Name="AttachmentSize" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="SellingPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="DateTime" Name="PublishedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NumberOfDownload" Nullable="true" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="101" />
   </ComplexType>
 </Schema>

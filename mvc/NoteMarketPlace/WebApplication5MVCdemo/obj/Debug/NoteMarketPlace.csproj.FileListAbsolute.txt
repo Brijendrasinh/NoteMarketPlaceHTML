@@ -300,6 +300,7 @@ C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5M
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\roslyn\VBCSCompiler.exe
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\Antlr3.Runtime.dll
+C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\DotNetZip.dll
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\EntityFramework.dll
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\EntityFramework.SqlServer.dll
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -313,6 +314,8 @@ C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5M
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\System.Web.WebPages.dll
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\System.Web.WebPages.Razor.dll
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\WebGrease.dll
+C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\DotNetZip.pdb
+C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\DotNetZip.xml
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\EntityFramework.xml
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\EntityFramework.SqlServer.xml
 C:\Users\Brijendra\Desktop\Back on Git Repo\mvc\NoteMarketPlace\WebApplication5MVCdemo\bin\System.Web.Helpers.xml

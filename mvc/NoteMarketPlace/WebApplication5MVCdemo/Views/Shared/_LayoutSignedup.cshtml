@@ -1,5 +1,4 @@
 ﻿@using WebApplication5MVCdemo.Models
-@using NoteMarketPlace.CommanClasses
 @using WebApplication5MVCdemo.CommanClasses
 
 @{
@@ -26,7 +25,7 @@
 
                 <div class="navbar-header">
                     <!-- Logo -->
-                    <a href="index.html" class="navbar-brand">
+                    <a href="@Url.Action("Index","Home")" class="navbar-brand">
                         <img src="@Url.Content("~/images/pre-login/logo.png")" alt="logo">
                     </a>
                 </div>
@@ -42,30 +41,41 @@
                         </li>
                         @if (Session["ID"] != null)
                         {
-                            int userid = Convert.ToInt32(Session["ID"]);
-                            User user = db.Users.Where(x => x.ID == userid).FirstOrDefault();
-                            if (user.RoleID == Convert.ToInt32(Enums.UserRoleId.Admin))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("BuyerRequest","Home")">Buyer Requests</a>
-                                </li>
-                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("BuyerRequest","Home")">Buyer Requests</a>
+                            </li>
+
+
                         }
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("FAQ","Home")">FAQ</a>
+                            <a class="nav-link" href="@Url.Action("FAQ", "Home")">FAQ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
                         </li>
-
                         @if (Session["ID"] != null)
                         {
                             int userid = Convert.ToInt32(Session["ID"]);
-                            //UserProfile user = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
+                            UserProfile user = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Members/@userid/Dp_.jpg" alt="pp">
+                                        @if (user != null)
+                                        {
+                                            if (user.ProfilePicture != null)
+                                            {
+                                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Members/@userid/@user.ProfilePicture" alt="pp">
+                                            }
+                                            else
+                                            {
+                                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="pp">
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="pp">
+                                        }
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <a href="@Url.Action("MyProfile","Profile")" class="dropdown-item" role="button">My Profile</a>
@@ -100,17 +110,72 @@
 
                     <div id="mobile-nav-content">
                         <ul class="nav flex-column">
-                            <li><a class="nav-link smooth-scroll" href="search-notes.html">Search Notes</a></li>
-                            <li><a class="nav-link smooth-scroll" href="#">Sell Your Notes</a></li>
-                            <li><a class="nav-link smooth-scroll" href="buyer-request.html">Buyer Requests</a></li>
-                            <li><a class="nav-link smooth-scroll" href="FAQ.html">FAQ</a></li>
-                            <li><a class="nav-link smooth-scroll" href="contact-us.html">Contact Us</a></li>
                             <li class="nav-item">
-                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="images/customer/team-1.jpg" alt="pp">
+                                <a class="nav-link" href="@Url.Action("Index","SearchNotes")">Search Notes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn home-nav-btn" href="login.html" title="Logout" role="button">Logout</a>
+                                <a class="nav-link" href="@Url.Action("Index","Dashboard")">Sell Your Notes</a>
                             </li>
+                            @if (Session["ID"] != null)
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("BuyerRequest","Home")">Buyer Requests</a>
+                                </li>
+
+
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("FAQ", "Home")">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
+                            </li>
+                            @if (Session["ID"] != null)
+                            {
+                                int userid = Convert.ToInt32(Session["ID"]);
+                                UserProfile user = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @if (user != null)
+                                            {
+                                                if (user.ProfilePicture != null)
+                                                {
+                                                    <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="~/Members/@userid/@user.ProfilePicture" alt="pp">
+                                                }
+                                                else
+                                                {
+                                                    <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="pp">
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <img style="height: 40px; width: 40px;" class="img-fluid rounded-circle" src="@ConstantStrings.Default_Profileimage_path" alt="pp">
+                                            }
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <a href="@Url.Action("MyProfile","Profile")" class="dropdown-item" role="button">My Profile</a>
+                                            <a href="@Url.Action("MyDownloads","Profile")" class="dropdown-item" role="button">My Downloads</a>
+                                            <a href="@Url.Action("MySoldNotes","Profile")" class="dropdown-item" role="button">My Sold Notes</a>
+                                            <a href="@Url.Action("MyRejectedNotes","Profile")" class="dropdown-item" role="button">My Rejected Notes</a>
+                                            <a href="@Url.Action("ChangePassword","Account")" class="dropdown-item" role="button">Change Password</a>
+                                            <a href="@Url.Action("Logout","Account")" class="dropdown-item" role="button">LOGOUT</a>
+
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn home-nav-btn" href="@Url.Action("Logout","Account")" title="Login" role="button">Logout</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="btn home-nav-btn" href="@Url.Action("Login","Account")" title="Login" role="button">Login</a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -128,9 +193,14 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-12 text-right">
                     <ul class="social-list">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        @{
+                            var facebookUrl = db.SystemConfigurations.Where(x => x.Keys == "Facebook").Select(x => x.Value).FirstOrDefault();
+                            var twitterUrl = db.SystemConfigurations.Where(x => x.Keys == "Twitter").Select(x => x.Value).FirstOrDefault();
+                            var linkedInUrl = db.SystemConfigurations.Where(x => x.Keys == "Linkedin").Select(x => x.Value).FirstOrDefault();
+                        }
+                        <li><a href="@facebookUrl"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="@twitterUrl"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="@linkedInUrl"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>

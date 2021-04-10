@@ -28,7 +28,7 @@
                     @if (ViewBag.firstName != null)
                     {
                         @Html.LabelFor(x => x.FirstName)
-                        @Html.TextBoxFor(x => x.FirstName, new { disabled = "disabled", placeholder = "Enter your First Name", @class = "form-control" })
+                        @Html.TextBoxFor(x => x.FirstName, new { disabled = "disabled", placeholder = "Enter your First Name", @class = "form-control", required= "required" })
                     }
                     @*<label for="inputUserProfileFirstName">First Name *</label>
                         <input type="text" class="form-control" id="inputUserProfileFirstName" placeholder="Enter your first name" required>*@
@@ -37,7 +37,7 @@
                     @if (ViewBag.lastName != null)
                     {
                         @Html.LabelFor(x => x.LastName)
-                        @Html.TextBoxFor(x => x.LastName, new { disabled = "disabled", placeholder = "Enter your First Name", @class = "form-control" })
+                        @Html.TextBoxFor(x => x.LastName, new { disabled = "disabled", placeholder = "Enter your First Name", @class = "form-control", required = "required" })
                     }
                     @*<label for="inputUserProfileLastName">Last Name *</label>
                         <input type="text" class="form-control" id="inputUserProfileLastName" placeholder="Enter your last name" required>*@
@@ -46,7 +46,7 @@
                     @if (ViewBag.emailid != null)
                     {
                         @Html.LabelFor(x => x.Email)
-                        @Html.TextBoxFor(x => x.Email, new { disabled = "disabled", placeholder = "Enter your First Name", @class = "form-control" })
+                        @Html.TextBoxFor(x => x.Email, new { disabled = "disabled", placeholder = "Enter your First Name", @class = "form-control", required = "required" })
                     }
                     @*<label for="inputUserProfileEmail">Email *</label>
                         <input type="email" class="form-control" id="inputUserProfileEmail" placeholder="Enter your email address" required>*@
@@ -104,7 +104,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12 col-12">
                     @Html.LabelFor(x => x.UserProfile.AddressLine1)
-                    @Html.TextBoxFor(x => x.UserProfile.AddressLine1, new { placeholder = "Enter your Address", @class = "form-control" })
+                    @Html.TextBoxFor(x => x.UserProfile.AddressLine1, new { placeholder = "Enter your Address", @class = "form-control", required = "required" })
                     @*<label for="inputUserProfileAddressLine1">Address Line 1 *</label>
                         <input type="text" class="form-control" id="inputUserProfileAddressLine1" placeholder="Enter your address" required>*@
                 </div>
@@ -116,25 +116,25 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-12">
                     @Html.LabelFor(x => x.UserProfile.City)
-                    @Html.TextBoxFor(x => x.UserProfile.City, new { placeholder = "Enter your City", @class = "form-control" })
+                    @Html.TextBoxFor(x => x.UserProfile.City, new { placeholder = "Enter your City", @class = "form-control", required = "required" })
                     @*<label for="inputUserProfileCity">City *</label>
                         <input type="text" class="form-control" id="inputUserProfileCity" placeholder="Enter your city" required>*@
                 </div>
                 <div class="col-md-6 col-sm-12 col-12">
                     @Html.LabelFor(x => x.UserProfile.State)
-                    @Html.TextBoxFor(x => x.UserProfile.State, new { placeholder = "Enter your State", @class = "form-control" })
+                    @Html.TextBoxFor(x => x.UserProfile.State, new { placeholder = "Enter your State", @class = "form-control", required = "required" })
                     @*<label for="inputUserProfileState">State *</label>
                         <input type="text" class="form-control" id="inputUserProfileState" placeholder="Enter your state" required>*@
                 </div>
                 <div class="col-md-6 col-sm-12 col-12">
                     @Html.LabelFor(x => x.UserProfile.ZipCode)
-                    @Html.TextBoxFor(x => x.UserProfile.ZipCode, new { placeholder = "Enter your Zipcode", @class = "form-control" })
+                    @Html.TextBoxFor(x => x.UserProfile.ZipCode, new { placeholder = "Enter your Zipcode", @class = "form-control", required = "required" })
                     @*<label for="inputUserProfileZipcode">ZipCode *</label>
                         <input type="text" class="form-control" id="inputUserProfileZipcode" placeholder="Enter your zipcode" required>*@
                 </div>
                 <div class="col-md-6 xol-sm-12 col-12">
                     @Html.LabelFor(x => x.UserProfile.Country)
-                    @Html.DropDownListFor(x => x.UserProfile.Country, new SelectList(Model.Countries, "Name", "Name"), "Select Country", new { @class = "form-control" })
+                    @Html.DropDownListFor(x => x.UserProfile.Country, new SelectList(Model.Countries, "Name", "Name"), "Select Country", new { @class = "form-control", required = "required" })
                     @*<label for="inputUserGender">Country *</label>
                         <select id="inputUserGender" class="form-control">
                             <option selected disabled value="">Select your country</option>

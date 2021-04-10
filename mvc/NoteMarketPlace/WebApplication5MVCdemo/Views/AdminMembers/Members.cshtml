@@ -1,0 +1,131 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.AdminMembersViewModel
+@{
+    ViewBag.Title = "Members";
+    ViewBag.Deactivate = "Are you sure you want to make this member inactive?";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container members">
+    <div class="row">
+        <div class=" col-xl-5 col-lg-4 col-md-3 col-sm-3 col-12 text-left category">
+            <h3>Members</h3>
+        </div>
+        <div class=" pl-0 m-left-auto col-xl-7 col-lg-8 col-md-9 col-sm-9 col-12 row search-side align-items-end">
+            <span class="members-span"><img src="~/Admin-Images/images/search-icon.png" alt=""></span>
+            <input class="col-sm-7 col-7 m-left-auto" type="text" id="inputSearch" placeholder="Search">
+            <button type="submit" class="col-sm-3 col-3 btn btn-search">
+                SEARCH
+            </button>
+        </div>
+        <div class="col-12 table-scroll">
+            <table class="table" id="MembersDetailDataTable">
+                <thead>
+                    <tr>
+                        <th class="srno">SR NO.</th>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>EMAIL</th>
+                        <th>JOINING DATE</th>
+                        <th class="no">UNDER REVIEW NOTES</th>
+                        <th class="no">PUBLISHED NOTES</th>
+                        <th class="no">DOWNLOADED NOTES</th>
+                        <th class="no">TOTAL EXPENSES</th>
+                        <th class="no1">TOTAL EARNINGS</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model.getMembersData_Results)
+                    {
+                        <tr>
+                            <td class="srno">@data.ID</td>
+                            <td>@data.FirstName</td>
+                            <td>@data.LastName</td>
+                            <td>@data.EmailID</td>
+                            <td>@data.CreatedDate</td>
+                            @if (data.NotesUnderReview != null)
+                            {
+                                <td class="no">
+                                    <a href="@Url.Action("NotesUnderReview","NotesUnderReview",new { sellerid = data.ID})" class="links">
+                                        @data.NotesUnderReview
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="no">0</td>
+                            }
+                            @if (data.PublishedNotes != null)
+                            {
+                                <td class="no">
+                                    <a href="@Url.Action("PublishedNotes","Admin",new { sellerid = data.ID})" class="links">
+                                        @data.PublishedNotes
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="no">0</td>
+                            }
+                            @if (data.DownloadedNote != null)
+                            {
+                                <td class="no">
+                                    <a href="@Url.Action("DownloadedNotes","Admin",new { buyerid = data.ID})" class="links">
+                                        @data.DownloadedNote
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="no">0</td>
+                            }
+                            @if (data.TotalExpenses != null)
+                            {
+                                <td class="no">
+                                    <a href="@Url.Action("DownloadedNotes","Admin",new { buyerid = data.ID})" class="links">
+                                        $@data.TotalExpenses
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="no">$0</td>
+                            }
+                            @if (data.TotalEarnings != null)
+                            {
+                                <td class="no">$@data.TotalEarnings</td>
+                            }
+                            else
+                            {
+                                <td class="no">$0</td>
+                            }
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/Admin-Images/images/dots.png" alt="">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                        <a class="dropdown-item" role="button" href="@Url.Action("MemberDetails","AdminMembers",new { SellerID = data.ID})">View More Details</a>
+                                        <a class="dropdown-item" role="button" href="@Url.Action("Deactivate","AdminMembers",new { SellerID = data.ID})" onclick="return confirm('@ViewBag.Deactivate')">Deactivate</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#MembersDetailDataTable").DataTable();
+        oTable = $('#MembersDetailDataTable').DataTable();
+        $('#inputSearch').keyup(function () {
+            oTable.search($(this).val()).draw();
+        });
+        $('#MembersDetailDataTable').DataTable().page.len(1).draw();
+    </script>
+}

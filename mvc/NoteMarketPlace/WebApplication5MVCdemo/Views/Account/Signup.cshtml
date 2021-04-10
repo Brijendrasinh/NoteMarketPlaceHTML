@@ -22,44 +22,44 @@
                     {
 
                         @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
-                        
+
                         <div class="form-group">
                             @Html.LabelFor(m => m.FirstName)
-                            @Html.TextBoxFor(m => m.FirstName, new { Placeholder = "Enter Your First Name", @class = "form-control form-control-sign-up" })
-                            @Html.ValidationMessageFor(m => m.FirstName,"", new { @class = "text-danger" })
+                            @Html.TextBoxFor(m => m.FirstName, new { Placeholder = "Enter Your First Name", @class = "form-control form-control-sign-up", required = "required" })
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
                             @*<label for="exampleInputSignupFirstName">First Name *</label>
                 <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupFirstName" aria-describedby="emailSignupHelp" placeholder="Enter your first name" required>*@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.LastName)
-                            @Html.TextBoxFor(m => m.LastName, new { Placeholder = "Enter Your Last Name", @class = "form-control form-control-sign-up" })
+                            @Html.TextBoxFor(m => m.LastName, new { Placeholder = "Enter Your Last Name", @class = "form-control form-control-sign-up", required = "required" })
                             @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
-                           
+
                             @*<label for="exampleInputSignupLastName">Last Name *</label>
-        <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupLastName" aria-describedby="emailSignupHelp" placeholder="Enter your last name" required>*@
+                <input type="text" class="form-control form-control-sign-up" id="exampleInputSignupLastName" aria-describedby="emailSignupHelp" placeholder="Enter your last name" required>*@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email)
-                            @Html.TextBoxFor(m => m.Email, new { Placeholder = "Enter Your Email Address", @class = "form-control form-control-sign-up" })
+                            @Html.TextBoxFor(m => m.Email, new { Placeholder = "Enter Your Email Address", @class = "form-control form-control-sign-up", required = "required" })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             @*<label for="exampleInputSignupEmail">Email *</label>
-        <input type="email" class="form-control form-control-sign-up" id="exampleInputSignupEmail" aria-describedby="emailSignupHelp" placeholder="Enter your email address" required>*@
+                <input type="email" class="form-control form-control-sign-up" id="exampleInputSignupEmail" aria-describedby="emailSignupHelp" placeholder="Enter your email address" required>*@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password)
-                            @Html.PasswordFor(m => m.Password, new { Placeholder = "Enter Your Password", @class = "form-control form-control-sign-up" })
+                            @Html.PasswordFor(m => m.Password, new { Placeholder = "Enter Your Password", @class = "form-control form-control-sign-up", required = "required" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             @*<label for="exampleInputSignupPassword">Password</label>
-        <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupPassword" placeholder="Enter your Password" required>*@
+                <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupPassword" placeholder="Enter your Password" required>*@
                             <span toggle="#Password" class="field-icon toggle-password"><img src="@Url.Content("~/images/pre-login/eye.png")" alt="eye"></span>
                         </div>
-        
+
                         <div class="form-group">
                             @Html.LabelFor(m => m.ConfirmPassword)
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { Placeholder = "Re Enter Your Password", @class = "form-control form-control-sign-up" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { Placeholder = "Re Enter Your Password", @class = "form-control form-control-sign-up", required = "required" })
                             @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                             @*<label for="exampleInputSignupConfirmPassword">Confirm Password</label>
-        <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupConfirmPassword" placeholder="Re-enter your Password" required>*@
+                <input type="password" class="form-control form-control-sign-up" id="exampleInputSignupConfirmPassword" placeholder="Re-enter your Password" required>*@
                             <span toggle="#ConfirmPassword" class="field-icon toggle-password"><img src="@Url.Content("~/images/pre-login/eye.png")" alt="eye"></span>
                         </div>
                         <button id="sign-up" type="submit" class="btn btn-login btn-block">SIGN UP</button>
@@ -73,6 +73,4 @@
     </div>
 </section>
 
-<script src="~/Scripts/js/custom.min.js">
-
-</script>
+<script src="~/Scripts/js/custom.min.js"></script>

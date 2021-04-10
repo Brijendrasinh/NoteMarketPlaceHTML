@@ -183,5 +183,101 @@ namespace WebApplication5MVCdemo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNotesUnderReviewData_Result>("GetNotesUnderReviewData", dataParameter);
         }
+    
+        public virtual ObjectResult<GetMembersData_Result> GetMembersData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMembersData_Result>("GetMembersData");
+        }
+    
+        public virtual ObjectResult<GetPublishedNotesData_Result> GetPublishedNotesData(string data)
+        {
+            var dataParameter = data != null ?
+                new ObjectParameter("data", data) :
+                new ObjectParameter("data", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPublishedNotesData_Result>("GetPublishedNotesData", dataParameter);
+        }
+    
+        public virtual ObjectResult<GetRejectedNotesData_Result> GetRejectedNotesData(string data)
+        {
+            var dataParameter = data != null ?
+                new ObjectParameter("data", data) :
+                new ObjectParameter("data", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRejectedNotesData_Result>("GetRejectedNotesData", dataParameter);
+        }
+    
+        public virtual ObjectResult<NewGetNotesUnderReviewData_Result> NewGetNotesUnderReviewData(string data)
+        {
+            var dataParameter = data != null ?
+                new ObjectParameter("data", data) :
+                new ObjectParameter("data", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NewGetNotesUnderReviewData_Result>("NewGetNotesUnderReviewData", dataParameter);
+        }
+    
+        public virtual ObjectResult<GetMembersDetails_Result> GetMembersDetails(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMembersDetails_Result>("GetMembersDetails", iDParameter);
+        }
+    
+        public virtual ObjectResult<NewGetMembersDetails_Result> NewGetMembersDetails(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NewGetMembersDetails_Result>("NewGetMembersDetails", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetDownloadedNotesData_Result> GetDownloadedNotesData(Nullable<int> noteID, Nullable<int> sellerID, Nullable<int> downloaderID)
+        {
+            var noteIDParameter = noteID.HasValue ?
+                new ObjectParameter("NoteID", noteID) :
+                new ObjectParameter("NoteID", typeof(int));
+    
+            var sellerIDParameter = sellerID.HasValue ?
+                new ObjectParameter("SellerID", sellerID) :
+                new ObjectParameter("SellerID", typeof(int));
+    
+            var downloaderIDParameter = downloaderID.HasValue ?
+                new ObjectParameter("DownloaderID", downloaderID) :
+                new ObjectParameter("DownloaderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDownloadedNotesData_Result>("GetDownloadedNotesData", noteIDParameter, sellerIDParameter, downloaderIDParameter);
+        }
+    
+        public virtual ObjectResult<NewGetMembersData_Result> NewGetMembersData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NewGetMembersData_Result>("NewGetMembersData");
+        }
+    
+        public virtual ObjectResult<GetCountryData_Result> GetCountryData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCountryData_Result>("GetCountryData");
+        }
+    
+        public virtual ObjectResult<GetCategoryData_Result> GetCategoryData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCategoryData_Result>("GetCategoryData");
+        }
+    
+        public virtual ObjectResult<GetNoteTypeData_Result> GetNoteTypeData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNoteTypeData_Result>("GetNoteTypeData");
+        }
+    
+        public virtual ObjectResult<NewGetDashboadrd_Result> NewGetDashboadrd(Nullable<int> data)
+        {
+            var dataParameter = data.HasValue ?
+                new ObjectParameter("data", data) :
+                new ObjectParameter("data", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NewGetDashboadrd_Result>("NewGetDashboadrd", dataParameter);
+        }
     }
 }

@@ -1,0 +1,76 @@
+﻿@using WebApplication5MVCdemo.Models
+@using WebApplication5MVCdemo.CommanClasses
+@model AdminDashboardViewModel
+
+<div class="col-12 table-scroll" id="DashboardPartial">
+    <table class="table" id="datatableDashboardAdmin">
+        <thead>
+            <tr>
+                <th class="srno">SR NO.</th>
+                <th>TITLE</th>
+                <th>CATEGORY</th>
+                <th>ATTACHMENT SIZE</th>
+                <th>SELL TYPE</th>
+                <th>PRICE</th>
+                <th>PUBLISHER</th>
+                <th>PUBLISHED DATE</th>
+                <th>NUMBER OF DOWNLOADS</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var data in Model.getDahboardData_Results)
+            {
+                <tr>
+                    <td class="srno">@data.ID</td>
+                    <td class="note-title">
+                        <a href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.ID})" class="links">
+                            @data.Title
+                        </a>
+                    </td>
+                    <td>@data.Category</td>
+                    <td class="size">@data.AttachmentSize</td>
+                    @if (data.IsPaid == true)
+                    {
+                        <td>PAID</td>
+                    }
+                    else
+                    {
+                        <td>FREE</td>
+                    }
+
+                    <td>$@data.SellingPrice</td>
+                    <td>@data.Publisher</td>
+                    <td>@data.PublishedDate</td>
+                    @if (data.NumberOfDownload != null)
+                    {
+                        <td class="no">
+                            <a href="@Url.Action("DownloadedNotes","Admin",new { noteid = data.ID})" class="links">
+                                @data.NumberOfDownload
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="download-no">0</td>
+                    }
+
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/Admin-Images/images/dots.png" alt="">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
+                                <a class="dropdown-item" role="button" href="@Url.Action("DownloadNote","NoteDetail",new { noteId = data.ID})">Download Notes</a>
+                                <a class="dropdown-item" role="button" href="@Url.Action("NoteDetail","NoteDetail",new { NoteID = data.ID})">View More Details</a>
+                                <a class="dropdown-item modalLink" data-id="@data.ID" data-title="@data.Title" data-toggle="modal" data-target="#rejectPopupModal" role="button" href="">Unpublish</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

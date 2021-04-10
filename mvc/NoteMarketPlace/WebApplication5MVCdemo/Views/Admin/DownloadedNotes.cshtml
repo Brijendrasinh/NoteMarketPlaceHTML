@@ -1,0 +1,92 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.DownloadedNotesViewModel
+
+
+@{
+    ViewBag.Title = "DownloadedNotes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container manage-admin download">
+    <div class="row">
+        <div class="col-12">
+            <h3>Downloaded Notes</h3>
+        </div>
+        <div class="padding-top-hide col-xl-5 col-lg-4 col-md-5 col-sm-8 col-12 text-left text-left">
+            <div class="row">
+
+                <div class="block NUR col-lg-3 col-4">
+                    @Html.LabelFor(x => x.NoteID)
+                    @Html.DropDownListFor(x => x.NoteID, Model.NoteTitle, "Select Seller", new { @class = "form-control" })
+                </div>
+                <div class="block NUR col-lg-3 col-4">
+                    @Html.LabelFor(x => x.Seller)
+                    @Html.DropDownListFor(x => x.Seller, Model.SellerName, "Select Seller", new { @class = "form-control" })
+                </div>
+                <div class="block NUR col-lg-3 col-4">
+                    @Html.LabelFor(x => x.Buyer)
+                    @Html.DropDownListFor(x => x.Buyer, Model.BuyerName, "Select Seller", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="padding-top-hide pl-0 m-left-auto m-left-auto-sm col-xl-7 col-lg-8 col-md-7 col-sm-12 col-12 row search-side align-items-end">
+            <span class="download-span"><img src="~/Admin-Images/images/search-icon.png" alt=""></span>
+            <input class="col-sm-7 col-7 m-left-auto m-left-auto-sm" type="text" id="inputSearch" placeholder="Search">
+            <button type="submit" class="col-sm-3 col-3 btn btn-search">
+                SEARCH
+            </button>
+        </div>
+    </div>
+    <div id="DownloadedNotesPartialView"></div>
+
+</div>
+
+@section scripts {
+    <script>
+        debugger
+        $("#DownloadedNotesDataTable").DataTable();
+        $(document).ready(function () {
+            BindDownloadedNotesDetail()
+        });
+        $("#NoteID").on("change", function () {
+            BindDownloadedNotesDetail()
+        });
+        $("#Seller").on("change", function () {
+            BindDownloadedNotesDetail()
+        });
+        $("#Buyer").on("change", function () {
+            BindDownloadedNotesDetail()
+        });
+        
+        function BindDownloadedNotesDetail() {
+
+            debugger
+            var noteID = $("#NoteID").val();
+            var sellerID = $("#Seller").val();
+            var buyerID = $("#Buyer").val();
+            $.ajax({
+                type: 'GET',
+                url: "@Url.Action("GetFilterDownloadedNotes", "Admin")",
+                data: {
+                    NoteId: noteID, SellerId: sellerID, BuyerId: buyerID
+                },
+                success: function (Result) {
+                    debugger
+                    $("#DownloadedNotesPartialView").replaceWith(Result);
+                    $("#DownloadedNotesDataTable").DataTable();
+                    oTable = $('#DownloadedNotesDataTable').DataTable();
+                    $('#inputSearch').keyup(function () {
+                        oTable.search($(this).val()).draw();
+                    });
+                    
+                    $('#DownloadedNotesDataTable').DataTable().page.len(1).draw();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    debugger
+                    alert("sorry");
+                }
+            });
+        }
+    </script>
+}

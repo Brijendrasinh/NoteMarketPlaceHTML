@@ -83,7 +83,7 @@ namespace NoteMarketPlace.Controllers
                     {
 
                         var fileExtension = Path.GetExtension(ProfilePictureFile.FileName);
-                        ProfilePictureFileName = "DP_" + fileExtension;
+                        ProfilePictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss")+ fileExtension;
                         userProfileDetail.ProfilePicture = ProfilePictureFileName;
                         ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
                         
@@ -91,7 +91,7 @@ namespace NoteMarketPlace.Controllers
                         db.SaveChanges();
                     }
 
-                    return RedirectToAction("MyProfile", "Profile");
+                    return RedirectToAction("Index", "SearchNotes");
                 }
                 catch (Exception)
                 {
@@ -126,12 +126,13 @@ namespace NoteMarketPlace.Controllers
                     {
 
                         var fileExtension = Path.GetExtension(ProfilePictureFile.FileName);
-                        ProfilePictureFileName = "DP_" + fileExtension;
+                        ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
 
+                        var File = CheckifPathExistForCurrentUser() + userProfile.ProfilePicture;
                         
-                        if (System.IO.File.Exists(userProfile.ProfilePicture))
+                        if (System.IO.File.Exists(File))
                         {
-                            System.IO.File.Delete(userProfile.ProfilePicture);
+                            System.IO.File.Delete(File);
                         }
 
                         userProfile.ProfilePicture = ProfilePictureFileName;
@@ -140,7 +141,7 @@ namespace NoteMarketPlace.Controllers
                         db.SaveChanges();
                     }
 
-                    return RedirectToAction("MyProfile", "Profile");
+                    return RedirectToAction("Index", "SearchNotes");
                 }
                 catch (Exception)
                 {
@@ -198,8 +199,8 @@ namespace NoteMarketPlace.Controllers
             if(Session["ID"] != null)
             {
                 int ID = Convert.ToInt32(Session["ID"]);
-                int status = Convert.ToInt32(Enums.ReferenceNoteStatus.Rejected);
-                var user = db.SellNotes.Where(x => x.SellerID == ID && x.Status == status).ToList();
+                int Rejected = Convert.ToInt32(Enums.ReferenceNoteStatus.Rejected);
+                var user = db.SellNotes.Where(x => x.SellerID == ID && x.Status == Rejected).ToList();
                 return View(user);
             }
             else

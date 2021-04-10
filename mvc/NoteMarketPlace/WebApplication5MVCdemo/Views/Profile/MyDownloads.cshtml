@@ -180,25 +180,25 @@
             $('#inputMyDownloadSearch').keyup(function () {
                 oTable.search($(this).val()).draw();
             });
+            $(".modalLink").on("click", function () {
+                var NoteID = $(this).data('noteid');
+                $(".modal-body #hiddenNoteid").val(NoteID);
+                var ID = $(this).data('id');
+                $(".modal-body #hiddenId").val(ID);
+            });
 
+            $(".modalLink1").on("click", function () {
+                var NoteID = $(this).data('noteid');
+                $(".modal-body #hiddenNoteid").val(NoteID);
+                var ID = $(this).data('id');
+                $(".modal-body #hiddenId").val(ID);
+            });
             $('#MyDownload-table').DataTable().page.len(3).draw();
 
         });
         
             debugger
-        $(".modalLink").on("click", function () {
-            var NoteID = $(this).data('noteid');
-            $(".modal-body #hiddenNoteid").val(NoteID);
-            var ID = $(this).data('id');
-            $(".modal-body #hiddenId").val(ID);
-        });
-
-        $(".modalLink1").on("click", function () {
-            var NoteID = $(this).data('noteid');
-            $(".modal-body #hiddenNoteid").val(NoteID);
-            var ID = $(this).data('id');
-            $(".modal-body #hiddenId").val(ID);
-        });
+        
         debugger
 
     </script>

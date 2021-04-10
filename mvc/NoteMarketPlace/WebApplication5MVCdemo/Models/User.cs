@@ -24,6 +24,8 @@ namespace WebApplication5MVCdemo.Models
             this.SellNotes = new HashSet<SellNote>();
             this.SellNotes1 = new HashSet<SellNote>();
             this.UserProfiles = new HashSet<UserProfile>();
+            this.SellNotes2 = new HashSet<SellNote>();
+            this.SellNotes3 = new HashSet<SellNote>();
         }
     
         public int ID { get; set; }
@@ -54,5 +56,9 @@ namespace WebApplication5MVCdemo.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
         public virtual UserRole UserRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SellNote> SellNotes2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SellNote> SellNotes3 { get; set; }
     }
 }

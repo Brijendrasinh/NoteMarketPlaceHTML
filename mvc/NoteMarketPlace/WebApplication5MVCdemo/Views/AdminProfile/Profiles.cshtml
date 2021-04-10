@@ -1,0 +1,73 @@
+﻿@model WebApplication5MVCdemo.CommanClasses.AdminProfileViewModel
+
+
+@{
+    ViewBag.Title = "Profiles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container my-profile">
+    <div class="row">
+        <div class="main-block col-xl-7 col-lg-10 col-md-10 col-12">
+            <h3>My Profile</h3>
+            @using (Html.BeginForm("Profiles", "AdminProfile", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="block col-12">
+                        @Html.LabelFor(x => x.user.FirstName)
+                        @Html.TextBoxFor(m => m.user.FirstName, new { Placeholder = "Enter Your First Name", disabled = "disabled", @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.user.FirstName, "", new { @class = "text-danger" })
+                        @*<label for="inputMyProfileFirstName">First Name *</label>
+                            <input class="form-control" placeholder="Enter your First Name" type="text" id="inputMyProfileFirstName" required>*@
+                    </div>
+                    <div class="block col-12">
+                        @Html.LabelFor(x => x.user.LastName)
+                        @Html.TextBoxFor(m => m.user.LastName, new { Placeholder = "Enter Your First Name", disabled = "disabled", @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.user.LastName, "", new { @class = "text-danger" })
+                        @*<label for="inputMyProfileLastName">Last Name *</label>
+                            <input class="form-control" placeholder="Enter your Last Name" type="text" id="inputMyProfileLastName" required>*@
+                    </div>
+                    <div class="block col-12">
+                        @Html.LabelFor(x => x.user.EmailID)
+                        @Html.TextBoxFor(m => m.user.EmailID, new { Placeholder = "Enter Your First Name", disabled = "disabled", @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.user.EmailID, "", new { @class = "text-danger" })
+                        @*<label for="inputMyProfileEmail">Email Address *</label>
+                            <input class="form-control" placeholder="Enter your Email Address" type="Email" id="inputMyProfileEmail" required>*@
+                    </div>
+                    <div class="block col-12">
+                        @Html.LabelFor(x => x.userProfile.SecondaryEmailAddress)
+                        @Html.TextBoxFor(m => m.userProfile.SecondaryEmailAddress, new { Placeholder = "Enter Your First Name", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.userProfile.SecondaryEmailAddress, "", new { @class = "text-danger" })
+                        @*<label for="inputMyProfileEmail2">Secondary Email</label>
+                            <input class="form-control" placeholder="Enter your Email Address" type="Email" id="inputMyProfileEmail2">*@
+                    </div>
+
+                    <div class="block col-sm-3 col-6">
+                        @Html.LabelFor(x => x.userProfile.PhoneNumber)
+                        @Html.DropDownListFor(x => x.userProfile.CountryCode, new SelectList(Model.countries, "CountryCode", "CountryCode"), "Select Country Code", new { @class = "form-control" })
+                        @*<label for="inputMyProfilePhoneNumberCountryCode">Phone Number</label>
+                            <select id="inputMyProfilePhoneNumberCountryCode" class="form-control">
+                                <option selected>+91</option>
+                                <option>+92</option>
+                                <option>+93</option>
+                                <option>+94</option>
+                            </select>*@
+                    </div>
+                    <div class="block pl-0 col-sm-9 col-12 phone-number d-flex align-items-end">
+                        @Html.TextBoxFor(x => x.userProfile.PhoneNumber, new { placeholder = "Enter your phone Number", @class = "form-control" })
+                        @*<input type="text" class="form-control" id="inputMyProfilePhoneNumber" placeholder="Enter your phone number">*@
+                    </div>
+                    <div class="block col-12 upload-picture">
+                        @Html.LabelFor(x => x.userProfile.ProfilePicture)
+                        <input type="file" name="ProfilePictureFile" class="upload form-control" id="userProfile_ProfilePicture" placeholder="Upload a picture">
+                        @*<label for="inputMyProfile">Profile Picture</label>
+                            <input type="file" class="upload form-control" id="inputMyProfile" placeholder="Enter your phone number">*@
+                    </div>
+                    <!-- Not working proper because there is no form tag -->
+                    <button type="submit" class="btn btn-submit">SUBMIT</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

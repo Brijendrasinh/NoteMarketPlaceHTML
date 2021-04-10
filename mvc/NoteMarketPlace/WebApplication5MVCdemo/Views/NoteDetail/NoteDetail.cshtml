@@ -1,9 +1,11 @@
 ﻿@model WebApplication5MVCdemo.CommanClasses.NoteDetailViewModel
 @using WebApplication5MVCdemo.Models
+@using WebApplication5MVCdemo.CommanClasses
 
 
 @{
     ViewBag.Title = "NoteDetail";
+    ViewBag.Deleteconfirmationbox = "Do you Really Want to Delete This Review?";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -22,7 +24,7 @@
                         }
                         else
                         {
-                            <img src="" alt="default" />
+                            <img src="@ConstantStrings.Default_Noteimage_path"  class="img-fluid" alt="default" />
                         }
                     </div>
                     <div class="col-xl-7 col-lg-7 col-md-12 col-sm-7 col-12">
@@ -179,13 +181,14 @@
         <div class="row row-02" id="note-detail-bottom-wrapper">
             <div class="col-lg-6 col-md-12 col-12">
                 <h5 class="title-section">Notes Preview</h5>
-                <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
-                    <div class="responsive-wrapper
-     responsive-wrapper-padding-bottom-90pct" style="-webkit-overflow-scrolling: touch; overflow: auto;">
-                        @if (Model.sellNote.NotesPreview != null)
-                        {
+                @if (Model.sellNote.NotesPreview != null)
+                {
+                    <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
+                        <div class="responsive-wrapper
+                                    responsive-wrapper-padding-bottom-90pct" style="-webkit-overflow-scrolling: touch; overflow: auto;">
+
                             <iframe src="~/Members/@Model.sellNote.SellerID/@Model.sellNote.ID/@Model.sellNote.NotesPreview">
-                                
+
                                 <p style="font-size: 110%;">
                                     <em>
                                         <strong>ERROR: </strong>
@@ -193,14 +196,16 @@
                                     </em> Please update your browser to its most recent version and try again, or access the file <a href="~/Members/@Model.sellNote.SellerID/@Model.sellNote.ID/@Model.sellNote.NotesPreview">with this link.</a>
                                 </p>
                             </iframe>
-                        }
-                        else
-                        {
-                            <p>There is no preview</p>
-                        }
-                        </div>
-                </div>
 
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <p>There is no preview uploaded by Seller</p>
+                    </div>
+                }
             </div>
             <div class="col-lg-6 col-md-12 col-12">
                 <h5 class="title-section">Customer Reviews</h5>
@@ -222,7 +227,7 @@
                                 <div class="row">
 
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                        <img src="~/Members/@data.ReviewedByID/@userProfile.ProfilePicture" class="img-fluid rounded-circle" alt="prof.pict">
+                                        <img src="~/Members/@data.ReviewedByID/@userProfile.ProfilePicture" class="img-fluid rounded-circle" alt="pp">
                                     </div>
                                     <div class="col-xl-10 col-lg-10 col-md-9 col-sm-10 col-12">
                                         <p class="customer-name">@reviewer.FirstName @reviewer.LastName</p>
@@ -278,7 +283,9 @@
                                         </p>
                                         <p class="customer-review">@data.Comments</p>
                                         <p>
-                                            <img src="~/Admin-Images/images/delete.png"/>
+                                            <a href="@Url.Action("DeleteReview","NoteDetail",new { ID = data.ID})" onclick="return confirm('@ViewBag.Deleteconfirmationbox')">
+                                                <img src="~/Admin-Images/images/delete.png" style="height: 20px;width: 20px" />
+                                            </a>
                                         </p>
                                     </div>
                                 </div>

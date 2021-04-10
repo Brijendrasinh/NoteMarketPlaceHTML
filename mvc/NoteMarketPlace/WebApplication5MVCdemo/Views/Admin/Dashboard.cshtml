@@ -8,16 +8,6 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<script>
-    function formatFileSize(bytes, decimalPoint) {
-        if (bytes == 0) return '0 Bytes';
-        var k = 1024,
-            dm = decimalPoint || 2,
-            sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-            i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    }
-</script>
 
 <div class="container" id="dashboard-top">
     <div class="row">
@@ -28,24 +18,24 @@
             <div class="row text-center">
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="block">
-                        <a href="notes-under-review.html" class="links">
-                            <h5>20</h5>
+                        <a href="@Url.Action("NotesUnderReview","NotesUnderReview")" class="links">
+                            <h5>@Model.NotesUnderReviewCount</h5>
                         </a>
                         <p>Numbers of Notes in Review for Publish</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="block">
-                        <a href="download-notes.html" class="links">
-                            <h5>103</h5>
+                        <a href="@Url.Action("DownloadedNotes","Admin")" class="links">
+                            <h5>@Model.NewDownloadCount</h5>
                         </a>
                         <p>Number of New Notes Downloaded (Last 7 days)</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="block">
-                        <a href="members.html" class="links">
-                            <h5>223</h5>
+                        <a href="@Url.Action("Members","AdminMembers")" class="links">
+                            <h5>@Model.NewRegistrationCount</h5>
                         </a>
                         <p>Numbers Of New Registrations (Last 7 days)</p>
                     </div>
@@ -65,100 +55,109 @@
             <span class="magnifier"><img src="~/Admin-Images/images/search-icon.png" alt=""></span>
             <input class="col-md-5 col-sm-5 col-7 m-left-auto m-left-auto-sm" type="text" placeholder="Search" id="inputMyDownloadSearch">
             <button type="submit" class="col-md-2 col-sm-2 col-3 btn btn-search">SEARCH</button>
-            <select class="col-md-3 col-sm-3 col-4">
-                <option selected value="">Select month</option>
-                <option>...</option>
+            <select class="col-md-3 col-sm-3 col-4" id="monthList">
+                <option value="0">Select month</option>
+                <option value="1">Last month</option>
+                <option value="2">Last 2 month</option>
+                <option value="3">Last 3 month</option>
+                <option value="4">Last 4 month</option>
+                <option value="5">Last 5 month</option>
+                <option value="6">Last 6 month</option>
             </select>
 
 
         </div>
+        <div id="DashboardPartial"></div>
 
-        <div class="col-12 table-scroll">
-            <table class="table" id="datatableDashboardAdmin">
-                <thead>
-                    <tr>
-                        <th class="srno">SR NO.</th>
-                        <th>TITLE</th>
-                        <th>CATEGORY</th>
-                        <th>ATTACHMENT SIZE</th>
-                        <th>SELL TYPE</th>
-                        <th>PRICE</th>
-                        <th>PUBLISHER</th>
-                        <th>PUBLISHED DATE</th>
-                        <th>NUMBER OF DOWNLOADS</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ NoteMarketPlaceEntities db = new NoteMarketPlaceEntities(); }
-                    @foreach (getDahboardData_Result data in Model.getDahboardData_Results)
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="rejectPopupModal" tabindex="-1" role="dialog" aria-labelledby="rejectPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container reject-popup">
+                    @using (Html.BeginForm("Unpublish", "Admin", FormMethod.Post, new { role = "form" }))
                     {
-
-                        SellNoteAttachment noteAttached = db.SellNoteAttachments.Where(x => x.NoteID == data.ID).FirstOrDefault();
-                        SellNote note = db.SellNotes.Where(x => x.ID == data.ID).FirstOrDefault();
-
-                        string path = noteAttached.FilePath + noteAttached.FileName;
-                        long length = new System.IO.FileInfo(path).Length;
-
-                        
-
-                        
-                    <tr>
-                        <td class="srno">@data.ID</td>
-                        <td class="note-title">
-                            <a href="note-detail.html" class="links">
-                                @data.Title
-                            </a>
-                        </td>
-                        <td>@data.Category</td>
-                        <td class="size" >10 kb</td>
-                        @if (data.IsPaid == true)
-                        {
-                            <td>PAID</td>
-                        }
-                        else
-                        {
-                            <td>FREE</td>
-                        }
-
-                        <td>$@data.SellingPrice</td>
-                        <td>@data.Publisher</td>
-                        <td>@data.PublishedDate</td>
-                        @if (data.NumberOfDownload != null)
-                        {
-                            <td class="download-no">@data.NumberOfDownload</td>
-                        }
-                        else
-                        {
-                            <td class="download-no">0</td>
-                        }
-
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" id="dropdownMenu3dot" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="~/Admin-Images/images/dots.png" alt="">
+                        <div class="row">
+                            <div class="col-md-12 remove-height">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu3dot">
-                                    <a class="dropdown-item" role="button" href="#">Download Notes</a>
-                                    <a class="dropdown-item" role="button" href="note-detail.html">View More Details</a>
-                                    <a class="dropdown-item" role="button" href="#">Unpublish</a>
-                                </div>
                             </div>
-                        </td>
-                    </tr>
+                            @Html.Hidden("hiddenId")
+                            <div class="col-md-12 col-12">
+                                <h5 id="Note-title"></h5>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <label for="inputRejectPopupComment">Remarks *</label>
+                                <textarea rows="6" type="text" class="form-control" name="remarks" placeholder="Write remarks" id="inputRejectPopupComment" required></textarea>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-reject" onclick="return confirm('@ViewBag.Rejectconfirmationbox')">Unpublish</button>
+                                <button type="button" class="close btn btn-inreview" data-dismiss="modal" aria-label="Close">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
                     }
 
-                </tbody>
-            </table>
+
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+
 @section scripts{
     <script>
         $("#datatableDashboardAdmin").DataTable();
+        $("#monthList").on("change", function () {
+            BindSellNotesDetail()
+        });
+        $(document).ready(function () {
+            BindSellNotesDetail()
+        });
+        function BindSellNotesDetail() {
 
-        
+            debugger
+            var month = $("#monthList").val();
+            $.ajax({
+                type: 'GET',
+                url: "@Url.Action("GetFilterDashboard", "Admin")",
+                data: {
+                    Month: month
+                },
+                success: function (Result) {
+                    debugger
+                    $("#DashboardPartial").replaceWith(Result);
+                    $("#datatableDashboardAdmin").DataTable();
+                    oTable = $('#datatableDashboardAdmin').DataTable();
+                    $('#inputMyDownloadSearch').keyup(function () {
+                        oTable.search($(this).val()).draw();
+                    });
+                    $(".modalLink").on("click", function () {
+
+                        var ID = $(this).data('id');
+                        $(".modal-body #hiddenId").val(ID);
+                        var Title = $(this).data('title');
+                        $(".modal-body #Note-title").html(Title);
+                    });
+                    $('#datatableDashboardAdmin').DataTable().page.len(1).draw();
+                    
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    debugger
+                    alert("sorry");
+                }
+            });
+        }
+
     </script>
-    
+
 }
