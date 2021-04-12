@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "AddNotes";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutWhiteNav.cshtml";
     ViewBag.confirmationBox = "Publishing this note will send note to administrator for review, once administrator review and approve then this note will be published to portal.Press ok to continue.";
 }
 
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.DisplayPicture)
-                    <input type="file" class="upload form-control" name="DisplayPictureFile" id="SellNote_DisplayPicture">
+                    <input type="file" class="upload form-control" name="DisplayPictureFile" accept = "application/pdf" id="SellNote_DisplayPicture">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <label for="inputAdNoteUploadNotes">Upload Notes *</label>
@@ -104,11 +104,11 @@
 
 
                             <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
-                                @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free" , onchange="radioValue(this)"@*, required = "required"*@ })
+                                @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free" , onchange="radioValue(this)", required = "required" })
                                 <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
                             </div>
                             <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
-                                @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)"@*, required = "required"*@ })
+                                @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)" })
                                 <label class="custom-control-label" for="paid">Paid</label>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -120,7 +120,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <label for="inputAddNotePreview">Note Preview</label>
                         <div class="note-preview">
-                            <input type="file" id="inputAddNotePreview" name="PreviewFile" placeholder="Upload a file" class="upload note-preview-input form-control">
+                            <input type="file" id="inputAddNotePreview" name="PreviewFile" accept = "application/pdf" class="upload note-preview-input form-control">
                         </div>
                     </div>
                     <button type="submit" name="SavePublish" value="save" class="btn btn-addnote-save">SAVE</button>

@@ -100,13 +100,21 @@ namespace NoteMarketPlace.Controllers
                     // check paid status
                     SellNotesEntity PaidOrNot = new SellNotesEntity();
                     bool PaidStatus = PaidOrNot.CheckNoteStatusPaidOrNot(user.IsPaidOrNot);
+                    if(user.SellNote.SellingPrice != null)
+                    {
+                        note.SellingPrice = user.SellNote.SellingPrice;
+                    }
+                    else
+                    {
+                        note.SellingPrice = 0;
+                    }
 
                     note.Course = user.SellNote.Course;
                     note.CourseCode = user.SellNote.CourseCode;
                     note.Discription = user.SellNote.Discription;
                     note.NumberOfPages = user.SellNote.NumberOfPages;
                     note.Professor = user.SellNote.Professor;
-                    note.SellingPrice = user.SellNote.SellingPrice;
+                    
                     note.Title = user.SellNote.Title;
                     note.UniversityName = user.SellNote.UniversityName;
                     note.IsPaid = PaidStatus;
@@ -286,7 +294,7 @@ namespace NoteMarketPlace.Controllers
                         Discription = user.SellNote.Discription,
                         NumberOfPages = user.SellNote.NumberOfPages,
                         Professor = user.SellNote.Professor,
-                        SellingPrice = user.SellNote.SellingPrice,
+                        
                         Title = user.SellNote.Title,
                         UniversityName = user.SellNote.UniversityName,
                         IsPaid = PaidStatus,
@@ -302,6 +310,14 @@ namespace NoteMarketPlace.Controllers
 
                     try
                     {
+                        if (user.SellNote.SellingPrice != null)
+                        {
+                            addSellNoteDetail.SellingPrice = user.SellNote.SellingPrice;
+                        }
+                        else
+                        {
+                            addSellNoteDetail.SellingPrice = 0;
+                        }
                         db.SellNotes.Add(addSellNoteDetail);
                         db.SaveChanges();
                         int NotesID = addSellNoteDetail.ID;
@@ -383,7 +399,7 @@ namespace NoteMarketPlace.Controllers
                         Discription = user.SellNote.Discription,
                         NumberOfPages = user.SellNote.NumberOfPages,
                         Professor = user.SellNote.Professor,
-                        SellingPrice = user.SellNote.SellingPrice,
+                        
                         Title = user.SellNote.Title,
                         UniversityName = user.SellNote.UniversityName,
                         IsPaid = PaidStatus,
@@ -400,6 +416,14 @@ namespace NoteMarketPlace.Controllers
 
                     try
                     {
+                        if (user.SellNote.SellingPrice != null)
+                        {
+                            addSellNoteDetail.SellingPrice = user.SellNote.SellingPrice;
+                        }
+                        else
+                        {
+                            addSellNoteDetail.SellingPrice = 0;
+                        }
                         db.SellNotes.Add(addSellNoteDetail);
                         db.SaveChanges();
                         int NotesID = addSellNoteDetail.ID;
