@@ -12,8 +12,8 @@ namespace WebApplication5MVCdemo.CommanClasses
         public const string Default_Picture_path = "Default/";
         public const string Default_Noteimage_path = "/Members/Default/DefaultNotePicture.jpg";
         public const string Default_Profileimage_path = "/Members/Default/DefaultProfilePicture.jpg";
-        public const string supportEmail = "tatvasoftbrijendrasupport@gmail.com";
-        public const string supportPassword = "b1k2chavda";
+        public const string supportEmail = "tatvasoftbrijendrasuppor@gmail.com";
+        public const string supportPassword = "B1k2chavd@";
         public const string supportName = "BrijendraSinh";
     }
 }

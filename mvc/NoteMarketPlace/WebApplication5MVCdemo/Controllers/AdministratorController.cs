@@ -107,81 +107,88 @@ namespace WebApplication5MVCdemo.Controllers
         [HttpPost]
         public ActionResult AddAdministrator(ManageAdministratorViewModel model)
         {
-            int AddedBy = Convert.ToInt32(Session["ID"]);
-            User user = db.Users.Where(x => x.EmailID.Equals(model.Email)).FirstOrDefault();
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                UserProfile userProfile = db.UserProfiles.Where(x => x.UserID == user.ID).FirstOrDefault();
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.ModifiedBy = AddedBy;
-                user.ModifiedDate = DateTime.Now;
-                user.IsActive = true;
-                if (userProfile != null)
+                int AddedBy = Convert.ToInt32(Session["ID"]);
+                User user = db.Users.Where(x => x.EmailID.Equals(model.Email)).FirstOrDefault();
+                if (user != null)
                 {
-                    userProfile.CountryCode = model.CountryCode;
-                    userProfile.PhoneNumber = model.PhoneNumber;
-                    userProfile.ModifiedDate = DateTime.Now;
-                    userProfile.ModifiedBy = AddedBy;
+                    UserProfile userProfile = db.UserProfiles.Where(x => x.UserID == user.ID).FirstOrDefault();
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.ModifiedBy = AddedBy;
+                    user.ModifiedDate = DateTime.Now;
+                    user.IsActive = true;
+                    if (userProfile != null)
+                    {
+                        userProfile.CountryCode = model.CountryCode;
+                        userProfile.PhoneNumber = model.PhoneNumber;
+                        userProfile.ModifiedDate = DateTime.Now;
+                        userProfile.ModifiedBy = AddedBy;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        UserProfile NewEntry = new UserProfile()
+                        {
+                            UserID = user.ID,
+                            PhoneNumber = model.PhoneNumber,
+                            AddressLine1 = "Admin",
+                            AddressLine2 = "Admin",
+                            City = "Admin",
+                            State = "Admin",
+                            ZipCode = "Admin",
+                            Country = "Admin",
+                            CountryCode = model.CountryCode,
+                            CreatedDate = DateTime.Now,
+                            CreatedBy = AddedBy,
+                        };
+                        db.UserProfiles.Add(NewEntry);
+                        db.SaveChanges();
+                    }
                     db.SaveChanges();
                 }
                 else
                 {
-                    UserProfile NewEntry = new UserProfile()
+                    int Admin = Convert.ToInt32(Enums.UserRoleId.Admin);
+                    User NewEntry = new User()
                     {
-                        UserID = user.ID,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        EmailID = model.Email,
+                        RoleID = Admin,
+                        CreatedBy = AddedBy,
+                        CreatedDate = DateTime.Now,
+                        IsEmailVerified = true,
+                        Password = "admin",
+                        IsActive = true,
+                    };
+                    db.Users.Add(NewEntry);
+                    db.SaveChanges();
+                    UserProfile NewProfile = new UserProfile()
+                    {
+                        UserID = NewEntry.ID,
                         PhoneNumber = model.PhoneNumber,
+                        CountryCode = model.CountryCode,
                         AddressLine1 = "Admin",
                         AddressLine2 = "Admin",
                         City = "Admin",
                         State = "Admin",
                         ZipCode = "Admin",
                         Country = "Admin",
-                        CountryCode = model.CountryCode,
                         CreatedDate = DateTime.Now,
                         CreatedBy = AddedBy,
+
                     };
-                    db.UserProfiles.Add(NewEntry);
+                    db.UserProfiles.Add(NewProfile);
                     db.SaveChanges();
                 }
-                db.SaveChanges();
+                return RedirectToAction("ManageAdministrator", "Administrator");
             }
             else
             {
-                int Admin = Convert.ToInt32(Enums.UserRoleId.Admin);
-                User NewEntry = new User()
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    EmailID = model.Email,
-                    RoleID = Admin,
-                    CreatedBy = AddedBy,
-                    CreatedDate = DateTime.Now,
-                    IsEmailVerified = true,
-                    Password = "admin",
-                    IsActive = true,
-                };
-                db.Users.Add(NewEntry);
-                db.SaveChanges();
-                UserProfile NewProfile = new UserProfile()
-                {
-                    UserID = NewEntry.ID,
-                    PhoneNumber = model.PhoneNumber,
-                    CountryCode = model.CountryCode,
-                    AddressLine1 = "Admin",
-                    AddressLine2 = "Admin",
-                    City = "Admin",
-                    State = "Admin",
-                    ZipCode = "Admin",
-                    Country = "Admin",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = AddedBy,
-
-                };
-                db.UserProfiles.Add(NewProfile);
-                db.SaveChanges();
+                return View(model);
             }
-            return RedirectToAction("ManageAdministrator", "Administrator");
         }
         public ActionResult DeleteAdministrator(int? ID)
         {

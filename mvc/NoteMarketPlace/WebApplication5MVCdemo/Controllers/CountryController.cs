@@ -70,32 +70,40 @@ namespace WebApplication5MVCdemo.Controllers
         [HttpPost]
         public ActionResult AddCountry(ManageCountryViewModel model)
         {
-            Country countryData = db.Countries.Where(x => x.CountryCode.Equals(model.CountryCode)).FirstOrDefault();
-            int AddedBy = Convert.ToInt32(Session["ID"]);
-            if (countryData != null)
+            if (ModelState.IsValid)
             {
-                countryData.Name = model.CountryName;
-                countryData.CountryCode = model.CountryCode;
-                countryData.ModifiedDate = DateTime.Now;
-                countryData.ModifiedBy = AddedBy;
-                countryData.IsActive = true;
-                db.SaveChanges();
+                Country countryData = db.Countries.Where(x => x.CountryCode.Equals(model.CountryCode)).FirstOrDefault();
+                int AddedBy = Convert.ToInt32(Session["ID"]);
+                if (countryData != null)
+                {
+                    countryData.Name = model.CountryName;
+                    countryData.CountryCode = model.CountryCode;
+                    countryData.ModifiedDate = DateTime.Now;
+                    countryData.ModifiedBy = AddedBy;
+                    countryData.IsActive = true;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Country NewEntry = new Country()
+                    {
+                        Name = model.CountryName,
+                        CountryCode = model.CountryCode,
+                        CreatedBy = AddedBy,
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                    };
+                    db.Countries.Add(NewEntry);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ManageCountry", "Country");
             }
             else
             {
-                Country NewEntry = new Country()
-                {
-                    Name = model.CountryName,
-                    CountryCode = model.CountryCode,
-                    CreatedBy = AddedBy,
-                    CreatedDate = DateTime.Now,
-                    IsActive = true,
-
-                };
-                db.Countries.Add(NewEntry);
-                db.SaveChanges();
+                return View(model);
             }
-            return RedirectToAction("ManageCountry", "Country");
+            
         }
         public ActionResult DeleteCountry(int? ID)
         {

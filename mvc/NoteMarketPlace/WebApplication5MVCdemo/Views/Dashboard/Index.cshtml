@@ -77,7 +77,7 @@
 
                 <span class="magnifier"><img src="~/Front_images/images/search-icon.png" alt=""></span>
                 <input class="col-sm-7 col-7 m-left-auto" type="search" placeholder="Search" id="InProgressNoteSearch">
-                <button class="col-sm-3 col-3 btn btn-search" name="search" type="submit">Search</button>
+                <button class="col-sm-3 col-3 btn btn-search" name="search" id="InProgressNoteSearchButton" type="submit">Search</button>
 
             </div>
             <div class="col-md-12 table-scroll">
@@ -146,7 +146,7 @@
 
                 <span class="magnifier"><img src="Front_images/images/search-icon.png" alt=""></span>
                 <input class="col-sm-7 col-7 m-left-auto" type="search" placeholder="Search" id="publishedNoteSearch">
-                <button class="col-sm-3 col-3 btn btn-search" name="search" type="submit">Search</button>
+                <button class="col-sm-3 col-3 btn btn-search" name="search" id="publishedNoteSearchButton" type="submit">Search</button>
 
             </div>
             <div class="col-12 table-scroll">
@@ -207,8 +207,8 @@
 
             //InProgress Table
             oTable = $('#InProgress-table').DataTable();
-            $('#InProgressNoteSearch').keyup(function () {
-                oTable.search($(this).val()).draw();
+            $('#InProgressNoteSearchButton').click(function () {
+                oTable.search($('#InProgressNoteSearch').val()).draw();
             });
 
             $('#InProgress-table').DataTable().page.len(5).draw();
@@ -216,8 +216,8 @@
 
             //Published Table
             vTable = $('#Published-table').DataTable();
-            $('#publishedNoteSearch').keyup(function () {
-                vTable.search($(this).val()).draw();
+            $('#publishedNoteSearchButton').click(function () {
+                vTable.search($("#publishedNoteSearch").val()).draw();
             });
 
             $('#Published-table').DataTable().page.len(5).draw();

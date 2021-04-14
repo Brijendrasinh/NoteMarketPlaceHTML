@@ -16,7 +16,7 @@
                 <span class="magnifier"><img src="images/Dashboard/search.jpg" alt=""></span>
                 <input class="col-sm-7 col-7 m-left-auto" type="text" placeholder="Search" id="inputMyRejectedNoteSearch">
 
-                <button type="submit" class="col-sm-3 col-3 btn btn-mydownload-search">SEARCH</button>
+                <button type="submit" id="inputMyRejectedNoteSearchButton" class="col-sm-3 col-3 btn btn-mydownload-search">SEARCH</button>
             </div>
             <div class="col-12 table-scroll">
                 <table id="MyRejectedNote-table" class="table table-border">
@@ -71,8 +71,8 @@
         $(document).ready(function () {
 
             oTable = $('#MyRejectedNote-table').DataTable();
-            $('#inputMyRejectedNoteSearch').keyup(function () {
-                oTable.search($(this).val()).draw();
+            $('#inputMyRejectedNoteSearchButton').click(function () {
+                oTable.search($('#inputMyRejectedNoteSearch').val()).draw();
             });
 
             $('#MyRejectedNote-table').DataTable().page.len(10).draw();

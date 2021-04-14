@@ -54,7 +54,7 @@
 
             <span class="magnifier"><img src="~/Admin-Images/images/search-icon.png" alt=""></span>
             <input class="col-md-5 col-sm-5 col-7 m-left-auto m-left-auto-sm" type="text" placeholder="Search" id="inputMyDownloadSearch">
-            <button type="submit" class="col-md-2 col-sm-2 col-3 btn btn-search">SEARCH</button>
+            <button type="submit" id="InutSearchButton" class="col-md-2 col-sm-2 col-3 btn btn-search">SEARCH</button>
             <select class="col-md-3 col-sm-3 col-4" id="monthList">
                 <option value="0">Select month</option>
                 <option value="1">Last month</option>
@@ -131,8 +131,8 @@
                     $("#DashboardPartial").replaceWith(Result);
                     $("#datatableDashboardAdmin").DataTable();
                     oTable = $('#datatableDashboardAdmin').DataTable();
-                    $('#inputMyDownloadSearch').keyup(function () {
-                        oTable.search($(this).val()).draw();
+                    $('#InutSearchButton').click(function () {
+                        oTable.search($("#inputMyDownloadSearch").val()).draw();
                     });
                     $(".modalLink").on("click", function () {
 

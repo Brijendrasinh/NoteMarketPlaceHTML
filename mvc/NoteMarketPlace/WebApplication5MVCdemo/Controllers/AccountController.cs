@@ -113,7 +113,8 @@ namespace NoteMarketPlace.Controllers
                         }
 
                         //update password in database
-                        var PasswordOfUser = db.Users.Where(x => x.EmailID.Equals(user.EmailID)).ToList().Select(x => x.Password = strrandom);
+                        var PasswordOfUser = db.Users.Where(x => x.EmailID.Equals(user.EmailID)).FirstOrDefault();
+                        PasswordOfUser.Password = strrandom;
                         db.SaveChanges();
 
                         // Email sending
@@ -132,11 +133,11 @@ namespace NoteMarketPlace.Controllers
 
                         var smtp = new SmtpClient
                         {
-                            Host = ConfigurationManager.AppSettings["Host"],
-                            Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
-                            EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]),
+                            Host = System.Configuration.ConfigurationManager.AppSettings["Host"].ToString(),
+                            Port = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["Port"]),
+                            EnableSsl = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["EnableSsl"]),
                             DeliveryMethod = SmtpDeliveryMethod.Network,
-                            UseDefaultCredentials = Convert.ToBoolean(ConfigurationManager.AppSettings["UseDefaultCredentials"]),
+                            UseDefaultCredentials = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["UseDefaultCredentials"]),
                             Credentials = new NetworkCredential(sender.Address, password)
                         };
 

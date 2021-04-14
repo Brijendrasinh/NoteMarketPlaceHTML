@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.DisplayPicture)
-                    <input type="file" class="upload form-control" name="DisplayPictureFile" accept = "application/pdf" id="SellNote_DisplayPicture">
+                    <input type="file" class="upload form-control" name="DisplayPictureFile" accept="application/pdf" id="SellNote_DisplayPicture">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <label for="inputAdNoteUploadNotes">Upload Notes *</label>
@@ -99,28 +99,67 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <label for="inlineRadioOptionSellFor">Sell For *</label>
+                        @if (Model.IsPaidOrNot != null)
+                        {
+                            if (Model.IsPaidOrNot == "True")
+                            {
+                                <div class="row">
+                                    <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
+                                        @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free", onchange = "radioValue(this)", required = "required" })
+                                        <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
+                                    </div>
+                                    <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
+                                        @Html.RadioButton("IsPaidOrNot", "true", false, new { @checked = "checked", @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)" })
+                                        <label class="custom-control-label" for="paid">Paid</label>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        @Html.LabelFor(m => m.SellNote.SellingPrice)
+                                        @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
+                                        @Html.RadioButton("IsPaidOrNot", "false", false, new { @checked = "checked", @class = "custom-control-input", @id = "free", onchange = "radioValue(this)", required = "required" })
+                                        <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
+                                    </div>
+                                    <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
+                                        @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)" })
+                                        <label class="custom-control-label" for="paid">Paid</label>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        @Html.LabelFor(m => m.SellNote.SellingPrice)
+                                        @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+                            }
 
-                        <div class="row">
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
+                                    @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free", onchange = "radioValue(this)", required = "required" })
+                                    <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
+                                </div>
+                                <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
+                                    @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)" })
+                                    <label class="custom-control-label" for="paid">Paid</label>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    @Html.LabelFor(m => m.SellNote.SellingPrice)
+                                    @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
+                                </div>
+                            </div>
+                        }
 
-
-                            <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
-                                @Html.RadioButton("IsPaidOrNot", "false", false, new { @class = "custom-control-input", @id = "free" , onchange="radioValue(this)", required = "required" })
-                                <label style="margin-left: 50px" class="custom-control-label" for="free">Free</label>
-                            </div>
-                            <div class="col-md-4 col-5 custom-control custom-radio custom-control-inline">
-                                @Html.RadioButton("IsPaidOrNot", "true", false, new { @class = "custom-control-input", @id = "paid", onchange = "radioValue(this)" })
-                                <label class="custom-control-label" for="paid">Paid</label>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                @Html.LabelFor(m => m.SellNote.SellingPrice)
-                                @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
-                            </div>
-                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <label for="inputAddNotePreview">Note Preview</label>
                         <div class="note-preview">
-                            <input type="file" id="inputAddNotePreview" name="PreviewFile" accept = "application/pdf" class="upload note-preview-input form-control">
+                            <input type="file" id="inputAddNotePreview" name="PreviewFile" accept="application/pdf" class="upload note-preview-input form-control">
                         </div>
                     </div>
                     <button type="submit" name="SavePublish" value="save" class="btn btn-addnote-save">SAVE</button>
@@ -140,11 +179,13 @@
         function radioValue(radio) {
             if (radio.value == "false") {
                 $('#inputAddNotePreview').prop('required', false);
+                $('#SellNote_SellingPrice').prop('disabled', true);
             }
             else {
                 $('#inputAddNotePreview').prop('required', true);
+                $('#SellNote_SellingPrice').prop('disabled', false);
             }
         }
-        
-    </script>    
+
+    </script>
 }

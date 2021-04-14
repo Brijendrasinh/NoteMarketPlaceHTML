@@ -47,52 +47,60 @@ namespace NoteMarketPlace.Controllers
         [HttpPost]
         public ActionResult Contact(ContactPageLogedUSer user)
         {
-            if (user.EmailId == null || user.FullName == null)
+            if (ModelState.IsValid)
             {
-                user.EmailId = Session["EmailID"].ToString();
+                if (user.EmailId == null || user.FullName == null)
+                {
+                    user.EmailId = Session["EmailID"].ToString();
 
-                var result = db.Users.Where(x => x.EmailID.Equals(user.EmailId)).FirstOrDefault();
-                var fullName = result.FirstName + ' ' + result.LastName;
+                    var result = db.Users.Where(x => x.EmailID.Equals(user.EmailId)).FirstOrDefault();
+                    var fullName = result.FirstName + ' ' + result.LastName;
 
-                user.FullName = fullName;
+                    user.FullName = fullName;
+                }
+
+                //send Email
+                var sender = new MailAddress(ConstantStrings.supportEmail, ConstantStrings.supportName);
+                var receiver = new MailAddress("brij2457@gmail.com", "Admin");
+                var password = ConstantStrings.supportPassword;
+                var body = string.Empty;
+                var subject = user.FullName + "-" + user.Subject;
+
+                using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTemplates/ContactUsMail.html")))
+                {
+                    body = reader.ReadToEnd();
+                }
+                body = body.Replace("{UserComment}", user.Comment);
+                body = body.Replace("{UserName}", user.FullName);
+
+                var smtp = new SmtpClient
+                {
+                    Host = ConfigurationManager.AppSettings["Host"],
+                    Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
+                    EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = Convert.ToBoolean(ConfigurationManager.AppSettings["UseDefaultCredentials"]),
+                    Credentials = new NetworkCredential(sender.Address, password)
+                };
+
+                using (var messege = new MailMessage(sender, receiver)
+                {
+                    Body = body,
+                    Subject = subject,
+                    IsBodyHtml = true
+                })
+                {
+                    smtp.Send(messege);
+
+                }
+
+                return RedirectToAction("Contact", "Home");
             }
-
-            //send Email
-            var sender = new MailAddress("brijendrasinhchavda2018@gmail.com", "Brijendrasinh");
-            var receiver = new MailAddress("brij2457@gmail.com", "Admin");
-            var password = "b1k2chavda";
-            var body = string.Empty;
-            var subject = user.FullName + "-" + user.Subject;
-
-            using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTemplates/ContactUsMail.html")))
+            else
             {
-                body = reader.ReadToEnd();
+                return View(user);
             }
-            body = body.Replace("{UserComment}", user.Comment);
-            body = body.Replace("{UserName}", user.FullName);
-
-            var smtp = new SmtpClient
-            {
-                Host = ConfigurationManager.AppSettings["Host"],
-                Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
-                EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]),
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = Convert.ToBoolean(ConfigurationManager.AppSettings["UseDefaultCredentials"]),
-                Credentials = new NetworkCredential(sender.Address, password)
-            };
-
-            using (var messege = new MailMessage(sender, receiver)
-            {
-                Body = body,
-                Subject = subject,
-                IsBodyHtml = true
-            })
-            {
-                smtp.Send(messege);
-
-            }
-
-            return RedirectToAction("Contact", "Home");
+            
         }
 
         public ActionResult FAQ()

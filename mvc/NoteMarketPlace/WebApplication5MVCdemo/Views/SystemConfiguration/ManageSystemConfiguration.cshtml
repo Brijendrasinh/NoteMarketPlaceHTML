@@ -16,15 +16,18 @@
 
                     <div class="block col-12">
                         @Html.LabelFor(x => x.SupportEmail)
-                        @Html.TextBoxFor(x => x.SupportEmail, new {@class="form-control", placeholder="Enter your Email Address", required ="required"})
+                        @Html.TextBoxFor(x => x.SupportEmail, new { @class = "form-control", placeholder = "Enter your Email Address", required = "required" })
+                        @Html.ValidationMessageFor(m => m.SupportEmail, "", new { @class = "text-danger" })
                     </div>
                     <div class="block col-12">
                         @Html.LabelFor(x => x.SupportContactNumber)
                         @Html.TextBoxFor(x => x.SupportContactNumber, new { @class = "form-control", placeholder = "Enter Phone number", required = "required" })
+                        @Html.ValidationMessageFor(m => m.SupportContactNumber, "", new { @class = "text-danger" })
                     </div>
                     <div class="block col-12">
                         @Html.LabelFor(x => x.EmailAddresses)
                         @Html.TextBoxFor(x => x.EmailAddresses, new { @class = "form-control", placeholder = "Enter your Email Address", required = "required" })
+                        @Html.ValidationMessageFor(m => m.EmailAddresses, "", new { @class = "text-danger" })
                     </div>
                     <div class="block col-12">
                         @Html.LabelFor(x => x.Facebook)

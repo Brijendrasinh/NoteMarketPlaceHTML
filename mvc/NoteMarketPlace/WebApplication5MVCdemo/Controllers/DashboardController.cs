@@ -70,6 +70,7 @@ namespace NoteMarketPlace.Controllers
                 {
                     SellNote note = db.SellNotes.Where(x => x.ID == noteId).FirstOrDefault();
                     viewModel.SellNote = note;
+                    viewModel.IsPaidOrNot = note.IsPaid.ToString();
                 }
                 return View(viewModel);
             }

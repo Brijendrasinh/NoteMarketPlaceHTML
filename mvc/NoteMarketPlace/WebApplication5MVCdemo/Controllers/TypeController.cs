@@ -70,32 +70,40 @@ namespace WebApplication5MVCdemo.Controllers
         [HttpPost]
         public ActionResult AddType(ManageTypeViewModel model)
         {
-            NoteType countryData = db.NoteTypes.Where(x => x.Name.Equals(model.Type)).FirstOrDefault();
-            int AddedBy = Convert.ToInt32(Session["ID"]);
-            if (countryData != null)
+            if (ModelState.IsValid)
             {
-                countryData.Name = model.Type;
-                countryData.Description = model.Description;
-                countryData.ModifiedDate = DateTime.Now;
-                countryData.ModifiedBy = AddedBy;
-                countryData.IsActive = true;
-                db.SaveChanges();
+                NoteType countryData = db.NoteTypes.Where(x => x.Name.Equals(model.Type)).FirstOrDefault();
+                int AddedBy = Convert.ToInt32(Session["ID"]);
+                if (countryData != null)
+                {
+                    countryData.Name = model.Type;
+                    countryData.Description = model.Description;
+                    countryData.ModifiedDate = DateTime.Now;
+                    countryData.ModifiedBy = AddedBy;
+                    countryData.IsActive = true;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    NoteType NewEntry = new NoteType()
+                    {
+                        Name = model.Type,
+                        Description = model.Description,
+                        CreatedBy = AddedBy,
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                    };
+                    db.NoteTypes.Add(NewEntry);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ManageType", "Type");
             }
             else
             {
-                NoteType NewEntry = new NoteType()
-                {
-                    Name = model.Type,
-                    Description = model.Description,
-                    CreatedBy = AddedBy,
-                    CreatedDate = DateTime.Now,
-                    IsActive = true,
-
-                };
-                db.NoteTypes.Add(NewEntry);
-                db.SaveChanges();
+                return View(model);
             }
-            return RedirectToAction("ManageType", "Type");
+            
         }
         public ActionResult DeleteType(int? ID)
         {

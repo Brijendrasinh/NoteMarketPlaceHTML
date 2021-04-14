@@ -51,81 +51,89 @@ namespace WebApplication5MVCdemo.Controllers
                                                       HttpPostedFileBase DefaultProfilePicturefile,
                                                       HttpPostedFileBase DefaultNotePicturefile)
         {
-            string DefaultProfilePictureFileName;
-            string DefaultNotePictureFileName;
-            SystemConfiguration supportEmail = db.SystemConfigurations.Where(x => x.Keys.Equals("SupportEmail")).FirstOrDefault();
-            supportEmail.Value = model.SupportEmail;
-            supportEmail.CreatedDate = DateTime.Now;
-            supportEmail.CreatedBy = Convert.ToInt32(Session["ID"]);
-            SystemConfiguration SupportPhoneNumber = db.SystemConfigurations.Where(x => x.Keys.Equals("SupportPhoneNumber")).FirstOrDefault();
-            SupportPhoneNumber.Value = model.SupportContactNumber;
-            SupportPhoneNumber.CreatedDate = DateTime.Now;
-            SupportPhoneNumber.CreatedBy = Convert.ToInt32(Session["ID"]);
-            if (model.Facebook != null)
+            if (ModelState.IsValid)
             {
-                SystemConfiguration Facebook = db.SystemConfigurations.Where(x => x.Keys.Equals("Facebook")).FirstOrDefault();
-                Facebook.Value = model.Facebook;
-                Facebook.CreatedDate = DateTime.Now;
-                Facebook.CreatedBy = Convert.ToInt32(Session["ID"]);
-            }
-            if (model.Twitter != null)
-            {
-                SystemConfiguration Twitter = db.SystemConfigurations.Where(x => x.Keys.Equals("Twitter")).FirstOrDefault();
-                Twitter.Value = model.Twitter;
-                Twitter.CreatedDate = DateTime.Now;
-                Twitter.CreatedBy = Convert.ToInt32(Session["ID"]);
-            }
-            if (model.Linkdin != null)
-            {
-                SystemConfiguration Linkedin = db.SystemConfigurations.Where(x => x.Keys.Equals("Linkedin")).FirstOrDefault();
-                Linkedin.Value = model.Linkdin;
-                Linkedin.CreatedDate = DateTime.Now;
-                Linkedin.CreatedBy = Convert.ToInt32(Session["ID"]);
-            }
-            SystemConfiguration DefaultNotePicture = db.SystemConfigurations.Where(x => x.Keys.Equals("DefaultNotePicture")).FirstOrDefault();
-            if (DefaultNotePicturefile != null)
-            {
-                var fileExtension = Path.GetExtension(DefaultNotePicturefile.FileName);
-                DefaultNotePictureFileName = "DefaultNotePicture" + fileExtension;
-
-                var File = CheckifPathExistForCurrentUser() + DefaultNotePicture.Value;
-
-                if (System.IO.File.Exists(File))
+                string DefaultProfilePictureFileName;
+                string DefaultNotePictureFileName;
+                SystemConfiguration supportEmail = db.SystemConfigurations.Where(x => x.Keys.Equals("SupportEmail")).FirstOrDefault();
+                supportEmail.Value = model.SupportEmail;
+                supportEmail.CreatedDate = DateTime.Now;
+                supportEmail.CreatedBy = Convert.ToInt32(Session["ID"]);
+                SystemConfiguration SupportPhoneNumber = db.SystemConfigurations.Where(x => x.Keys.Equals("SupportPhoneNumber")).FirstOrDefault();
+                SupportPhoneNumber.Value = model.SupportContactNumber;
+                SupportPhoneNumber.CreatedDate = DateTime.Now;
+                SupportPhoneNumber.CreatedBy = Convert.ToInt32(Session["ID"]);
+                if (model.Facebook != null)
                 {
-                    System.IO.File.Delete(File);
+                    SystemConfiguration Facebook = db.SystemConfigurations.Where(x => x.Keys.Equals("Facebook")).FirstOrDefault();
+                    Facebook.Value = model.Facebook;
+                    Facebook.CreatedDate = DateTime.Now;
+                    Facebook.CreatedBy = Convert.ToInt32(Session["ID"]);
+                }
+                if (model.Twitter != null)
+                {
+                    SystemConfiguration Twitter = db.SystemConfigurations.Where(x => x.Keys.Equals("Twitter")).FirstOrDefault();
+                    Twitter.Value = model.Twitter;
+                    Twitter.CreatedDate = DateTime.Now;
+                    Twitter.CreatedBy = Convert.ToInt32(Session["ID"]);
+                }
+                if (model.Linkdin != null)
+                {
+                    SystemConfiguration Linkedin = db.SystemConfigurations.Where(x => x.Keys.Equals("Linkedin")).FirstOrDefault();
+                    Linkedin.Value = model.Linkdin;
+                    Linkedin.CreatedDate = DateTime.Now;
+                    Linkedin.CreatedBy = Convert.ToInt32(Session["ID"]);
+                }
+                SystemConfiguration DefaultNotePicture = db.SystemConfigurations.Where(x => x.Keys.Equals("DefaultNotePicture")).FirstOrDefault();
+                if (DefaultNotePicturefile != null)
+                {
+                    var fileExtension = Path.GetExtension(DefaultNotePicturefile.FileName);
+                    DefaultNotePictureFileName = "DefaultNotePicture" + fileExtension;
+
+                    var File = CheckifPathExistForCurrentUser() + DefaultNotePicture.Value;
+
+                    if (System.IO.File.Exists(File))
+                    {
+                        System.IO.File.Delete(File);
+                    }
+
+                    DefaultNotePicture.Value = DefaultNotePictureFileName;
+                    DefaultNotePicture.CreatedDate = DateTime.Now;
+                    DefaultNotePicture.CreatedBy = Convert.ToInt32(Session["ID"]);
+                    DefaultNotePictureFileName = CheckifPathExistForCurrentUser() + DefaultNotePictureFileName;
+
+                    DefaultNotePicturefile.SaveAs(DefaultNotePictureFileName);
+                    db.SaveChanges();
+                }
+                SystemConfiguration DefaultProfilePicture = db.SystemConfigurations.Where(x => x.Keys.Equals("DefaultProfilePicture")).FirstOrDefault();
+                if (DefaultProfilePicturefile != null)
+                {
+                    var fileExtension = Path.GetExtension(DefaultProfilePicturefile.FileName);
+                    DefaultProfilePictureFileName = "DefaultProfilePicture" + fileExtension;
+
+                    var File = CheckifPathExistForCurrentUser() + DefaultProfilePicture.Value;
+
+                    if (System.IO.File.Exists(File))
+                    {
+                        System.IO.File.Delete(File);
+                    }
+
+                    DefaultProfilePicture.Value = DefaultProfilePictureFileName;
+                    DefaultProfilePicture.CreatedDate = DateTime.Now;
+                    DefaultProfilePicture.CreatedBy = Convert.ToInt32(Session["ID"]);
+                    DefaultProfilePictureFileName = CheckifPathExistForCurrentUser() + DefaultProfilePictureFileName;
+
+                    DefaultProfilePicturefile.SaveAs(DefaultProfilePictureFileName);
+                    db.SaveChanges();
                 }
 
-                DefaultNotePicture.Value = DefaultNotePictureFileName;
-                DefaultNotePicture.CreatedDate = DateTime.Now;
-                DefaultNotePicture.CreatedBy = Convert.ToInt32(Session["ID"]);
-                DefaultNotePictureFileName = CheckifPathExistForCurrentUser() + DefaultNotePictureFileName;
-
-                DefaultNotePicturefile.SaveAs(DefaultNotePictureFileName);
-                db.SaveChanges();
+                return RedirectToAction("ManageSystemConfiguration", "SystemConfiguration");
             }
-            SystemConfiguration DefaultProfilePicture = db.SystemConfigurations.Where(x => x.Keys.Equals("DefaultProfilePicture")).FirstOrDefault();
-            if (DefaultProfilePicturefile != null)
+            else
             {
-                var fileExtension = Path.GetExtension(DefaultProfilePicturefile.FileName);
-                DefaultProfilePictureFileName = "DefaultProfilePicture" + fileExtension;
-
-                var File = CheckifPathExistForCurrentUser() + DefaultProfilePicture.Value;
-
-                if (System.IO.File.Exists(File))
-                {
-                    System.IO.File.Delete(File);
-                }
-
-                DefaultProfilePicture.Value = DefaultProfilePictureFileName;
-                DefaultProfilePicture.CreatedDate = DateTime.Now;
-                DefaultProfilePicture.CreatedBy = Convert.ToInt32(Session["ID"]);
-                DefaultProfilePictureFileName = CheckifPathExistForCurrentUser() + DefaultProfilePictureFileName;
-
-                DefaultProfilePicturefile.SaveAs(DefaultProfilePictureFileName);
-                db.SaveChanges();
+                return View(model);
             }
-
-            return RedirectToAction("ManageSystemConfiguration", "SystemConfiguration");
+            
         }
 
         public String CheckifPathExistForCurrentUser()

@@ -71,32 +71,40 @@ namespace WebApplication5MVCdemo.Controllers
         [HttpPost]
         public ActionResult AddCategory(ManageCategoryViewModel model)
         {
-            NoteCategory countryData = db.NoteCategories.Where(x => x.Name.Equals(model.CategoryName)).FirstOrDefault();
-            int AddedBy = Convert.ToInt32(Session["ID"]);
-            if (countryData != null)
+            if (ModelState.IsValid)
             {
-                countryData.Name = model.CategoryName;
-                countryData.Description = model.Description;
-                countryData.ModifiedDate = DateTime.Now;
-                countryData.ModifiedBy = AddedBy;
-                countryData.IsActive = true;
-                db.SaveChanges();
+                NoteCategory countryData = db.NoteCategories.Where(x => x.Name.Equals(model.CategoryName)).FirstOrDefault();
+                int AddedBy = Convert.ToInt32(Session["ID"]);
+                if (countryData != null)
+                {
+                    countryData.Name = model.CategoryName;
+                    countryData.Description = model.Description;
+                    countryData.ModifiedDate = DateTime.Now;
+                    countryData.ModifiedBy = AddedBy;
+                    countryData.IsActive = true;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    NoteCategory NewEntry = new NoteCategory()
+                    {
+                        Name = model.CategoryName,
+                        Description = model.Description,
+                        CreatedBy = AddedBy,
+                        CreatedDate = DateTime.Now,
+                        IsActive = true,
+
+                    };
+                    db.NoteCategories.Add(NewEntry);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ManageCategory", "Category");
             }
             else
             {
-                NoteCategory NewEntry = new NoteCategory()
-                {
-                    Name = model.CategoryName,
-                    Description = model.Description,
-                    CreatedBy = AddedBy,
-                    CreatedDate = DateTime.Now,
-                    IsActive = true,
-
-                };
-                db.NoteCategories.Add(NewEntry);
-                db.SaveChanges();
+                return View(model);
             }
-            return RedirectToAction("ManageCategory", "Category");
+            
         }
         public ActionResult DeleteCategory(int? ID)
         {

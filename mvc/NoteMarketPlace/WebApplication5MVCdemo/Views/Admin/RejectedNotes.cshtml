@@ -17,7 +17,7 @@
         <div class="pl-0 m-left-auto align-items-end col-xl-7 col-lg-8 col-md-9 col-sm-9 col-12 row search-side search-side-NUR">
             <span><img src="images/search-icon.png" alt=""></span>
             <input class="col-sm-7 col-7 m-left-auto" type="text" id="inputSearch" placeholder="Search">
-            <button type="submit" class="col-sm-3 col-3 btn btn-search">
+            <button type="submit" id="InutSearchButton" class="col-sm-3 col-3 btn btn-search">
                 SEARCH
             </button>
         </div>
@@ -48,8 +48,8 @@
                     $("#RejectedNotesPartialView").replaceWith(Result);
                     $("#RejectedNotesDataTable").DataTable();
                     oTable = $('#RejectedNotesDataTable').DataTable();
-                    $('#inputSearch').keyup(function () {
-                        oTable.search($(this).val()).draw();
+                    $('#InutSearchButton').click(function () {
+                        oTable.search($("#inputSearch").val()).draw();
                     });
                     $('#RejectedNotesDataTable').DataTable().page.len(10).draw();
                 },

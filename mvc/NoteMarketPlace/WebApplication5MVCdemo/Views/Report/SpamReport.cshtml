@@ -14,7 +14,7 @@
         <div class=" pl-0 m-left-auto col-xl-7 col-sm-8 col-12 row search-side align-items-end">
             <span class="members-span"><img src="images/search-icon.png" alt=""></span>
             <input class="col-sm-7 col-7 m-left-auto" type="text" id="inputSearch" placeholder="Search">
-            <button type="submit" class="col-sm-3 col-3 btn btn-search">
+            <button type="submit" id="InutSearchButton" class="col-sm-3 col-3 btn btn-search">
                 SEARCH
             </button>
         </div>
@@ -75,8 +75,8 @@
 
         $("#ReportDataTable").DataTable();
         oTable = $('#ReportDataTable').DataTable();
-        $('#inputSearch').keyup(function () {
-            oTable.search($(this).val()).draw();
+        $('#InutSearchButton').click(function () {
+            oTable.search($('#inputSearch').val()).draw();
         });
         $('#ReportDataTable').DataTable().page.len(10).draw();
     </script>
