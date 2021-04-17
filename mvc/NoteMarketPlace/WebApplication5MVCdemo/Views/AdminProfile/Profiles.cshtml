@@ -43,7 +43,8 @@
                     </div>
                     <div class="block col-12 upload-picture">
                         @Html.LabelFor(x => x.userProfile.ProfilePicture)
-                        <input type="file" name="ProfilePictureFile" class="upload form-control" id="userProfile_ProfilePicture" placeholder="Upload a picture">
+                        <input type="file" name="ProfilePictureFile" class="upload form-control" accept="image/png,image/jpeg,image/jpg" id="userProfile_ProfilePicture" placeholder="Upload a picture">
+                        @Html.ValidationMessage("ProfilePictureFile", "", new { @class = "text-danger" })
                     </div>
                     <button type="submit" class="btn btn-submit">SUBMIT</button>
                 </div>

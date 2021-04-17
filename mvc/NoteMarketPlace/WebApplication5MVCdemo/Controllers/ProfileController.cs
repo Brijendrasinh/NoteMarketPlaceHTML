@@ -81,14 +81,36 @@ namespace NoteMarketPlace.Controllers
                     
                     if (ProfilePictureFile != null)
                     {
-
+                            
                         var fileExtension = Path.GetExtension(ProfilePictureFile.FileName);
-                        ProfilePictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss")+ fileExtension;
-                        userProfileDetail.ProfilePicture = ProfilePictureFileName;
-                        ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
-                        
-                        ProfilePictureFile.SaveAs(ProfilePictureFileName);
-                        db.SaveChanges();
+                        fileExtension = fileExtension.ToLower();
+                        if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                            fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
+                        {
+                            if (ProfilePictureFile.ContentLength < (10 * 1024 * 1024))
+                            {
+                                ProfilePictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                userProfileDetail.ProfilePicture = ProfilePictureFileName;
+                                ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
+
+                                ProfilePictureFile.SaveAs(ProfilePictureFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("ProfilePictureFile", "Please upload image file of max. 10 MB");
+                                user.Genders = db.Genders.ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("ProfilePictureFile", "Please upload image file of jpg, jpeg, png only");
+                            user.Genders = db.Genders.ToList();
+                            user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                            return View(user);
+                        }
                     }
 
                     return RedirectToAction("Index", "SearchNotes");
@@ -126,19 +148,41 @@ namespace NoteMarketPlace.Controllers
                     {
 
                         var fileExtension = Path.GetExtension(ProfilePictureFile.FileName);
-                        ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
-
-                        var File = CheckifPathExistForCurrentUser() + userProfile.ProfilePicture;
-                        
-                        if (System.IO.File.Exists(File))
+                        fileExtension = fileExtension.ToLower();
+                        if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                            fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
                         {
-                            System.IO.File.Delete(File);
-                        }
+                            if(ProfilePictureFile.ContentLength < (10 * 1024 * 1024))
+                            {
+                                ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
 
-                        userProfile.ProfilePicture = ProfilePictureFileName;
-                        ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
-                        ProfilePictureFile.SaveAs(ProfilePictureFileName);
-                        db.SaveChanges();
+                                var File = CheckifPathExistForCurrentUser() + userProfile.ProfilePicture;
+
+                                if (System.IO.File.Exists(File))
+                                {
+                                    System.IO.File.Delete(File);
+                                }
+
+                                userProfile.ProfilePicture = ProfilePictureFileName;
+                                ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
+                                ProfilePictureFile.SaveAs(ProfilePictureFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("ProfilePictureFile", "Please upload image file of max. 10 MB");
+                                user.Genders = db.Genders.ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("ProfilePictureFile", "Please upload image file of jpg, jpeg, png only");
+                            user.Genders = db.Genders.ToList();
+                            user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                            return View(user);
+                        }
                     }
 
                     return RedirectToAction("Index", "SearchNotes");

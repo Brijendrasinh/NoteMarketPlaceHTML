@@ -28,7 +28,7 @@ namespace WebApplication5MVCdemo.Controllers
                 {
                     AdminProfileViewModel Model = new AdminProfileViewModel();
                     Model.countries = db.Countries.Where(x => x.IsActive == true).ToList();
-                   
+
                     User userModel = db.Users.Where(x => x.ID == id).FirstOrDefault();
 
                     Model.user = userModel;
@@ -52,7 +52,7 @@ namespace WebApplication5MVCdemo.Controllers
         {
             int userid = Convert.ToInt32(Session["ID"]);
             UserProfile userProfile = db.UserProfiles.Where(x => x.UserID == userid).FirstOrDefault();
-            
+
             string ProfilePictureFileName;
 
             if (userProfile != null)
@@ -73,17 +73,37 @@ namespace WebApplication5MVCdemo.Controllers
                     {
 
                         var fileExtension = Path.GetExtension(ProfilePictureFile.FileName);
-                        ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
-
-                        var File = CheckifPathExistForCurrentUser() + userProfile.ProfilePicture;
-                        if (System.IO.File.Exists(File))
+                        fileExtension = fileExtension.ToLower();
+                        if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                            fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
                         {
-                            System.IO.File.Delete(File);
+                            if (ProfilePictureFile.ContentLength < (10 * 1024 * 1024))
+                            {
+                                ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
+
+                                var File = CheckifPathExistForCurrentUser() + userProfile.ProfilePicture;
+                                if (System.IO.File.Exists(File))
+                                {
+                                    System.IO.File.Delete(File);
+                                }
+                                userProfile.ProfilePicture = ProfilePictureFileName;
+                                ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
+                                ProfilePictureFile.SaveAs(ProfilePictureFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("ProfilePictureFile", "Please upload image file of max. 10 MB");
+                                formData.countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                return View(formData);
+                            }
                         }
-                        userProfile.ProfilePicture = ProfilePictureFileName;
-                        ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
-                        ProfilePictureFile.SaveAs(ProfilePictureFileName);
-                        db.SaveChanges();
+                        else
+                        {
+                            ModelState.AddModelError("ProfilePictureFile", "Please upload image file of jpg, jpeg, png only");
+                            formData.countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                            return View(formData);
+                        }
                     }
 
                     return RedirectToAction("Profile", "AdminProfile");
@@ -112,19 +132,39 @@ namespace WebApplication5MVCdemo.Controllers
                 };
                 db.UserProfiles.Add(userProfiledata);
                 db.SaveChanges();
-                if (ProfilePictureFile != null )
+                if (ProfilePictureFile != null)
                 {
 
                     var fileExtension = Path.GetExtension(ProfilePictureFile.FileName);
-                    ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
-                    userProfiledata.ProfilePicture = ProfilePictureFileName;
-                    ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
-                    ProfilePictureFile.SaveAs(ProfilePictureFileName);
-                    db.SaveChanges();
+                    fileExtension = fileExtension.ToLower();
+                    if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                        fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
+                    {
+                        if (ProfilePictureFile.ContentLength < (10 * 1024 * 1024))
+                        {
+                            ProfilePictureFileName = "DP_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + fileExtension;
+                            userProfiledata.ProfilePicture = ProfilePictureFileName;
+                            ProfilePictureFileName = CheckifPathExistForCurrentUser() + ProfilePictureFileName;
+                            ProfilePictureFile.SaveAs(ProfilePictureFileName);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("ProfilePictureFile", "Please upload image file of max. 10 MB");
+                            formData.countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                            return View(formData);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("ProfilePictureFile", "Please upload image file of jpg, jpeg, png only");
+                        formData.countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                        return View(formData);
+                    }
                 }
                 return RedirectToAction("Dashboard", "Admin");
             }
-            
+
 
         }
         public String CheckifPathExistForCurrentUser()

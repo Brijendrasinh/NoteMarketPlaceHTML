@@ -71,6 +71,8 @@ namespace NoteMarketPlace.Controllers
                     SellNote note = db.SellNotes.Where(x => x.ID == noteId).FirstOrDefault();
                     viewModel.SellNote = note;
                     viewModel.IsPaidOrNot = note.IsPaid.ToString();
+                    var attachment = db.SellNoteAttachments.Where(x => x.NoteID == noteId).ToList();
+                    ViewBag.UploadedFileData = attachment.Count();
                 }
                 return View(viewModel);
             }
@@ -134,18 +136,31 @@ namespace NoteMarketPlace.Controllers
                     {
 
                         fileExtension = Path.GetExtension(DisplayPictureFile.FileName);
-                        DisplayPictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                        var checkFile = CheckifPathExistForCurrentUser(note.ID) + note.DisplayPicture;
-                        if (System.IO.File.Exists(checkFile))
+                        fileExtension = fileExtension.ToLower();
+                        if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                            fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
                         {
-                            System.IO.File.Delete(checkFile);
+                            DisplayPictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                            var checkFile = CheckifPathExistForCurrentUser(note.ID) + note.DisplayPicture;
+                            if (System.IO.File.Exists(checkFile))
+                            {
+                                System.IO.File.Delete(checkFile);
+                            }
+                            note.DisplayPicture = DisplayPictureFileName;
+
+                            DisplayPictureFileName = CheckifPathExistForCurrentUser(note.ID) + DisplayPictureFileName;
+
+                            DisplayPictureFile.SaveAs(DisplayPictureFileName);
+                            db.SaveChanges();
                         }
-                        note.DisplayPicture = DisplayPictureFileName;
-
-                        DisplayPictureFileName = CheckifPathExistForCurrentUser(note.ID) + DisplayPictureFileName;
-
-                        DisplayPictureFile.SaveAs(DisplayPictureFileName);
-                        db.SaveChanges();
+                        else
+                        {
+                            ModelState.AddModelError("DisplayPictureFile", "Please upload image file of jpg, jpeg, png only");
+                            user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                            user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                            user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                            return View(user);
+                        }
                     }
 
 
@@ -153,17 +168,29 @@ namespace NoteMarketPlace.Controllers
                     if (PreviewFile != null /*&& note.NotesPreview != null*/)
                     {
                         fileExtension = Path.GetExtension(PreviewFile.FileName);
-                        PreviewFileName = "PreviewFile_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                        var checkFile1 = CheckifPathExistForCurrentUser(note.ID) + note.NotesPreview;
-                        if (System.IO.File.Exists(checkFile1))
+                        fileExtension = fileExtension.ToLower();
+                        if (fileExtension == ".pdf")
                         {
-                            System.IO.File.Delete(checkFile1);
-                        }
-                        note.NotesPreview = PreviewFileName;
-                        PreviewFileName = CheckifPathExistForCurrentUser(note.ID) + PreviewFileName;
+                            PreviewFileName = "PreviewFile_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                            var checkFile1 = CheckifPathExistForCurrentUser(note.ID) + note.NotesPreview;
+                            if (System.IO.File.Exists(checkFile1))
+                            {
+                                System.IO.File.Delete(checkFile1);
+                            }
+                            note.NotesPreview = PreviewFileName;
+                            PreviewFileName = CheckifPathExistForCurrentUser(note.ID) + PreviewFileName;
 
-                        PreviewFile.SaveAs(PreviewFileName);
-                        db.SaveChanges();
+                            PreviewFile.SaveAs(PreviewFileName);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("inputAddNotePreview", "Please upload file of pdf only");
+                            user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                            user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                            user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                            return View(user);
+                        }
                     }
 
 
@@ -189,8 +216,9 @@ namespace NoteMarketPlace.Controllers
                         foreach (HttpPostedFileBase file in UploadedPdfFile)
                         {
                             fileExtension = Path.GetExtension(file.FileName);
+                            fileExtension = fileExtension.ToLower();
                             //Checking file is available to save.  
-                            if (file != null)
+                            if (file != null && fileExtension == ".pdf")
                             {
                                 var InputFileName = Path.GetFileNameWithoutExtension(file.FileName);
                                 var attachment = new SellNoteAttachment()
@@ -203,7 +231,7 @@ namespace NoteMarketPlace.Controllers
                                 db.SellNoteAttachments.Add(attachment);
                                 db.SaveChanges();
                                 int AttachmentID = attachment.ID;
-                                fileExtension = Path.GetExtension(file.FileName);
+                                
                                 var UploadedPdfFileName = AttachmentID.ToString() + "_" + InputFileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
                                 attachment.FileName = UploadedPdfFileName;
                                 var destinationFileLocation = Path.Combine(FilePathForUploadedPdf, UploadedPdfFileName);
@@ -211,7 +239,14 @@ namespace NoteMarketPlace.Controllers
                                 Length = Length + file.ContentLength;
                                 db.SaveChanges();
                             }
-
+                            else
+                            {
+                                ModelState.AddModelError("inputAdNoteUploadNotes", "Please upload file of pdf only");
+                                user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
                         }
 
                         note.AttachmentSize = FileSizeFormatter.FormatSize(Length);
@@ -328,23 +363,48 @@ namespace NoteMarketPlace.Controllers
                         {
 
                             fileExtension = Path.GetExtension(DisplayPictureFile.FileName);
-                            DisplayPictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                            addSellNoteDetail.DisplayPicture = DisplayPictureFileName;
-                            DisplayPictureFileName = CheckifPathExistForCurrentUser(NotesID) + DisplayPictureFileName;
+                            fileExtension = fileExtension.ToLower();
+                            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                            fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
+                            {
+                                DisplayPictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                addSellNoteDetail.DisplayPicture = DisplayPictureFileName;
+                                DisplayPictureFileName = CheckifPathExistForCurrentUser(NotesID) + DisplayPictureFileName;
 
-                            DisplayPictureFile.SaveAs(DisplayPictureFileName);
-                            db.SaveChanges();
+                                DisplayPictureFile.SaveAs(DisplayPictureFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("DisplayPictureFile", "Please upload image file of jpg, jpeg, png only");
+                                user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
                         }
 
                         if (PreviewFile != null)
                         {
                             fileExtension = Path.GetExtension(PreviewFile.FileName);
-                            PreviewFileName = "PreviewFile_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                            addSellNoteDetail.NotesPreview = PreviewFileName;
-                            PreviewFileName = CheckifPathExistForCurrentUser(NotesID) + PreviewFileName;
+                            fileExtension = fileExtension.ToLower();
+                            if (fileExtension == ".pdf")
+                            {
+                                PreviewFileName = "PreviewFile_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                addSellNoteDetail.NotesPreview = PreviewFileName;
+                                PreviewFileName = CheckifPathExistForCurrentUser(NotesID) + PreviewFileName;
 
-                            PreviewFile.SaveAs(PreviewFileName);
-                            db.SaveChanges();
+                                PreviewFile.SaveAs(PreviewFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("inputAddNotePreview", "Please upload file of pdf only");
+                                user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
                         }
 
                         var FilePathForUploadedPdf = checkifPathExistForNoteAttachment(NotesID);
@@ -354,24 +414,38 @@ namespace NoteMarketPlace.Controllers
                             //Checking file is available to save.  
                             if (file != null)
                             {
-                                var InputFileName = Path.GetFileNameWithoutExtension(file.FileName);
-                                var attachment = new SellNoteAttachment()
-                                {
-                                    NoteID = NotesID,
-                                    FileName = InputFileName,
-                                    FilePath = FilePathForUploadedPdf,
-                                    IsActive = true
-                                };
-                                db.SellNoteAttachments.Add(attachment);
-                                db.SaveChanges();
-                                int AttachmentID = attachment.ID;
                                 fileExtension = Path.GetExtension(file.FileName);
-                                var UploadedPdfFileName = AttachmentID.ToString() + "_" + InputFileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                                attachment.FileName = UploadedPdfFileName;
-                                var destinationFileLocation = Path.Combine(FilePathForUploadedPdf, UploadedPdfFileName);
-                                file.SaveAs(destinationFileLocation);
-                                Length = Length + file.ContentLength;
-                                db.SaveChanges();
+                                fileExtension = fileExtension.ToLower();
+                                if (fileExtension == ".pdf")
+                                {
+                                    var InputFileName = Path.GetFileNameWithoutExtension(file.FileName);
+                                    var attachment = new SellNoteAttachment()
+                                    {
+                                        NoteID = NotesID,
+                                        FileName = InputFileName,
+                                        FilePath = FilePathForUploadedPdf,
+                                        IsActive = true
+                                    };
+                                    db.SellNoteAttachments.Add(attachment);
+                                    db.SaveChanges();
+                                    int AttachmentID = attachment.ID;
+
+                                    var UploadedPdfFileName = AttachmentID.ToString() + "_" + InputFileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                    attachment.FileName = UploadedPdfFileName;
+                                    var destinationFileLocation = Path.Combine(FilePathForUploadedPdf, UploadedPdfFileName);
+                                    file.SaveAs(destinationFileLocation);
+                                    Length = Length + file.ContentLength;
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("inputAdNoteUploadNotes", "Please upload file of pdf only");
+                                    user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                    user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                    user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                    return View(user);
+                                }
+
                             }
 
                         }
@@ -434,23 +508,48 @@ namespace NoteMarketPlace.Controllers
                         {
 
                             fileExtension = Path.GetExtension(DisplayPictureFile.FileName);
-                            DisplayPictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                            addSellNoteDetail.DisplayPicture = DisplayPictureFileName;
-                            DisplayPictureFileName = CheckifPathExistForCurrentUser(NotesID) + DisplayPictureFileName;
+                            fileExtension = fileExtension.ToLower();
+                            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" ||
+                            fileExtension == ".JPG" || fileExtension == ".JPEG" || fileExtension == ".PNG")
+                            {
+                                DisplayPictureFileName = "DP_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                addSellNoteDetail.DisplayPicture = DisplayPictureFileName;
+                                DisplayPictureFileName = CheckifPathExistForCurrentUser(NotesID) + DisplayPictureFileName;
 
-                            DisplayPictureFile.SaveAs(DisplayPictureFileName);
-                            db.SaveChanges();
+                                DisplayPictureFile.SaveAs(DisplayPictureFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("DisplayPictureFile", "Please upload image file of jpg, jpeg, png only");
+                                user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
                         }
 
                         if (PreviewFile != null)
                         {
                             fileExtension = Path.GetExtension(PreviewFile.FileName);
-                            PreviewFileName = "PreviewFile_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                            addSellNoteDetail.NotesPreview = PreviewFileName;
-                            PreviewFileName = CheckifPathExistForCurrentUser(NotesID) + PreviewFileName;
+                            fileExtension = fileExtension.ToLower();
+                            if (fileExtension == ".pdf")
+                            {
+                                PreviewFileName = "PreviewFile_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                addSellNoteDetail.NotesPreview = PreviewFileName;
+                                PreviewFileName = CheckifPathExistForCurrentUser(NotesID) + PreviewFileName;
 
-                            PreviewFile.SaveAs(PreviewFileName);
-                            db.SaveChanges();
+                                PreviewFile.SaveAs(PreviewFileName);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("inputAddNotePreview", "Please upload file of pdf only");
+                                user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                return View(user);
+                            }
                         }
 
                         var FilePathForUploadedPdf = checkifPathExistForNoteAttachment(NotesID);
@@ -460,24 +559,37 @@ namespace NoteMarketPlace.Controllers
                             //Checking file is available to save.  
                             if (file != null)
                             {
-                                var InputFileName = Path.GetFileNameWithoutExtension(file.FileName);
-                                var attachment = new SellNoteAttachment()
-                                {
-                                    NoteID = NotesID,
-                                    FileName = InputFileName,
-                                    FilePath = FilePathForUploadedPdf,
-                                    IsActive = true
-                                };
-                                db.SellNoteAttachments.Add(attachment);
-                                db.SaveChanges();
-                                int AttachmentID = attachment.ID;
                                 fileExtension = Path.GetExtension(file.FileName);
-                                var UploadedPdfFileName = AttachmentID.ToString() + "_" + InputFileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
-                                attachment.FileName = UploadedPdfFileName;
-                                var destinationFileLocation = Path.Combine(FilePathForUploadedPdf, UploadedPdfFileName);
-                                file.SaveAs(destinationFileLocation);
-                                Length = Length + file.ContentLength;
-                                db.SaveChanges();
+                                fileExtension = fileExtension.ToLower();
+                                if (fileExtension == ".pdf")
+                                {
+                                    var InputFileName = Path.GetFileNameWithoutExtension(file.FileName);
+                                    var attachment = new SellNoteAttachment()
+                                    {
+                                        NoteID = NotesID,
+                                        FileName = InputFileName,
+                                        FilePath = FilePathForUploadedPdf,
+                                        IsActive = true
+                                    };
+                                    db.SellNoteAttachments.Add(attachment);
+                                    db.SaveChanges();
+                                    int AttachmentID = attachment.ID;
+
+                                    var UploadedPdfFileName = AttachmentID.ToString() + "_" + InputFileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtension;
+                                    attachment.FileName = UploadedPdfFileName;
+                                    var destinationFileLocation = Path.Combine(FilePathForUploadedPdf, UploadedPdfFileName);
+                                    file.SaveAs(destinationFileLocation);
+                                    Length = Length + file.ContentLength;
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("inputAdNoteUploadNotes", "Please upload file of pdf only");
+                                    user.NoteCategories = db.NoteCategories.Where(x => x.IsActive == true).ToList();
+                                    user.Countries = db.Countries.Where(x => x.IsActive == true).ToList();
+                                    user.NoteTypes = db.NoteTypes.Where(x => x.IsActive == true).ToList();
+                                    return View(user);
+                                }
                             }
 
                         }

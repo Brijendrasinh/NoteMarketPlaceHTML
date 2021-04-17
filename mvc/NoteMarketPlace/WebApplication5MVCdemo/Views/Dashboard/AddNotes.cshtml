@@ -33,12 +33,14 @@
                     @Html.DropDownListFor(m => m.SellNote.Category, new SelectList(Model.NoteCategories, "ID", "Name"), "Select Category", new { @class = "form-control", required = "required" })
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                    @Html.LabelFor(m => m.SellNote.DisplayPicture)
-                    <input type="file" class="upload form-control" name="DisplayPictureFile" accept="application/pdf" id="SellNote_DisplayPicture">
+                    @Html.LabelFor(m => m.SellNote.DisplayPicture) 
+                    <input type="file" class="upload form-control" name="DisplayPictureFile" accept="image/png,image/jpeg,image/jpg" id="SellNote_DisplayPicture">
+                    @Html.ValidationMessage("DisplayPictureFile", "",new { @class = "text-danger"})      
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <label for="inputAdNoteUploadNotes">Upload Notes *</label>
-                    <input type="file" class="upload upload-note form-control" id="inputAdNoteUploadNotes" name="UploadedPdfFile" multiple required>
+                    <input type="file" class="upload upload-note form-control" id="inputAdNoteUploadNotes" accept="application/pdf" name="UploadedPdfFile" multiple required>
+                    @Html.ValidationMessage("inputAdNoteUploadNotes", "", new { @class = "text-danger" })
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     @Html.LabelFor(m => m.SellNote.NoteType)
@@ -131,7 +133,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         @Html.LabelFor(m => m.SellNote.SellingPrice)
-                                        @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", required = "required" })
+                                        @Html.TextBoxFor(m => m.SellNote.SellingPrice, new { placeholder = "Enter your Price", @class = "form-control", disabled = "disabled" })
                                     </div>
                                 </div>
                             }
@@ -161,6 +163,7 @@
                         <div class="note-preview">
                             <input type="file" id="inputAddNotePreview" name="PreviewFile" accept="application/pdf" class="upload note-preview-input form-control">
                         </div>
+                        @Html.ValidationMessage("inputAddNotePreview","",new { @class = "text-danger"})
                     </div>
                     <button type="submit" name="SavePublish" value="save" class="btn btn-addnote-save">SAVE</button>
                     <button type="submit" name="SavePublish" onclick="return confirm('@ViewBag.confirmationBox')" value="publish" class="btn btn-addnote-publish">PUBLISH</button>
@@ -186,6 +189,15 @@
                 $('#SellNote_SellingPrice').prop('disabled', false);
             }
         }
+
+        $(document).ready(function () {
+            if (@ViewBag.UploadedFileData > 0) {
+                $("#inputAdNoteUploadNotes").prop('required', false);
+            }
+            else {
+                $("#inputAdNoteUploadNotes").prop('required', true);
+            }
+        });
 
     </script>
 }

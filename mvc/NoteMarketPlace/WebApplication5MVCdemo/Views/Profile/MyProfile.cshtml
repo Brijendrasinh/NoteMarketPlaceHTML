@@ -61,10 +61,10 @@
                 </div>
                 <div class="upload-picture col-lg-6 col-md-6 col-sm-12 col-12">
                     @Html.LabelFor(x => x.UserProfile.ProfilePicture)
-                    <input type="file" name="ProfilePictureFile" class="upload form-control" id="UserProfile_ProfilePicture" placeholder="Upload a picture">
+                    <input type="file" name="ProfilePictureFile" class="upload form-control" accept="image/png,image/jpeg,image/jpg" id="UserProfile_ProfilePicture" placeholder="Upload a picture">
+                    @Html.ValidationMessage("ProfilePictureFile", "",new { @class = "text-danger"})
+                </div>
             </div>
-            </div>
-            @*</form>*@
         </div>
     </section>
 
